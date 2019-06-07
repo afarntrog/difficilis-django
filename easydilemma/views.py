@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404
-from .forms import DilemmaForm
-from .models import DilemmaModel
+from django.shortcuts import render, get_object_or_404, redirect
+from .forms import DilemmaForm, BookFormset
+from .models import DilemmaModel, Book
 # Create your views here.
+
 
 
 def index(request):
@@ -52,16 +53,29 @@ def handle_dilemma(request):
     form = DilemmaForm()
     return render(request, 'easydilemma/dilemma.html', {"form_1": form})
 
-    # question = get_object_or_404(Question, pk=question_id)
+ 
 
-    # try:
-    #     dilemma_1 = request.POST['dilemma-part-1'])
-    # except (KeyError, Choice.DoesNotExist):
-    #     return render(request, 'polls/detail.html', {
-    #         'question': question,
-    #         'error_message': "You didn't select a choice"
-    #     } )
-    # else :
-    #     selected_choice.votes += 1
-    #     selected_choice.save()
-        # return render(request, 'easydilemma/all_dilemmas.html', context=None)
+
+
+
+
+def create_book_normal(request):
+    template_name = 'easydilemma/create_normal.html'
+    heading_message = 'Formset Demo'
+    if request.method == 'GET':
+        formset = BookFormset(request.GET or None)
+    elif request.method == 'POST':
+        formset = BookFormset(request.POST)
+        if formset.is_valid():
+            for form in formset:
+                # extract name from each form and save
+                name = form.cleaned_data.get('name')
+                # save book instance
+                if name:
+                    Book(name=name).save()
+            # once all books are saved, redirect to book list view
+            return redirect('book_list')
+    return render(request, template_name, {
+        'formset': formset,
+        'heading': heading_message,
+    })
