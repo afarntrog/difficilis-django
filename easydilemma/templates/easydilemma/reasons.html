@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ToDo App</title>
+    {% load static %}
+
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--My css sheet-->
+    <link rel="stylesheet" href="../../static/easydilemma/css/main.css">
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!--jQuery CDN-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
+    </script>
+
+    <!--jQuery UI local link-->
+    <script src="../../static/easydilemma/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+    <!--Loading overlay Libary-->
+    <!-- <script src="./anseki-jquery-plainoverlay/anseki-jquery-plainoverlay-16888ea/jquery.plainoverlay.min.js"></script> -->
+
+<!--    
+    <script>
+        $(function() {
+            $(".sortable").sortable({
+                handle: '.handle',
+                cancel: ""
+            });
+            $(".sortable").disableSelection();
+        });
+        // Must load the page first. gets the url and parses it to display the title of each reason card.
+        window.onload = function() {
+            var url_parts = window.location.toString().split("?");
+            // Get half that stores both parts of the dilemma
+            var both_queries = url_parts[1].split("&");
+            // Get the first half dilemma
+            var dilemma_part_1 = both_queries[0]
+            // Get the second half of dilemma
+            var dilemma_part_2 = both_queries[1];
+            // Further parse first half to get the actual dilemma then grab the second part of the array which is the actual text
+            // NOTE: The browser thinks that a space is a plus sign so therefore replace it with a space. 
+            // NOTE Must set the g-flag to replace every occurence {https://stackoverflow.com/a/22822463}
+            var actual_dilemma_1 = dilemma_part_1.split("=")[1].replace(/\+/g,' ');
+            // Further parse first half to get the actual dilemma then grab the second part of the array which is the actual text
+            var actual_dilemma_2 = dilemma_part_2.split("=")[1].replace(/\+/g, ' ');
+            // Set the result to the proper span elements. And lowercase them.
+            document.getElementById("reason-1-title").innerHTML = actual_dilemma_1.toLowerCase();
+            document.getElementById("reason-2-title").innerHTML = actual_dilemma_2.toLowerCase();
+
+            // IMPORTANT: Set the storage so it can be used in later user. When we create the reasons table
+            localStorage.setItem("dilemma", actual_dilemma_1.toLowerCase() + "*" + actual_dilemma_2.toLowerCase());
+            // alert(localStorage.getItem("dilemma"))
+            // $("#edit_reasons_form").attr("placeholder", "Should I " + actual_dilemma_1 + " Or should I " + actual_dilemma_2);
+            // $("#edit_reasons_form").attr("value", "Should I " + actual_dilemma_1.toLowerCase() + " Or should I " + actual_dilemma_2.toLowerCase());
+        
+        // EDIT REASON BUTTON::Change the value on click so that when we pass it to the url it will be much easier to parse.
+        document.getElementById("edit_reasons_button").onclick = function() {
+            $("#edit_reasons_form").attr("value", actual_dilemma_1 + "*" + actual_dilemma_2);
+        }
+        
+        // Set the full dilemma in the result modal title.
+        $("#reason-modal-title").text(actual_dilemma_1 + " " + actual_dilemma_2);
+ 
+    };// End window.onload
+    </script> -->
+    <script src="../../static/easydilemma/js/main2.js" ></script>
+
+</head>
+
+<!--Make it inherit the first page navbar-->
+
+<body>
+    <header class="header">
+        <!-- Navbar-->
+        <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
+            <div class="d-flex">
+                <a class="navbar-brand grow" href="{% url 'index' %}" id="logo"><img src="{% static '../static/easydilemma/images/question.png' %}" id="logo" alt="Question mark"></a>
+                <!--<a href="index.html" class="navbar-brand text-uppercase font-weight-bold"><span>Difficilis</span></a>-->
+            </div>
+            
+            <button type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"  class="navbar-toggler navbar-toggler-right">
+                <i class="fa fa-bars"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <!--Left side of NavBar-->
+                <ul class="navbar-nav">
+                <li class="nav-item" ><a  href="{% url 'index' %}" class="nav-link font-weight-bold">Home</a></li>
+                <li class="nav-item "><a  href="{% url 'all_dilemmas' %}" class="nav-link font-weight-bold">Popular</a></li>
+                <li class="nav-item"><a  href="{% url 'all_dilemmas' %}" class="nav-link font-weight-bold">Newest</a></li>
+                <li class="nav-item"><a  href="{% url 'all_dilemmas' %}" class="nav-link font-weight-bold">All Dilemmas</a></li>
+
+                </ul>
+                <!--Right side of NavBar-->
+                <ul class="navbar-nav ml-auto">
+                <li class="nav-item ml-lg-3 "><button class="btn btn-outline-primary navbar_btn" id="login-overlay-button" data-toggle="modal" data-target="#login-modal"><strong>LOG IN</strong></button></li>
+                <li class="nav-item ml-lg-3 "><button class="btn btn-primary navbar_btn" data-toggle="modal" data-target="#signup-modal"><strong>SIGN UP</strong></button></li>
+                </ul>
+
+            </div>
+        </nav>
+        <!-- /Navbar -->
+        </header>
+
+
+    <!--TODO Make this input stick on scroll instead of the navbar-->
+    <!--This is the top non-editable form that displays the users dilemma-->
+    <div class="container">
+        <form method="POST" action="{% url 'edit_dilemma' dilemma.id %}"> {% csrf_token %}
+            <!-- <div class="row"> -->
+                <div class="input-group mb-3">
+                    <input type="text" id="edit_reasons_form" name="edit_reasons_form" class="form-control text-center font-weight-bold"  value='{{ dilemma.dilemma_part_one }} Or {{ dilemma.dilemma_part_two }}' readonly>
+                    <div class="input-group-append">
+                        <!--Edit button should take you back to the form page with the original dillema still filled in the form.-->
+                        <button id="edit_reasons_button" class="btn btn-outline-secondary" type="submit">Edit</button>
+                    </div>
+                </div>
+            <!-- </div> -->
+        </form>
+    </div>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h2>Reasons to: <span id="reason-1-title">{{ dilemma.dilemma_part_one }}</span></h2>
+        </div>
+        <div class="card-body">
+            <form action="#" method="POST" role="form" class="sortable" id="form-first-half">{% csrf_token %}
+                <div class="form-row">
+                    <div class="col-md-8">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-secondary" type="button"><span class="handle">=</span></button>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Reason..." required>
+                        </div>
+                    </div>
+    
+                    <div class="col-md-4">
+                        <div class="input-group mb-3">
+                            <select class="browser-default custom-select" required>
+                                <option value="" selected>Select Importance...</option>
+                                <option value="1">Not really important</option>
+                                <option value="2">Somewhat Important</option>
+                                <option value="3">Important</option>
+                                <option value="4">Very Important</option>
+                                <option value="5">Extremely Important</option>
+                            </select>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-danger delete_button" type="button">X</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!--Plus button to add new reason element-->
+            <div class="mt-3 text-center">
+                <!--https://codepen.io/jnbruno/pen/vNpPpW-->
+                <button type="button" class="btn btn-primary btn-circle btn-xs" id ="add-reason-form-1">
+                    <span class="fas" style="font-size: larger">+</span>
+                </button>
+            </div>
+
+        </div> <!--End card bosy-->
+        <!--I can delete this. it is just to link to form html page. NEW: mt-2 allows a top margin!!-->
+
+    </div>
+    <br>
+    <br>
+
+
+    <div class="card">
+        <div class="card-header">
+            <!-- Store the reason title that was pulled with JS from the url which is from the form-->
+            <h2>Reasons to: <span id="reason-2-title">{{ dilemma.dilemma_part_two }}</span></h2></div>
+        <div class="card-body">
+            <form action="#" method="POST" role="form" class="sortable" id="form-second-half"> {% csrf_token %}
+                <div class="form-row">
+                    <div class="col-md-8">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-secondary" type="button"><span class="handle">=</span></button>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Reason..." required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="input-group mb-3">
+                            <select class="browser-default custom-select" required>
+                                <option value="" selected>Select Importance...</option>
+                                <option value="1">Not really important</option>
+                                <option value="2">Somewhat Important</option>
+                                <option value="3">Important</option>
+                                <option value="4">Very Important</option>
+                                <option value="5">Extremely Important</option>
+                            </select>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-danger delete_button" type="button">X</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="mt-3 text-center">
+                <button type="button" class="btn btn-primary btn-circle btn-xs" id ="add-reason-form-2">
+                    <span class="fas" style="font-size: larger">+</span>
+                </button>
+            </div>
+            <!--JAVASCRIPT: Add a plus sign. So that jquery will add a new form row
+                        Also, add a delete button. So that if you add a reason and you change your can delete it.-->
+        </div>
+    </div>
+</div>
+<br>
+<script>
+    /**
+     * When the modal opens we process the form. Therefore:
+     * if the form is not valid then prevent modal from opening. So the form will not be processed
+     * on click get all the reasons and select elements. Make sure !blank
+     * if not blank return true else return false
+     * if true allow modal to open if false do not allow modal to open, so change data-toggle attr.
+     */
+    var form_checker = function() {
+
+        var all_reason_elements = [];
+        all_reason_elements = $("#form-first-half").find("input");
+
+        // Get all select elements for this form.
+        var all_importance_elemnets = [];
+        all_importance_elemnets = $("#form-first-half").find("select");
+
+        // Get number of reasons so that we can use in for loop. Reasons and importance are the SAME length.
+        var total_amnt_of_reasons = all_reason_elements.length;
+
+        // Loop through and get the values for each reason and it's corresponding importance. Then store it in a string
+        // Then store in string seperated only by a ~ between each one and a a | between group
+        for (var index = 0; index < total_amnt_of_reasons; index++) {
+            if ( (all_reason_elements[index].value == "") || (all_importance_elemnets[index].value == "") ) {
+                return false;
+            }
+        }
+
+        // Repeat process for the second form.
+        // Get all the reason elements for this form.
+        var all_reason_elements = [];
+        all_reason_elements = $("#form-second-half").find("input");
+
+        // Get all select elements for this form.
+        var all_importance_elemnets = [];
+        all_importance_elemnets = $("#form-second-half").find("select");
+
+        for (var index = 0; index < total_amnt_of_reasons; index++) {
+            if ( (all_reason_elements[index].value == "") || (all_importance_elemnets[index].value == "") ) {
+                return false
+            }
+        }
+        return true;
+    }
+
+    /**
+     * This will call the checker function and then modify the data-toggle attribute.
+     */
+    var validate_reasons = function() {
+        // Call function that checks all the fields. And then store boolean result.
+        var is_valid = form_checker();
+        if ( is_valid ) {
+            // Process form and allow modal to open and display results
+            $("#decide-button").attr("data-toggle","modal");
+        }
+        else {
+            // Prevent modal from opening. This will also prevent the form from being processed.
+            $("#decide-button").attr("data-toggle","#");
+            // Display an error message to user with an alert. Append dismissable error alert to page. I have to append it because whenever user dismisses it then it is removed from the dom sp since we want the error message to come everytime i had to append it to the body each time.
+            var html_alert =  '<div class="alert alert-danger alert-dismissible fade container show" role="alert" id="buttonAlert"><strong>Not Valid</strong> Please fill out all the reasons and select an importance level.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+            $("#mr-alert").append(html_alert);
+        }
+    }
+    
+
+
+</script>
+<div id="mr-alert">
+
+
+</div>
+    <div class="container mb-3" >
+        <button id="decide-button" type="submit" class="btn btn-primary btn-block" data-toggle="modal" data-target="#reason-result-modal" onclick="validate_reasons()">Decide!</button>
+        
+        <!-- data-toggle="modal" data-target="#reason-result-modal"> id="login-overlay-button" -->
+        <!-- <button id="decide-getter-2" type="submit" class="btn btn-primary btn-block">Getter 2</button> -->
+    </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="login-modal-title">Login</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        
+             <!-- form card login -->
+            <form class="form needs-validation" role="form" autocomplete="off" id="login-form" method="" novalidate>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="login_username">Username</label>
+                        <input type="text" class="form-control form-control-lg" name="login_username" id="login_username" required>
+                        <div class="invalid-feedback">Please enter your username.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="login_password">Password</label>
+                        <input type="password" class="form-control form-control-lg" id="login_password" name="login_password" required>
+                        <div class="invalid-feedback">Please enter your password too!</div>
+                    </div>
+                    <div>
+                        <span class="custom-control-description small text-dark">Don't have an account? <a data-dismiss="modal" data-toggle="modal" href="#signup-modal">Sign Up</a></span>
+                    </div>
+                            
+                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" id="btnLogin">Login</button> <!-- Don't actually login user because no database to store credentials-->
+                </div>
+            </form>
+      </div>
+    </div>
+  </div>
+  <!--/end LOGIN modal-->
+    <!-- Modal -->
+    <div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="login-modal-title">Sign Up</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                <!-- form card login -->
+                    <form class="form needs-validation" role="form" autocomplete="off" id="signup-form" method="" novalidate>
+                        <div class="form-group">
+                            <label for="sign_up_username">Username</label>
+                            <input type="text" class="form-control form-control-lg" name="sign_up_username" id="sign_up_username" required>
+                            <div class="invalid-feedback">Please enter a valid username.</div> <!-- This site is annunymous so no email required-->
+                        </div>
+                        <div class="form-group">
+                            <label for="sign_up__password">Password</label>
+                            <input type="password" class="form-control form-control-lg" id="sign_up__password" name="sign_up__password" required>
+                            <div class="invalid-feedback">Please enter your password too!</div>
+                        </div>
+                        <div>
+                            <!--When user clicks the link then it closes the signup modal and opens the login one-->
+                            <span class="custom-control-description small text-dark">Have an account? <a data-dismiss="modal" data-toggle="modal" href="#login-modal">Login</a></span>
+                        </div>
+                        
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-success" data-dismiss="modal" id="btnSignUp">Sign Up</button> <!-- Don't actually Sign Up user because no database to store credentials-->
+                </div>
+            </form>
+              </div>
+            </div>
+          </div>
+          <!--/end SIGNUP modal-->
+          <a style="display: none" href="./all_dilemmas.html" id="redirect">Redirect Link for the dilemma result</a>
+         
+<!-- Modal TESTER -->
+<div class="modal fade" id="reason-result-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-lg modal-dialog modal-dialog-centered" role="document" id="reason-result-modal">
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <h5 class="modal-title w-100 font-weight-bold">Dilemma results:</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        
+             <!-- form card login -->
+             <div class="container mt-3 mb-3">
+                <div class="card">
+                    <div class="card-header">
+                        <!-- Store the reason title that was pulled with JS from the url which is from the form-->
+                        <h5>Dilemma: <span id="reason-modal-title"></span></h5>
+                    </div> 
+                    <div class="card-body" id="reason-modal-body">
+                    </div>
+               
+                <div class="card-footer">
+                    <h5 class="font-weight-bold">Result: <span id="reason-modal-footer"> </span> </h5>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="./all_dilemmas.html" class="btn btn-success"><strong>All Dilemmas</strong></a>
+        </div>
+    
+        <!--End content-->
+
+      </div>
+    </div>
+  </div>
+  <!--/end LOGIN modal-->
+
+    <!-- FOOTER -->
+    <hr>
+    <footer class="container pt-5">
+        <div class="float-right"><a href="#" id="back-to-top"></a></div>
+
+        <!-- <p class="float-right"><a href="#"></a></p> -->
+        <p>&copy; 2019 Aaron Farntrog & Eliezer Altshul</p>
+    </footer>
+
+  <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+</body>
+</html>
+
+
+
