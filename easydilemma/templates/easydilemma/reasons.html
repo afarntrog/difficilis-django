@@ -24,7 +24,7 @@
     <!--Loading overlay Libary-->
     <!-- <script src="./anseki-jquery-plainoverlay/anseki-jquery-plainoverlay-16888ea/jquery.plainoverlay.min.js"></script> -->
 
-<!--    
+    
     <script>
         $(function() {
             $(".sortable").sortable({
@@ -33,7 +33,10 @@
             });
             $(".sortable").disableSelection();
         });
-        // Must load the page first. gets the url and parses it to display the title of each reason card.
+
+    </script>
+
+        <!-- // Must load the page first. gets the url and parses it to display the title of each reason card.
         window.onload = function() {
             var url_parts = window.location.toString().split("?");
             // Get half that stores both parts of the dilemma
@@ -66,9 +69,17 @@
         // Set the full dilemma in the result modal title.
         $("#reason-modal-title").text(actual_dilemma_1 + " " + actual_dilemma_2);
  
-    };// End window.onload
-    </script> -->
+    };// End window.onload -->
+    <!-- <script src="../../static/easydilemma/js/main2.js" ></script> -->
     <script src="../../static/easydilemma/js/main2.js" ></script>
+    <!-- <script>
+        // Store good and bad numbers in this global list.
+        var good_numbers = [];
+        var ignore_numbers = [];
+        var good_numbers_string = '';
+        var ignore_numbers_string = '';
+        var SEP = "-"; // This will be the string that seperates the values.
+    </script> -->
 
 </head>
 
@@ -107,7 +118,6 @@
         <!-- /Navbar -->
         </header>
 
-
     <!--TODO Make this input stick on scroll instead of the navbar-->
     <!--This is the top non-editable form that displays the users dilemma-->
     <div class="container">
@@ -123,26 +133,39 @@
             <!-- </div> -->
         </form>
     </div>
+    <!--END/ Edit button form-->
+
+
+
+
+
+
+
+
+<form action="{% url 'test_reason' dilemma.id %}" method="POST" role="form" class="sortable" >{% csrf_token %}
 <div class="container">
     <div class="card">
         <div class="card-header">
             <h2>Reasons to: <span id="reason-1-title">{{ dilemma.dilemma_part_one }}</span></h2>
         </div>
         <div class="card-body">
-            <form action="#" method="POST" role="form" class="sortable" id="form-first-half">{% csrf_token %}
+            
+                <div id="form-first-half">
+
                 <div class="form-row">
+
                     <div class="col-md-8">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <button class="btn btn-outline-secondary" type="button"><span class="handle">=</span></button>
                             </div>
-                            <input type="text" class="form-control" placeholder="Reason..." required>
+                            <input type="text" id="reason1" name="reason1" class="form-control" placeholder="Reason..." required>
                         </div>
-                    </div>
+                    </div><!--END/col-md-8 -->
     
                     <div class="col-md-4">
                         <div class="input-group mb-3">
-                            <select class="browser-default custom-select" required>
+                            <select class="browser-default custom-select" name="form-first-half-select" required>
                                 <option value="" selected>Select Importance...</option>
                                 <option value="1">Not really important</option>
                                 <option value="2">Somewhat Important</option>
@@ -154,9 +177,14 @@
                                 <button class="btn btn-outline-danger delete_button" type="button">X</button>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </form>
+                    </div><!--END/col-md-4 -->
+
+                </div><!--END/ form-row-->
+                
+            </div><!--END/ form-first-half-->
+            <!-- </form> -->
+
+
             <!--Plus button to add new reason element-->
             <div class="mt-3 text-center">
                 <!--https://codepen.io/jnbruno/pen/vNpPpW-->
@@ -165,10 +193,10 @@
                 </button>
             </div>
 
-        </div> <!--End card bosy-->
+        </div> <!--End card body-->
         <!--I can delete this. it is just to link to form html page. NEW: mt-2 allows a top margin!!-->
 
-    </div>
+    </div><!--End card-->
     <br>
     <br>
 
@@ -178,20 +206,23 @@
             <!-- Store the reason title that was pulled with JS from the url which is from the form-->
             <h2>Reasons to: <span id="reason-2-title">{{ dilemma.dilemma_part_two }}</span></h2></div>
         <div class="card-body">
-            <form action="#" method="POST" role="form" class="sortable" id="form-second-half"> {% csrf_token %}
+            <div id="form-second-half">
+            <!-- <form action="#" method="POST" role="form" class="sortable" id="form-second-half"> {% csrf_token %} -->
+                
                 <div class="form-row">
+
                     <div class="col-md-8">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <button class="btn btn-outline-secondary" type="button"><span class="handle">=</span></button>
                             </div>
-                            <input type="text" class="form-control" placeholder="Reason..." required>
+                            <input type="text" class="form-control" placeholder="Reason..." name="reason_2" required>
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <div class="input-group mb-3">
-                            <select class="browser-default custom-select" required>
+                            <select class="browser-default custom-select" name="form-second-half-select" required>
                                 <option value="" selected>Select Importance...</option>
                                 <option value="1">Not really important</option>
                                 <option value="2">Somewhat Important</option>
@@ -204,8 +235,13 @@
                             </div>
                         </div>
                     </div>
+
+
                 </div>
-            </form>
+
+
+            </div>
+
 
             <div class="mt-3 text-center">
                 <button type="button" class="btn btn-primary btn-circle btn-xs" id ="add-reason-form-2">
@@ -216,7 +252,13 @@
                         Also, add a delete button. So that if you add a reason and you change your can delete it.-->
         </div>
     </div>
+
+
 </div>
+    <!-- <input type="hidden" id="total_form_1_elem" name="form_1_total">
+<input type="hidden" id="total_form_2_elem" name="form_2_total"> -->
+<input type="submit" value="SUBMITME">
+</form>
 <br>
 <script>
     /**
@@ -293,8 +335,10 @@
         <button id="decide-button" type="submit" class="btn btn-primary btn-block" data-toggle="modal" data-target="#reason-result-modal" onclick="validate_reasons()">Decide!</button>
         
         <!-- data-toggle="modal" data-target="#reason-result-modal"> id="login-overlay-button" -->
-        <!-- <button id="decide-getter-2" type="submit" class="btn btn-primary btn-block">Getter 2</button> -->
+        <p id="myButton" class="btn btn-primary btn-block">Getter 2</p>
     </div>
+
+
 
   <!-- Modal -->
   <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

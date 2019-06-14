@@ -31,12 +31,12 @@ $(document).ready( function () {
 
   // This will ADD reason elements to the page for the first form.
   $("#add-reason-form-1").on("click", function() {
-    $("#form-first-half").append(new_reason_element);
+    $("#form-first-half").append(form_1_reason_element);
   });
 
   // This will ADD reason elements to the page for the second form.
   $("#add-reason-form-2").on("click", function() {
-    $("#form-second-half").append(new_reason_element);
+    $("#form-second-half").append(form_2_reason_element);
   });
 
  }); // END READY function.
@@ -153,18 +153,45 @@ var dilemma_form_validator = function() {
 
 // ADD new reason element HTML.
 // This will store the reasons element text and values so we can use in different functions.
-var new_reason_element = '<div class="form-row">'
+var form_1_reason_element = '<div class="form-row">'
     +'<div class="col-md-8">'
     +    '<div class="input-group mb-3">'
     +        '<div class="input-group-prepend">'
     +            '<button class="btn btn-outline-secondary" type="button"><span class="handle">=</span></button>'
     +        '</div>'
-    +        '<input type="text" class="form-control" placeholder="Reason...">'
+    +        '<input type="text" class="form-control" placeholder="Reason..." name="reason1" required>'
     +    '</div>'
     + '</div>'
     +'<div class="col-md-4">'
     +    '<div class="input-group mb-3">'
-    +        '<select class="browser-default custom-select">'
+    +        '<select name="form-first-half-select" class="browser-default custom-select">'
+    +            '<option selected>Select Importance...</option>'
+    +            '<option value="1">Not really important</option>'
+    +            '<option value="2">Somewhat Important</option>'
+    +            '<option value="3">Important</option>'
+    +            '<option value="4">Very Important</option>'
+    +            '<option value="5">Extremely Important</option>'
+    +        '</select>'
+    +        '<div class="input-group-append">'
+    +            '<button class="btn btn-outline-danger delete_button" type="button">X</button>'
+    +        '</div>'
+    +    '</div>'
+    +'</div>'
+    +'</div>'
+
+
+var form_2_reason_element = '<div class="form-row">'
+    +'<div class="col-md-8">'
+    +    '<div class="input-group mb-3">'
+    +        '<div class="input-group-prepend">'
+    +            '<button class="btn btn-outline-secondary" type="button"><span class="handle">=</span></button>'
+    +        '</div>'
+    +        '<input type="text" class="form-control" placeholder="Re..." name="reason_2" required>'
+    +    '</div>'
+    + '</div>'
+    +'<div class="col-md-4">'
+    +    '<div class="input-group mb-3">'
+    +        '<select name="form-second-half-select" class="browser-default custom-select">'
     +            '<option selected>Select Importance...</option>'
     +            '<option value="1">Not really important</option>'
     +            '<option value="2">Somewhat Important</option>'
