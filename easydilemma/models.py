@@ -14,7 +14,7 @@ class DilemmaPartOne(models.Model):
 
 class ReasonPartOne(models.Model):
     # Asscccoiate a reason to a dilemma
-    dilemma = models.ForeignKey(DilemmaPartOne, default=None, on_delete=models.CASCADE)
+    dilemma = models.ForeignKey(DilemmaPartOne, default=None, related_name="reason_part_one", on_delete=models.CASCADE)
 
     reason = models.TextField()
 
@@ -32,7 +32,7 @@ class DilemmaPartTwo(models.Model):
 
 class ReasonPartTwo(models.Model):
     # Asscccoiate a reason to a dilemma
-    dilemma = models.ForeignKey(DilemmaPartTwo, default=None, on_delete=models.CASCADE)
+    dilemma = models.ForeignKey(DilemmaPartTwo, default=None, related_name="reason_part_two" , on_delete=models.CASCADE)
     
     reason = models.TextField()
 

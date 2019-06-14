@@ -45,8 +45,32 @@ def reasons(request):
 
 
 def all_dilemmas(request):
-    print("hello")
-    return render(request, 'easydilemma/all_dilemmas.html', context=None)
+    # Get this main dilemma pk
+    all_dilemmas = Dilemma.objects.all()
+
+    # Get the pk for each dilemma side
+    # dilemma_1 = my_dilemma.dilemma_part_one
+    # dilemma_2 = my_dilemma.dilemma_part_two
+    # # print(dilemma_1_id.reason_part_one.all)
+    # for item in dilemma_1.reason_part_one.all():
+    #     print(item)
+
+    for dilemma in all_dilemmas:
+        dilemma_first_half = dilemma.dilemma_part_one
+        dilemma_second_half = dilemma.dilemma_part_two
+
+        for reason in dilemma_first_half.reason_part_one.all():
+            print(reason.reason)
+            print(reason.selected_option)
+
+    #### USE ^^^^^ THis method for looping throught the dilemma object in th template
+    # Use the pks for each dilemma to get the current dilemma object to assccoiate with the reason
+    # dilemma_part_one = DilemmaPartOne.objects.get(id=dilemma_1_id)
+    context = {
+        'dilemma': all_dilemmas,
+    }
+
+    return render(request, 'easydilemma/all_dilemmas.html', context)
 
 # def handle_dilemma(request):
 #     if request.method =='POST':
