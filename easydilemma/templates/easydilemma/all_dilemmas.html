@@ -30,79 +30,79 @@
         // Create a new html card elemnet to append to page. [Card Part 1]
         // var complete_html_card = '<div class="container mb-5"><div class="card w-75 mx-auto">'
 
-        // GET ALL THE STUFF PARSE THEM AND THEN LOOP THROUGH THEM.
-        var dilemma_count = parseInt( localStorage.dilemma_count );
+    //     // GET ALL THE STUFF PARSE THEM AND THEN LOOP THROUGH THEM.
+    //     var dilemma_count = parseInt( localStorage.dilemma_count );
 
 
-        for (var i = 1; i <= dilemma_count; i++) {
+    //     for (var i = 1; i <= dilemma_count; i++) {
 
-            // Create a new html card elemnet to append to page. [Card Part 1]
-            var complete_html_card = '<div class="container mb-5"><div class="card w-75 mx-auto">'
+    //         // Create a new html card elemnet to append to page. [Card Part 1]
+    //         var complete_html_card = '<div class="container mb-5"><div class="card w-75 mx-auto">'
 
-            // GET THE DILEMMA;
-            // NOTE: this is set on the reason page. This way it is always updated. I can just ue this instead of forms. But no practice if do that.
-            var dilemma_storage_string = localStorage.getItem("dilemma" + i);
+    //         // GET THE DILEMMA;
+    //         // NOTE: this is set on the reason page. This way it is always updated. I can just ue this instead of forms. But no practice if do that.
+    //         var dilemma_storage_string = localStorage.getItem("dilemma" + i);
 
-            var dilemma_header = dilemma_storage_string.replace("*", " or ");
+    //         var dilemma_header = dilemma_storage_string.replace("*", " or ");
 
-            // Add the dilemma header to the html card element. [Card Part 2]
-            complete_html_card += '<div class="card-header"><h5>Dilemma: <span id="reason-card-header">'+ dilemma_header + '</span></h5></div>';
+    //         // Add the dilemma header to the html card element. [Card Part 2]
+    //         complete_html_card += '<div class="card-header"><h5>Dilemma: <span id="reason-card-header">'+ dilemma_header + '</span></h5></div>';
 
-            // Add card body html [Card part 3]
-            complete_html_card += '<div class="card-body" id="reason-card-body">';
+    //         // Add card body html [Card part 3]
+    //         complete_html_card += '<div class="card-body" id="reason-card-body">';
             
-            // FIRST FORM
-            // Get all the reasons and importance for the dilemma
-            // Initilaize card to be used in the html body.
-            var storage_string = localStorage.getItem("form_1_dilemma_reasons" + i);
-            var cleaned_form_1_reasons = storage_string.slice(0, -1).split("|");
-            var html_card = "";
-            for (var index = 0; index < cleaned_form_1_reasons.length; index++) {
-                var reason_and_importance = cleaned_form_1_reasons[index].split("*");
-                var reason =  reason_and_importance[0];
-                var importance = reason_and_importance[1];
-                html_card = '<div class="row mb-3"><div class="col-md-8"><input type="text" class="form-control font-weight-bold expand-reason text-truncate" value=' 
-                        + '"' + reason + '" ' + ' readonly>' + '<div class="p-2 mb-3 rounded text-dark font-weight-bold border text-center bg-light" style="display: none" id="full-reason-div">' + reason + '</div>';
-                var second_part = '</div><div class="col-md-4"><input type="text" class="form-control text-center font-weight-bold" value=' + "'" + importance + "' " +'placeholder="*" readonly></div></div>';
-                var whole_element = html_card + second_part;
+    //         // FIRST FORM
+    //         // Get all the reasons and importance for the dilemma
+    //         // Initilaize card to be used in the html body.
+    //         var storage_string = localStorage.getItem("form_1_dilemma_reasons" + i);
+    //         var cleaned_form_1_reasons = storage_string.slice(0, -1).split("|");
+    //         var html_card = "";
+    //         for (var index = 0; index < cleaned_form_1_reasons.length; index++) {
+    //             var reason_and_importance = cleaned_form_1_reasons[index].split("*");
+    //             var reason =  reason_and_importance[0];
+    //             var importance = reason_and_importance[1];
+    //             html_card = '<div class="row mb-3"><div class="col-md-8"><input type="text" class="form-control font-weight-bold expand-reason text-truncate" value=' 
+    //                     + '"' + reason + '" ' + ' readonly>' + '<div class="p-2 mb-3 rounded text-dark font-weight-bold border text-center bg-light" style="display: none" id="full-reason-div">' + reason + '</div>';
+    //             var second_part = '</div><div class="col-md-4"><input type="text" class="form-control text-center font-weight-bold" value=' + "'" + importance + "' " +'placeholder="*" readonly></div></div>';
+    //             var whole_element = html_card + second_part;
 
-                // Append the body/reasons of form_1 to the card element [Card Part 3]
-                complete_html_card += whole_element;
-                // $("#reason-card-body").append(whole_element);
+    //             // Append the body/reasons of form_1 to the card element [Card Part 3]
+    //             complete_html_card += whole_element;
+    //             // $("#reason-card-body").append(whole_element);
 
-        }
+    //     }
         
         
-        // SECOND FORM
-        var storage_string = localStorage.getItem("form_2_dilemma_reasons" + i);
-        var cleaned_form_2_reasons = storage_string.slice(0, -1).split("|");
+    //     // SECOND FORM
+    //     var storage_string = localStorage.getItem("form_2_dilemma_reasons" + i);
+    //     var cleaned_form_2_reasons = storage_string.slice(0, -1).split("|");
 
-        // Step through the array. Split the reason and importance for each one
-        html_card = "";
-        for (var index = 0; index < cleaned_form_2_reasons.length; index++) {
-            var reason_and_importance = cleaned_form_2_reasons[index].split("*");
-            var reason =  reason_and_importance[0];
-            var importance = reason_and_importance[1];
-            html_card = '<div class="row mb-3"><div class="col-md-8"><input type="text" class="form-control font-weight-bold expand-reason text-truncate" value=' 
-                    + '"' + reason + '" ' + ' readonly>' + '<div class="p-2 mb-3 rounded text-dark font-weight-bold border text-center bg-light" style="display: none" id="full-reason-div">' + reason +  '</div>';
-            var second_part = '</div><div class="col-md-4"><input type="text" class="form-control text-center font-weight-bold" value=' + "'" + importance + "' " +'placeholder="*" readonly></div></div>';
-            var whole_element = html_card + second_part;
-            // Append the body/reasons of form_1 to the card element [Card Part 4]
-            complete_html_card += whole_element;
-            // $("#reason-card-body").append(whole_element);
-        }
+    //     // Step through the array. Split the reason and importance for each one
+    //     html_card = "";
+    //     for (var index = 0; index < cleaned_form_2_reasons.length; index++) {
+    //         var reason_and_importance = cleaned_form_2_reasons[index].split("*");
+    //         var reason =  reason_and_importance[0];
+    //         var importance = reason_and_importance[1];
+    //         html_card = '<div class="row mb-3"><div class="col-md-8"><input type="text" class="form-control font-weight-bold expand-reason text-truncate" value=' 
+    //                 + '"' + reason + '" ' + ' readonly>' + '<div class="p-2 mb-3 rounded text-dark font-weight-bold border text-center bg-light" style="display: none" id="full-reason-div">' + reason +  '</div>';
+    //         var second_part = '</div><div class="col-md-4"><input type="text" class="form-control text-center font-weight-bold" value=' + "'" + importance + "' " +'placeholder="*" readonly></div></div>';
+    //         var whole_element = html_card + second_part;
+    //         // Append the body/reasons of form_1 to the card element [Card Part 4]
+    //         complete_html_card += whole_element;
+    //         // $("#reason-card-body").append(whole_element);
+    //     }
 
-        // Get the result from storage and store it in the card footer.
-        var result_string = localStorage.getItem("result" + i);
-        // Append the body/reasons of form_1 to the card element [Card Part 5]
-        var card_footer = '</div><div class="card-footer"><h5 class="font-weight-bold">Result: <span id="reason-card-footer">' + result_string + '</span> </h5></div></div></div>';
+    //     // Get the result from storage and store it in the card footer.
+    //     var result_string = localStorage.getItem("result" + i);
+    //     // Append the body/reasons of form_1 to the card element [Card Part 5]
+    //     var card_footer = '</div><div class="card-footer"><h5 class="font-weight-bold">Result: <span id="reason-card-footer">' + result_string + '</span> </h5></div></div></div>';
 
-        complete_html_card += card_footer;
+    //     complete_html_card += card_footer;
 
-        // Add the entire new card to the page
-        $("#add-content").prepend( complete_html_card );
+    //     // Add the entire new card to the page
+    //     $("#add-content").prepend( complete_html_card );
         
-    } // END FOR loop
+    // } // END FOR loop
 
     // Add toggle abibilty to the reasons table
     // When user clicks the text box a new field will display showing the entire reason un-truncated.
@@ -189,18 +189,16 @@
             });
         </script> -->
         
-        
-
 <!--TOGGLE CLASS-->
 <div class="container">
         <div class="card w-75 mx-auto">
             <div class="card-header">
-                <h5>Dilemma: Shoud I eat spinach</h5>
+                <h5>tdfcygvuhbkj</h5>
             </div> 
             <div class="card-body">
                 <div class="row mb-3">
                     <div class="col-md-8">
-                        <input type="text" class="form-control font-weight-bold expand-reason text-truncate" value="hreodddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddhfohsdo" readonly>
+                        <input type="text" class="form-control font-weight-bold expand-reason text-truncate" value="dxrtygv" readonly>
                         <div class="p-2 mb-3 rounded text-dark font-weight-bold border text-center bg-light" style="display: none" id="full-reason-div">Javascript first because jQuery ismmmmmmmmmmmmmmmm on Javascript</div>
                     </div>
                     <div class="col-md-4">
@@ -387,7 +385,7 @@
         <div class="float-right"><a href="#" id="back-to-top"></a></div>
 
         <!-- <p class="float-right"><a href="#"></a></p> -->
-        <p>&copy; 2019 Aaron Farntrog & Eliezer Altshul</p>
+        <p>&copy; 2019 Aaron Farntrog</p>
     </footer>
 
     

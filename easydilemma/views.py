@@ -121,7 +121,6 @@ def test_reason(request, dilemma_id):
         reason_model.dilemma = dilemma_part_one
         reason_model.save()
 
-
     # Get the second form and all it's reasons and weights.
     all_reason_2 = request.POST.getlist('reason_2')
     all_select_elements_2 = request.POST.getlist('form-second-half-select')
@@ -134,10 +133,39 @@ def test_reason(request, dilemma_id):
         reason_model.dilemma = dilemma_part_two
         reason_model.save()
 
-    return HttpResponse("Hello, world. You're at the polls index.")
+    # Get the winning dilemma side.
+    dilemma_result = result(request, all_select_elements_1, all_select_elements_2,my_dilemma )
+
+
+    # Get a list of all the reason objects for each side of the dilemma 
+    list_of_reasons_one = ReasonPartOne.objects.filter(dilemma=dilemma_part_one)
+    list_of_reasons_two = ReasonPartTwo.objects.filter(dilemma=dilemma_part_two)
+
+    # Store model data for use in the template
+    context = {
+        'full_dilemma': f"Should I {my_dilemma.dilemma_part_one} Or should I {my_dilemma.dilemma_part_two}",
+        'dilemma_part_one': my_dilemma.dilemma_part_one,
+        'dilemma_part_two': my_dilemma.dilemma_part_two,
+        'all_dilemma_one_reasons': list_of_reasons_one,
+        'all_dilemma_two_reasons': list_of_reasons_two,
+        'result': dilemma_result,
+    }
+
+    return render(request, 'easydilemma/dilemma_result.html', context)
  
 
-
-
-
-
+# This will simply calculate and return the result which side is better
+def result(request, all_select_elements_1, all_select_elements_2, my_dilemma ):
+    total_dilemma_1 = 0
+    for val in all_select_elements_1:
+        total_dilemma_1 += int(val)
+    
+    total_dilemma_2 = 0
+    for val in all_select_elements_2:
+        total_dilemma_2 += int(val)
+    
+    if total_dilemma_1 > total_dilemma_2:
+        return my_dilemma.dilemma_part_one
+    else:
+        return my_dilemma.dilemma_part_two
+    

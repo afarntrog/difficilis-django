@@ -149,47 +149,6 @@
         <!--/row-->
     </div>
     <!--/container-->
-                   
-                                <!--TEST-->
-                                <div id="form-set">
-                                <div class="form-row">
-                                        <div class="col-md-8">
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend">
-                                                    <button class="btn btn-outline-secondary" type="button"><span class="handle">=</span></button>
-                                                </div>
-                                                {{ form.dilemma_part_one }}
-                                                <!-- <input type="text" id="reason1" name="reason1" class="form-control" placeholder="Reason..." required> -->
-                                            </div>
-                                        </div>
-                        
-                                        <div class="col-md-4">
-                                            <div class="input-group mb-3">
-                                                <select class="browser-default custom-select" required>
-                                                    <option value="" selected>Select Importance...</option>
-                                                    <option value="1">Not really important</option>
-                                                    <option value="2">Somewhat Important</option>
-                                                    <option value="3">Important</option>
-                                                    <option value="4">Very Important</option>
-                                                    <option value="5">Extremely Important</option>
-                                                </select>
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-outline-danger delete_button" type="button">X</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                    <button id="add_more">add more</button>
-                                <!--TEST-->  
-                                <script>
-                                        $('#add_more').click(function() {
-                                            alert("h");
-                                            // var form_idx = $('#id_form-TOTAL_FORMS').val();
-                                            $('#form_set').append($('#form-row').html());
-                                            // $('#id_form-TOTAL_FORMS').val(parseInt(form_idx) + 1);
-                                        });
-                                    </script>
                              
   <!-- Modal -->
   <div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -277,7 +236,7 @@
         <div class="float-right"><a href="#" id="back-to-top"></a></div>
 
         <!-- <p class="float-right"><a href="#"></a></p> -->
-        <p>&copy; 2019 Aaron Farntrog & Eliezer Altshul</p>
+        <p>&copy; 2019 Aaron Farntrog</p>
     </footer>
 
 
