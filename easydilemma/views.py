@@ -35,9 +35,13 @@ def edit_dilemma(request, dilemma_id):
     form = DilemmaForm(initial={'dilemma_part_one' : dilemma.dilemma_part_one, 'dilemma_part_two' : dilemma.dilemma_part_two})
     
     context = {
-        "form": form
+        "form": form,
+        "dilemma": dilemma,
     }
-    return render(request, 'easydilemma/dilemma.html', context)
+    return render(request, 'easydilemma/edit_dilemma.html', context)
+
+
+
 
 
 def reasons(request):
@@ -46,54 +50,13 @@ def reasons(request):
 
 def all_dilemmas(request):
     # Get this main dilemma pk
-    all_dilemmas = Dilemma.objects.all()
+    all_dilemmas = Dilemma.objects.all()        
 
-    # Get the pk for each dilemma side
-    # dilemma_1 = my_dilemma.dilemma_part_one
-    # dilemma_2 = my_dilemma.dilemma_part_two
-    # # print(dilemma_1_id.reason_part_one.all)
-    # for item in dilemma_1.reason_part_one.all():
-    #     print(item)
-
-    for dilemma in all_dilemmas:
-        dilemma_first_half = dilemma.dilemma_part_one # This is an object
-        dilemma_second_half = dilemma.dilemma_part_two
-
-        dilemma_first_half.dilemma_part_one # This is the text of the object
-        dilemma_second_half.dilemma_part_two
-
-        for reason in dilemma_first_half.reason_part_one.all():
-            print(reason.reason)
-            print(reason.selected_option)
-
-        
-
-    #### USE ^^^^^ THis method for looping throught the dilemma object in th template
     # Use the pks for each dilemma to get the current dilemma object to assccoiate with the reason
-    # dilemma_part_one = DilemmaPartOne.objects.get(id=dilemma_1_id)
     context = {
         'all_dilemmas': all_dilemmas,
     }
-
     return render(request, 'easydilemma/all_dilemmas.html', context)
-
-# def handle_dilemma(request):
-#     if request.method =='POST':
-#         form = DilemmaForm(request.POST)
-#         if form.is_valid():
-#             dilemma = DilemmaModel()
-#             dilemma.dilemma_part_one = form.cleaned_data['dilemma_part_one']
-#             dilemma.dilemma_part_two = form.cleaned_data['dilemma_part_two']
-#             dilemma.save()
-#             context = {
-#                 "dilemma": dilemma
-#             }
-#             return render(request, 'easydilemma/reasons.html', context)
-#         else:
-#             pass
-
-#     form = DilemmaForm()
-#     return render(request, 'easydilemma/dilemma.html', {"form_1": form})
 
 
 def handle_dilemma(request):
@@ -201,3 +164,39 @@ def result(request, all_select_elements_1, all_select_elements_2, my_dilemma ):
     else:
         return my_dilemma.dilemma_part_two.dilemma_part_two
     
+
+def handle_revised_dilemma(request, dilemma_id):
+    if request.method =='POST':
+        form = DilemmaForm(request.POST)
+
+        if form.is_valid():
+            dilemma_1 = DilemmaPartOne()
+            dilemma_2 = DilemmaPartTwo()
+            dilemma_1.dilemma_part_one = form.cleaned_data['dilemma_part_one']
+            dilemma_2.dilemma_part_two = form.cleaned_data['dilemma_part_two']
+            dilemma_1.save()
+            dilemma_2.save()
+
+            # We are revising a dilemma, so get the Dilemma that we need to update
+            dilemma = Dilemma(id=dilemma_id)
+            dilemma.dilemma_part_one = dilemma_1
+            dilemma.dilemma_part_two = dilemma_2
+            dilemma.save()
+
+            context = {
+                "dilemma": dilemma
+            }
+            return render(request, 'easydilemma/reasons.html', context)
+        else:
+            # Add message here, popup alert or something
+            pass
+
+
+    # If for some reason the revised form is not valid then redisplay the form with the prefilled 
+    # ... data that they wanted to revise
+    dilemma =  get_object_or_404(Dilemma, pk=dilemma_id)
+    dilemma_part_1 = get_object_or_404(DilemmaPartOne, pk=dilemma_id)
+    dilemma_part_2 = get_object_or_404(DilemmaPartTwo, pk=dilemma_id)
+    form = DilemmaForm(initial={'dilemma_part_one' : dilemma.dilemma_part_one, 'dilemma_part_two' : dilemma.dilemma_part_two})
+    
+    return render(request, 'easydilemma/dilemma.html', {"form_1": form})
