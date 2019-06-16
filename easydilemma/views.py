@@ -87,7 +87,7 @@ def handle_dilemma(request):
     return render(request, 'easydilemma/dilemma.html', {"form_1": form})
 
 
-def test_reason(request, dilemma_id):
+def store_and_calc_reasons(request, dilemma_id):
 
     # Get this main dilemma pk
     my_dilemma = Dilemma.objects.get(id=dilemma_id)
@@ -126,7 +126,7 @@ def test_reason(request, dilemma_id):
         reason_model.save()
 
     # Get the winning dilemma side.
-    dilemma_result = result(request, all_select_elements_1, all_select_elements_2,my_dilemma )
+    dilemma_result = calculate_result(request, all_select_elements_1, all_select_elements_2,my_dilemma )
     # Save winning dilemma side to the currnt Dilemm model result field
     my_dilemma.result = dilemma_result
     my_dilemma.save()
@@ -150,7 +150,7 @@ def test_reason(request, dilemma_id):
  
 
 # This will simply calculate and return the result which side is better
-def result(request, all_select_elements_1, all_select_elements_2, my_dilemma ):
+def calculate_result(request, all_select_elements_1, all_select_elements_2, my_dilemma ):
     total_dilemma_1 = 0
     for val in all_select_elements_1:
         total_dilemma_1 += int(val)

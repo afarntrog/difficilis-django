@@ -142,7 +142,7 @@
 
 
 
-<form action="{% url 'test_reason' dilemma.id %}" method="POST" role="form" >{% csrf_token %}
+<form action="{% url 'store_and_calc_reasons' dilemma.id %}" method="POST" role="form" >{% csrf_token %}
 <div class="container">
     <div class="card">
         <div class="card-header">
@@ -257,7 +257,11 @@
 </div>
     <!-- <input type="hidden" id="total_form_1_elem" name="form_1_total">
 <input type="hidden" id="total_form_2_elem" name="form_2_total"> -->
-<input type="submit" value="SUBMITME">
+<!-- <input type="submit" value="SUBMITME"> -->
+<div class="container mb-3 mt-5" >
+        <button id="decide-button" type="submit" class="btn btn-primary btn-block">Decide!</button>
+        <!-- <button id="decide-button" type="submit" class="btn btn-primary btn-block" data-toggle="modal" data-target="#reason-result-modal" onclick="validate_reasons()">Decide!</button> -->
+    </div>
 </form>
 <br>
 <script>
@@ -308,12 +312,14 @@
     /**
      * This will call the checker function and then modify the data-toggle attribute.
      */
-    var validate_reasons = function() {
+    var validate_reasons = function( event ) {
+        event.preventDefault();
         // Call function that checks all the fields. And then store boolean result.
         var is_valid = form_checker();
         if ( is_valid ) {
             // Process form and allow modal to open and display results
-            $("#decide-button").attr("data-toggle","modal");
+            // $("#decide-button").attr("data-toggle","modal");
+            $("#decide-button").submit();
         }
         else {
             // Prevent modal from opening. This will also prevent the form from being processed.
@@ -331,12 +337,12 @@
 
 
 </div>
-    <div class="container mb-3" >
+    <!-- <div class="container mb-3" >
         <button id="decide-button" type="submit" class="btn btn-primary btn-block" data-toggle="modal" data-target="#reason-result-modal" onclick="validate_reasons()">Decide!</button>
         
-        <!-- data-toggle="modal" data-target="#reason-result-modal"> id="login-overlay-button" -->
+        data-toggle="modal" data-target="#reason-result-modal"> id="login-overlay-button"
         <p id="myButton" class="btn btn-primary btn-block">Getter 2</p>
-    </div>
+    </div> -->
 
 
 
