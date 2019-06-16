@@ -29,9 +29,9 @@ def dilemma(request):
 # https://stackoverflow.com/a/936622 
 # Problem this is making a new dilemma each time. So you must make a new html template that does not create a new dilemma rather it just edits the field.
 def edit_dilemma(request, dilemma_id):
-    dilemma =  get_object_or_404(DilemmaModel, pk=dilemma_id)
+    dilemma =  get_object_or_404(Dilemma, pk=dilemma_id)
     dilemma_part_1 = get_object_or_404(DilemmaPartOne, pk=dilemma_id)
-    dilemma_part_2 = get_object_or_404
+    dilemma_part_2 = get_object_or_404(DilemmaPartTwo, pk=dilemma_id)
     form = DilemmaForm(initial={'dilemma_part_one' : dilemma.dilemma_part_one, 'dilemma_part_two' : dilemma.dilemma_part_two})
     
     context = {
