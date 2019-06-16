@@ -17,10 +17,10 @@
     width: 115px;
 }
 
-#logo {
-    width: 150px;
-    height: 30px;
-}
+/* #logo {
+    width: 150px !important;
+    height: 30px !important;
+} */
 
 .navbar {
     border-bottom:1px solid #e7e7e7;
