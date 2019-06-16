@@ -56,18 +56,23 @@ def all_dilemmas(request):
     #     print(item)
 
     for dilemma in all_dilemmas:
-        dilemma_first_half = dilemma.dilemma_part_one
+        dilemma_first_half = dilemma.dilemma_part_one # This is an object
         dilemma_second_half = dilemma.dilemma_part_two
+
+        dilemma_first_half.dilemma_part_one # This is the text of the object
+        dilemma_second_half.dilemma_part_two
 
         for reason in dilemma_first_half.reason_part_one.all():
             print(reason.reason)
             print(reason.selected_option)
 
+        
+
     #### USE ^^^^^ THis method for looping throught the dilemma object in th template
     # Use the pks for each dilemma to get the current dilemma object to assccoiate with the reason
     # dilemma_part_one = DilemmaPartOne.objects.get(id=dilemma_1_id)
     context = {
-        'dilemma': all_dilemmas,
+        'all_dilemmas': all_dilemmas,
     }
 
     return render(request, 'easydilemma/all_dilemmas.html', context)
@@ -159,6 +164,9 @@ def test_reason(request, dilemma_id):
 
     # Get the winning dilemma side.
     dilemma_result = result(request, all_select_elements_1, all_select_elements_2,my_dilemma )
+    # Save winning dilemma side to the currnt Dilemm model result field
+    my_dilemma.result = dilemma_result
+    my_dilemma.save()
 
 
     # Get a list of all the reason objects for each side of the dilemma 
@@ -189,7 +197,7 @@ def result(request, all_select_elements_1, all_select_elements_2, my_dilemma ):
         total_dilemma_2 += int(val)
     
     if total_dilemma_1 > total_dilemma_2:
-        return my_dilemma.dilemma_part_one
+        return my_dilemma.dilemma_part_one.dilemma_part_one
     else:
-        return my_dilemma.dilemma_part_two
+        return my_dilemma.dilemma_part_two.dilemma_part_two
     

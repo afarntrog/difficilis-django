@@ -189,23 +189,58 @@
             });
         </script> -->
         
+{% for dilemma in all_dilemmas %}
 <!--TOGGLE CLASS-->
-<div class="container">
+<div class="container mb-5">
         <div class="card w-75 mx-auto">
             <div class="card-header">
-                <h5>tdfcygvuhbkj</h5>
+                <h5>{{ dilemma.dilemma_part_one.dilemma_part_one }} or {{ dilemma.dilemma_part_two.dilemma_part_two }}</h5>
             </div> 
             <div class="card-body">
+                {% for reason in dilemma.dilemma_part_one.reason_part_one.all %}
                 <div class="row mb-3">
                     <div class="col-md-8">
-                        <input type="text" class="form-control font-weight-bold expand-reason text-truncate" value="dxrtygv" readonly>
-                        <div class="p-2 mb-3 rounded text-dark font-weight-bold border text-center bg-light" style="display: none" id="full-reason-div">Javascript first because jQuery ismmmmmmmmmmmmmmmm on Javascript</div>
+                        <input type="text" class="form-control font-weight-bold expand-reason text-truncate" value="{{ reason.reason }}" readonly>
+                        <div class="p-2 mb-3 rounded text-dark font-weight-bold border text-center bg-light" style="display: none" id="full-reason-div">{{ reason.reason }}</div>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control text-center font-weight-bold" value="jddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddsdlkjflksdjakljfl"  placeholder="*" readonly>
+                            {% if reason.selected_option == "1" %}
+                                <input type="text" class="form-control text-center font-weight-bold" value="Not Really Important" readonly>
+                            {% elif reason.selected_option == "2" %}
+                                <input type="text" class="form-control text-center font-weight-bold" value="Somewhat Important" readonly>
+                            {% elif reason.selected_option == "3" %}
+                                <input type="text" class="form-control text-center font-weight-bold" value="Important" readonly>
+                            {% elif reason.selected_option == "4" %}
+                                <input type="text" class="form-control text-center font-weight-bold" value="Very Important" readonly>
+                            {% elif reason.selected_option == "5" %}
+                                <input type="text" class="form-control text-center font-weight-bold" value="Extremely Important" readonly>
+                            {% endif %}
                     </div>
                 </div>
+                {% endfor %}
+
+                {% for reason in dilemma.dilemma_part_two.reason_part_two.all %}
                 <div class="row mb-3">
+                    <div class="col-md-8">
+                        <input type="text" class="form-control font-weight-bold expand-reason text-truncate" value="{{ reason.reason }}" readonly>
+                        <div class="p-2 mb-3 rounded text-dark font-weight-bold border text-center bg-light" style="display: none" id="full-reason-div">{{ reason.reason }}</div>
+                    </div>
+                    <div class="col-md-4">
+                            {% if reason.selected_option == "1" %}
+                                <input type="text" class="form-control text-center font-weight-bold" value="Not Really Important" readonly>
+                            {% elif reason.selected_option == "2" %}
+                                <input type="text" class="form-control text-center font-weight-bold" value="Somewhat Important" readonly>
+                            {% elif reason.selected_option == "3" %}
+                                <input type="text" class="form-control text-center font-weight-bold" value="Important" readonly>
+                            {% elif reason.selected_option == "4" %}
+                                <input type="text" class="form-control text-center font-weight-bold" value="Very Important" readonly>
+                            {% elif reason.selected_option == "5" %}
+                                <input type="text" class="form-control text-center font-weight-bold" value="Extremely Important" readonly>
+                            {% endif %}                        
+                    </div>
+                </div>
+                {% endfor %}
+              <!--<div class="row mb-3">
                     <div class="col-md-8">
                         <input type="text" class="form-control font-weight-bold  expand-reason text-truncate" value="hreohfohsdo" readonly>
                         <div class="p-2 mb-3 rounded text-dark font-weight-bold border text-center bg-light" style="display: none" id="full-reason-div">Javascript first because jQuery ismmmmmmmmmmmmmmmm on Javascript</div>
@@ -222,8 +257,8 @@
                         <div class="col-md-4">
                             <input type="text" class="form-control text-center font-weight-bold" value="jsdlkjflksdjakljfl"  placeholder="*" readonly>
                         </div>
-                    </div>
-                    <div class="row mb-3">
+                    </div> -->
+                    <!-- <div class="row mb-3">
                         <div class="col-md-8">
                             <input type="text" class="form-control font-weight-bold  expand-reason text-truncate" value="hreohfohsdo" readonly>
                             <div class="p-2 mb-3 rounded text-dark font-weight-bold border text-center bg-light" style="display: none" id="full-reason-div">Javascript first because jQuery ismmmmmmmmmmmmmmmm on Javascript</div>
@@ -231,19 +266,20 @@
                         <div class="col-md-4">
                             <input type="text" class="form-control text-center font-weight-bold" value="jsdlkjflksdjakljfl"  placeholder="*" readonly>
                         </div>
-                    </div>
+                    </div> -->
             </div>
        
         <div class="card-footer">
-            <h5>Result: Eat spinach </span> </h5>
+            <h5>Result: {{ dilemma.result }} </span> </h5>
         </div>
     </div>
 </div>
+{% endfor %}
 <br> <br>
         
 
 <!--TOGGLE CLASS-->
-<div class="container">
+<!-- <div class="container">
     <div class="card w-75 mx-auto">
         <div class="card-header">
             <h5>Dilemma: Shoud I eat spinach</h5>
@@ -291,7 +327,7 @@
         <h5>Result: Eat spinach </span> </h5>
     </div>
 </div>
-</div>
+</div> -->
 
 
 

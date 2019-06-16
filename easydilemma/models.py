@@ -42,12 +42,17 @@ class ReasonPartTwo(models.Model):
         return self.reason[:50]
 
 
+
 class Dilemma(models.Model):
     dilemma_part_one = models.ForeignKey(DilemmaPartOne, on_delete=models.CASCADE)
     dilemma_part_two = models.ForeignKey(DilemmaPartTwo, on_delete=models.CASCADE)
+    result = models.TextField()
 
     def __str__(self):
         return f"{self.dilemma_part_two}... Or {self.dilemma_part_two}..."
+    
+    # def get_part_one(self):
+    #     return dilemma_part_one.dilemma_part_one
 
 # class Reason(models.Model):
 #     dilemma = models.ForeignKey(Dilemma, default=None, on_delete=models.CASCADE)

@@ -142,7 +142,7 @@
 
 
 
-<form action="{% url 'test_reason' dilemma.id %}" method="POST" role="form" class="sortable" >{% csrf_token %}
+<form action="{% url 'test_reason' dilemma.id %}" method="POST" role="form" >{% csrf_token %}
 <div class="container">
     <div class="card">
         <div class="card-header">
@@ -150,7 +150,7 @@
         </div>
         <div class="card-body">
             
-                <div id="form-first-half">
+                <div id="form-first-half" class="sortable">
 
                 <div class="form-row">
 
@@ -206,7 +206,7 @@
             <!-- Store the reason title that was pulled with JS from the url which is from the form-->
             <h2>Reasons to: <span id="reason-2-title">{{ dilemma.dilemma_part_two }}</span></h2></div>
         <div class="card-body">
-            <div id="form-second-half">
+            <div id="form-second-half" class="sortable">
             <!-- <form action="#" method="POST" role="form" class="sortable" id="form-second-half"> {% csrf_token %} -->
                 
                 <div class="form-row">
