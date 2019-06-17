@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,12 +21,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '$_v727yr4*msrkr2)mzolcppy&j8urkoo-@4ogv&=n_ly$$8hj'
+# SECRET_KEY = '$_v727yr4*msrkr2)mzolcppy&j8urkoo-@4ogv&=n_ly$$8hj'
 
+SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['difficilis.herokuapp.com']
 
 
 # Application definition
@@ -132,3 +134,6 @@ MEDIA_URL =  '/images/'
 LOGIN_REDIRECT_URL = 'easydilemma:index'
 LOGOUT_REDIRECT_URL = 'easydilemma:index'
 LOGIN_URL = 'login'
+
+
+django_heroku.settings(locals())
