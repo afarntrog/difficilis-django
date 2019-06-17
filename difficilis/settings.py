@@ -134,6 +134,9 @@ MEDIA_URL =  '/images/'
 LOGIN_REDIRECT_URL = 'easydilemma:index'
 LOGOUT_REDIRECT_URL = 'easydilemma:index'
 LOGIN_URL = 'login'
-
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 django_heroku.settings(locals())
