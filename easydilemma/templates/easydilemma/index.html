@@ -32,13 +32,26 @@
 
 <body>
   <!--Alert when you open the site-->
-  <div class="container">
+  <!-- <div class="container">
     <div class="alert alert-info alert-dismissible fade show text-center">
       <button type="button" data-dismiss="alert" class="close">&times;</button>
       <strong>Welcome!</strong> This site is in Beta
     </div>
-  </div>
+  </div> -->
   <!--/Alert-->
+
+  <!--Alert Django messages {https://docs.djangoproject.com/en/dev/ref/contrib/messages/}-->
+  {% if messages %}
+  {% for message in messages %}
+  <div class="container">
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show text-center">
+        <button type="button" data-dismiss="alert" class="close">&times;</button>
+        <strong> {{ message }}</strong>
+      </div>
+    </div>
+    <!--/Alert-->
+    {% endfor %}
+    {% endif %}
 
   <header class="header">
     <!-- Navbar-->
