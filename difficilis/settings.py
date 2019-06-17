@@ -128,5 +128,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'images') #default path to a directory where
 MEDIA_URL =  '/images/'
 
 
-LOGIN_REDIRECT_URL = 'index'
-# LOGOUT_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = 'easydilemma:index'
+LOGOUT_REDIRECT_URL = 'easydilemma:index'
+LOGIN_URL = 'login'
