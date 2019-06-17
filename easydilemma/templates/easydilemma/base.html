@@ -28,7 +28,6 @@
   <title>Difficilis</title>
   <link rel="shortcut icon" type="image/png" href="{% static '../../../../static/easydilemma/images/favicon-16x16.png' %}"/> <!-- https://logohub.io/# -->
 
-
 </head>
 
 <body>
@@ -81,10 +80,10 @@
         <!--Right side of NavBar-->
         <ul class="navbar-nav ml-auto">
             {% if user.is_authenticated %}
-            <li class="nav-item ml-lg-3 "><a  href="{% url 'users:logout' %}" class="btn btn-primary navbar_btn"><strong>LOG OUT</strong></a></li>
+              <li class="nav-item ml-lg-3 "><button class="btn btn-outline-primary navbar_btn" id="login-overlay-button" data-toggle="modal" data-target="#login-modal"><strong>LOG OUT</strong></button></li>
             {% else %}
-            <li class="nav-item ml-lg-3 "><a  href="{% url 'users:login' %}" class="btn btn-outline-primary navbar_btn" ><strong>LOG IN</strong></a></li>
-            <li class="nav-item ml-lg-3 "><a  href="{% url 'users:register' %}" class="btn btn-primary navbar_btn"><strong>SIGN UP</strong></a></li>
+              <li class="nav-item ml-lg-3 "><button class="btn btn-outline-primary navbar_btn" id="login-overlay-button" data-toggle="modal" data-target="#login-modal"><strong>LOG IN</strong></button></li>
+              <li class="nav-item ml-lg-3 "><button class="btn btn-primary navbar_btn" data-toggle="modal" data-target="#signup-modal"><strong>SIGN UP</strong></button></li>
             {% endif %}
         </ul>
 
@@ -199,30 +198,6 @@
     </div>    
     
   </main>
-
-
-  <!--Client Who Use us Carousel-->
-  <!-- <section>
-    <div class="container mt-5 mb-5">
-      <div class="container mb-5">
-        <h2 class="text-center">Companies that love us</h2>
-        <p class=" text-center text-muted">Get Difficilis for business</p>
-      </div>
-      <div class="customer-logos slider"> -->
-        <!--<a href="https://icons8.com/icon/38607/hp">All icons by Icons8</a>-->
-          <!-- <div class="slide"><img src="https://img.icons8.com/color/100/000000/google-logo.png"></div>
-          <div class="slide"><img src="https://img.icons8.com/color/100/000000/office-365.png"></div>
-          <div class="slide"><img src="https://img.icons8.com/color/100/000000/google-firebase-console.png"></div>
-          <div class="slide"><img src="https://img.icons8.com/color/100/000000/hp.png"></div>
-          <div class="slide"><img src="https://img.icons8.com/color/100/000000/facebook-circled.png"></div>
-          <div class="slide"><img src="https://img.icons8.com/color/100/000000/snapchat-circled-logo.png"></div>
-          <div class="slide"><img src="https://img.icons8.com/color/100/000000/class.png"></div>
-          <div class="slide"><img src="https://img.icons8.com/color/100/000000/twitter.png"></div>
-        </div>
-    </div>
-  </section> -->
-  <!--/End Carousel-->
-
     <!-- FOOTER -->
     <hr>
     <footer class="container pt-5">

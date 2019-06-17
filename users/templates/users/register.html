@@ -5,10 +5,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>ToDo App</title>
     {% load static %}
     {% load crispy_forms_tags %}
+    <title>Difficilis</title>
+    <link rel="shortcut icon" type="image/png" href="{% static '../static/easydilemma/images/favicon-16x16.png' %}"/> <!-- https://logohub.io/# -->
+
+
 
     <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
     <!-- Bootstrap CSS -->
@@ -52,10 +54,13 @@
     <header class="header">
         <!-- Navbar-->
         <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
-            <div class="d-flex">
-                <a class="navbar-brand grow" href="{% url 'easydilemma:index' %}" id="logo"><img src="{% static '../static/easydilemma/images/question.png' %}" id="logo" alt="Question mark"></a>
-                <!--<a href="index.html" class="navbar-brand text-uppercase font-weight-bold"><span>Difficilis</span></a>-->
-            </div>
+                <div class="d-flex">
+                    <a class="navbar-brand grow" href="{% url 'easydilemma:index' %}"><img src="{% static '../static/easydilemma/images/Logo.png' %}" id="logo" style="max-height: 30px; max-width: 150px;;"  alt="Difficilis"></a>
+                    <!-- <a class="navbar-brand grow" href="{% url 'easydilemma:index' %}" ><img src="{% static '../static/easydilemma/images/question.png' %}" id="logo" alt="Question mark"></a> -->
+                    <!-- If you use the above logo insteas of the one with the text then you have to comment out the logo id in main.css  -->
+                    <!--<a href="index.html" class="navbar-brand text-uppercase font-weight-bold"><span>Difficilis</span></a> -->
+                    <!-- https://logohub.io/# -->
+                </div>
             
             <button type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"  class="navbar-toggler navbar-toggler-right">
                 <i class="fa fa-bars"></i>

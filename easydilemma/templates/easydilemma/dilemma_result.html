@@ -5,8 +5,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ToDo App</title>
     {% load static %}
+    <title>Difficilis</title>
+    <link rel="shortcut icon" type="image/png" href="{% static '../static/easydilemma/images/favicon-16x16.png' %}"/> <!-- https://logohub.io/# -->
+  
 
     <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
     <!-- Bootstrap CSS -->
@@ -43,10 +45,13 @@
     <header class="header">
         <!-- Navbar-->
         <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
-            <div class="d-flex">
-                <a class="navbar-brand grow" href="{% url 'easydilemma:index' %}" id="logo"><img src="{% static '../static/easydilemma/images/question.png' %}" id="logo" alt="Question mark"></a>
-                <!--<a href="index.html" class="navbar-brand text-uppercase font-weight-bold"><span>Difficilis</span></a>-->
-            </div>
+                <div class="d-flex">
+                        <a class="navbar-brand grow" href="{% url 'easydilemma:index' %}"><img src="{% static '../static/easydilemma/images/Logo.png' %}" id="logo" style="max-height: 30px; max-width: 150px;;"  alt="Difficilis"></a>
+                        <!-- <a class="navbar-brand grow" href="{% url 'easydilemma:index' %}" ><img src="{% static '../static/easydilemma/images/question.png' %}" id="logo" alt="Question mark"></a> -->
+                        <!-- If you use the above logo insteas of the one with the text then you have to comment out the logo id in main.css  -->
+                        <!--<a href="index.html" class="navbar-brand text-uppercase font-weight-bold"><span>Difficilis</span></a> -->
+                        <!-- https://logohub.io/# -->
+                      </div>
             
             <button type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"  class="navbar-toggler navbar-toggler-right">
                 <i class="fa fa-bars"></i>
@@ -63,9 +68,13 @@
                 </ul>
                 <!--Right side of NavBar-->
                 <ul class="navbar-nav ml-auto">
-                <li class="nav-item ml-lg-3 "><button class="btn btn-outline-primary navbar_btn" id="login-overlay-button" data-toggle="modal" data-target="#login-modal"><strong>LOG IN</strong></button></li>
-                <li class="nav-item ml-lg-3 "><button class="btn btn-primary navbar_btn" data-toggle="modal" data-target="#signup-modal"><strong>SIGN UP</strong></button></li>
-                </ul>
+                        {% if user.is_authenticated %}
+                        <li class="nav-item ml-lg-3 "><a  href="{% url 'users:logout' %}" class="btn btn-primary navbar_btn"><strong>LOG OUT</strong></a></li>
+                        {% else %}
+                        <li class="nav-item ml-lg-3 "><a  href="{% url 'users:login' %}" class="btn btn-outline-primary navbar_btn" ><strong>LOG IN</strong></a></li>
+                        <li class="nav-item ml-lg-3 "><a  href="{% url 'users:register' %}" class="btn btn-primary navbar_btn"><strong>SIGN UP</strong></a></li>
+                        {% endif %}
+                    </ul>
 
             </div>
         </nav>
@@ -80,7 +89,7 @@
 
             <div class="card-body">
                     <div class="row mb-3">
-                            <div class="text-center font-weight-bold col-md-12">Reasons for tsad one</div>
+                            <div class="text-center font-weight-bold col-md-12">Reasons for {{ dilemma_part_one }}</div>
                     </div>
                 {% for reason in all_dilemma_one_reasons %}
                 <div class="row mb-3">
@@ -106,7 +115,7 @@
                 {% endfor %}
                 <hr>
                 <div class="row mb-3">
-                        <div class="text-center font-weight-bold col-md-12">Reasons for tsad Two</div>
+                        <div class="text-center font-weight-bold col-md-12">Reasons for {{ dilemma_part_two }}</div>
                 </div>
                 {% for reason in all_dilemma_two_reasons %}
                 <div class="row mb-3">
@@ -156,117 +165,6 @@
     <a  href="{% url 'easydilemma:all_dilemmas' %}" class="btn btn-primary">Don't Post</a>
 </div></li>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <!-- Modal for LOGIN and SIGNUP -->
-  <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="login-modal-title">Login</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        
-             <!-- form card login -->
-            <form class="form needs-validation" role="form" autocomplete="off" id="login-form" method="" novalidate>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="login_username">Username</label>
-                        <input type="text" class="form-control form-control-lg" name="login_username" id="login_username" required>
-                        <div class="invalid-feedback">Please enter your username.</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="login_password">Password</label>
-                        <input type="password" class="form-control form-control-lg" id="login_password" name="login_password" required>
-                        <div class="invalid-feedback">Please enter your password too!</div>
-                    </div>
-                    <div>
-                        <span class="custom-control-description small text-dark">Don't have an account? <a data-dismiss="modal" data-toggle="modal" href="#signup-modal">Sign Up</a></span>
-                    </div>
-                            
-                    </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-success" data-dismiss="modal" id="btnLogin">Login</button> <!-- Don't actually login user because no database to store credentials-->
-                </div>
-            </form>
-      </div>
-    </div>
-  </div>
-  <!--/end LOGIN modal-->
-    <!-- Modal -->
-    <div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="login-modal-title">Sign Up</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                <!-- form card login -->
-                        <form class="form needs-validation" role="form" autocomplete="off" id="signup-form" method="" novalidate>
-                            <div class="form-group">
-                                <label for="sign_up_username">Username</label>
-                                <input type="text" class="form-control form-control-lg" name="sign_up_username" id="sign_up_username" required>
-                                <div class="invalid-feedback">Please enter a valid username.</div> <!-- This site is annunymous so no email required-->
-                            </div>
-                            <div class="form-group">
-                                <label for="sign_up__password">Password</label>
-                                <input type="password" class="form-control form-control-lg" id="sign_up__password" name="sign_up__password" required>
-                                <div class="invalid-feedback">Please enter your password too!</div>
-                            </div>
-                            <div>
-                                <!--When user clicks the link then it closes the signup modal and opens the login one-->
-                                <span class="custom-control-description small text-dark">Have an account? <a data-dismiss="modal" data-toggle="modal" href="#login-modal">Login</a></span>
-                            </div>
-                        
-                        </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                  <button type="button" class="btn btn-success" data-dismiss="modal" id="btnSignUp">Sign Up</button> <!-- Don't actually Sign Up user because no database to store credentials-->
-                </div>
-            </form>
-              </div>
-            </div>
-          </div>
-          <!--/end SIGNUP modal-->
 
     <!-- FOOTER -->
     <hr>

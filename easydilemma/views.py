@@ -2,7 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .forms import DilemmaForm
 from .models import *
 # Create your views here.
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 
 
 # from django.contrib import messages
@@ -132,7 +133,7 @@ def store_and_calc_reasons(request, dilemma_id):
     my_dilemma.save()
 
 
-    # Get a list of all the reason objects for each side of the dilemma 
+    # # Get a list of all the reason objects for each side of the dilemma 
     list_of_reasons_one = ReasonPartOne.objects.filter(dilemma=dilemma_part_one)
     list_of_reasons_two = ReasonPartTwo.objects.filter(dilemma=dilemma_part_two)
 
@@ -147,6 +148,7 @@ def store_and_calc_reasons(request, dilemma_id):
     }
 
     return render(request, 'easydilemma/dilemma_result.html', context)
+
  
 
 # This will simply calculate and return the result which side is better
