@@ -44,8 +44,8 @@
     <!-- Navbar-->
     <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
         <div class="d-flex">
-            <a class="navbar-brand grow" href="{% url 'index' %}"><img src="{% static '../static/easydilemma/images/Logo.png' %}" id="logo" style="max-height: 30px; max-width: 150px;;"  alt="Difficilis"></a>
-            <!-- <a class="navbar-brand grow" href="{% url 'index' %}" ><img src="{% static '../static/easydilemma/images/question.png' %}" id="logo" alt="Question mark"></a> -->
+            <a class="navbar-brand grow" href="{% url 'easydilemma:index' %}"><img src="{% static '../static/easydilemma/images/Logo.png' %}" id="logo" style="max-height: 30px; max-width: 150px;;"  alt="Difficilis"></a>
+            <!-- <a class="navbar-brand grow" href="{% url 'easydilemma:index' %}" ><img src="{% static '../static/easydilemma/images/question.png' %}" id="logo" alt="Question mark"></a> -->
             <!-- If you use the above logo insteas of the one with the text then you have to comment out the logo id in main.css  -->
             <!--<a href="index.html" class="navbar-brand text-uppercase font-weight-bold"><span>Difficilis</span></a> -->
             <!-- https://logohub.io/# -->
@@ -58,16 +58,20 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <!--Left side of NavBar-->
         <ul class="navbar-nav">
-          <li class="nav-item" ><a  href="{% url 'index' %}" class="nav-link font-weight-bold">Home</a></li>
-          <li class="nav-item "><a  href="{% url 'all_dilemmas' %}" class="nav-link font-weight-bold">Popular</a></li>
-          <li class="nav-item"><a  href="{% url 'all_dilemmas' %}" class="nav-link font-weight-bold">Newest</a></li>
-          <li class="nav-item"><a  href="{% url 'all_dilemmas' %}" class="nav-link font-weight-bold">All Dilemmas</a></li>
+          <li class="nav-item" ><a  href="{% url 'easydilemma:index' %}" class="nav-link font-weight-bold">Home</a></li>
+          <li class="nav-item "><a  href="{% url 'easydilemma:all_dilemmas' %}" class="nav-link font-weight-bold">Popular</a></li>
+          <li class="nav-item"><a  href="{% url 'easydilemma:all_dilemmas' %}" class="nav-link font-weight-bold">Newest</a></li>
+          <li class="nav-item"><a  href="{% url 'easydilemma:all_dilemmas' %}" class="nav-link font-weight-bold">All Dilemmas</a></li>
 
         </ul>
         <!--Right side of NavBar-->
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item ml-lg-3 "><button class="btn btn-outline-primary navbar_btn" id="login-overlay-button" data-toggle="modal" data-target="#login-modal"><strong>LOG IN</strong></button></li>
-          <li class="nav-item ml-lg-3 "><button class="btn btn-primary navbar_btn" data-toggle="modal" data-target="#signup-modal"><strong>SIGN UP</strong></button></li>
+            {% if user.is_authenticated %}
+              <li class="nav-item ml-lg-3 "><button class="btn btn-outline-primary navbar_btn" id="login-overlay-button" data-toggle="modal" data-target="#login-modal"><strong>LOG OUT</strong></button></li>
+            {% else %}
+              <li class="nav-item ml-lg-3 "><button class="btn btn-outline-primary navbar_btn" id="login-overlay-button" data-toggle="modal" data-target="#login-modal"><strong>LOG IN</strong></button></li>
+              <li class="nav-item ml-lg-3 "><button class="btn btn-primary navbar_btn" data-toggle="modal" data-target="#signup-modal"><strong>SIGN UP</strong></button></li>
+            {% endif %}
         </ul>
 
       </div>
@@ -114,7 +118,7 @@
 
      <!--Get started button-->
      <div class="mt-5 text-center pb-5 pt-5 " style="background-color: #f2f2f2;">
-        <a class="btn btn-primary btn-lg" role="button" href="{% url 'dilemma' %}">Get started !</a>
+        <a class="btn btn-primary btn-lg" role="button" href="{% url 'easydilemma:dilemma' %}">Get started !</a>
       </div> 
 
     <!--Introduction with images-->
@@ -177,7 +181,7 @@
 
     <!--NEW: mt-2 allows a top margin!!-->
     <div class="mt-5 text-center pb-5 pt-5 container" style="background-color: #f2f2f2;">
-      <a class="btn btn-primary btn-lg" role="button" href="{% url 'dilemma' %}">Get started!</a>
+      <a class="btn btn-primary btn-lg" role="button" href="{% url 'easydilemma:dilemma' %}">Get started!</a>
     </div>    
     
   </main>

@@ -90,7 +90,7 @@
         <!-- Navbar-->
         <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
             <div class="d-flex">
-                <a class="navbar-brand grow" href="{% url 'index' %}" id="logo"><img src="{% static '../static/easydilemma/images/question.png' %}" id="logo" alt="Question mark"></a>
+                <a class="navbar-brand grow" href="{% url 'easydilemma:index' %}" id="logo"><img src="{% static '../static/easydilemma/images/question.png' %}" id="logo" alt="Question mark"></a>
                 <!--<a href="index.html" class="navbar-brand text-uppercase font-weight-bold"><span>Difficilis</span></a>-->
             </div>
             
@@ -101,10 +101,10 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <!--Left side of NavBar-->
                 <ul class="navbar-nav">
-                <li class="nav-item" ><a  href="{% url 'index' %}" class="nav-link font-weight-bold">Home</a></li>
-                <li class="nav-item "><a  href="{% url 'all_dilemmas' %}" class="nav-link font-weight-bold">Popular</a></li>
-                <li class="nav-item"><a  href="{% url 'all_dilemmas' %}" class="nav-link font-weight-bold">Newest</a></li>
-                <li class="nav-item"><a  href="{% url 'all_dilemmas' %}" class="nav-link font-weight-bold">All Dilemmas</a></li>
+                <li class="nav-item" ><a  href="{% url 'easydilemma:index' %}" class="nav-link font-weight-bold">Home</a></li>
+                <li class="nav-item "><a  href="{% url 'easydilemma:all_dilemmas' %}" class="nav-link font-weight-bold">Popular</a></li>
+                <li class="nav-item"><a  href="{% url 'easydilemma:all_dilemmas' %}" class="nav-link font-weight-bold">Newest</a></li>
+                <li class="nav-item"><a  href="{% url 'easydilemma:all_dilemmas' %}" class="nav-link font-weight-bold">All Dilemmas</a></li>
 
                 </ul>
                 <!--Right side of NavBar-->
@@ -121,7 +121,7 @@
     <!--TODO Make this input stick on scroll instead of the navbar-->
     <!--This is the top non-editable form that displays the users dilemma-->
     <div class="container">
-        <form method="POST" action="{% url 'edit_dilemma' dilemma.id %}"> {% csrf_token %}
+        <form method="POST" action="{% url 'easydilemma:edit_dilemma' dilemma.id %}"> {% csrf_token %}
             <!-- <div class="row"> -->
                 <div class="input-group mb-3">
                     <input type="text" id="edit_reasons_form" name="edit_reasons_form" class="form-control text-center font-weight-bold"  value='{{ dilemma.dilemma_part_one }} Or {{ dilemma.dilemma_part_two }}' readonly>
@@ -142,7 +142,7 @@
 
 
 
-<form action="{% url 'store_and_calc_reasons' dilemma.id %}" method="POST" role="form" >{% csrf_token %}
+<form action="{% url 'easydilemma:store_and_calc_reasons' dilemma.id %}" method="POST" role="form" >{% csrf_token %}
 <div class="container">
     <div class="card">
         <div class="card-header">

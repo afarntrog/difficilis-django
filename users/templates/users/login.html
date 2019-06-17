@@ -1,0 +1,141 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ToDo App</title>
+    {% load static %}
+
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--My css sheet-->
+    <link rel="stylesheet" href="../../static/easydilemma/css/main.css">
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!--jQuery CDN-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
+    </script>
+
+    <!--jQuery UI local link-->
+    <script src="../../static/easydilemma/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+    <!--Loading overlay Libary-->
+    <!-- <script src="./jquery-loading-overlay-2.1.6/src/loadingoverlay.js"></script> -->
+    <script src="../../static/easydilemma/js/main2.js" ></script>
+     <!--Load bootstrap modal on page load. And disable the click outside to close and disable the esc key-->
+  <!---->
+  <script type="text/javascript">
+    $(window).on('load',function(){
+      $('#login-modal').modal({backdrop: 'static', keyboard: false});
+        $('#login-modal').modal('show');
+    });
+  </script>
+  <!--Disable X https://stackoverflow.com/questions/25183303/how-to-remove-x-button-in-modal-->
+  <style>.close {display: none;}</style>
+</head>
+
+<!--Make it inherit the first page navbar-->
+
+<body>
+
+    <header class="header">
+        <!-- Navbar-->
+        <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
+            <div class="d-flex">
+                <a class="navbar-brand grow" href="{% url 'easydilemma:index' %}"><img src="{% static '../static/easydilemma/images/Logo.png' %}" id="logo" style="max-height: 30px; max-width: 150px;;"  alt="Difficilis"></a>
+                <!-- <a class="navbar-brand grow" href="{% url 'easydilemma:index' %}" ><img src="{% static '../static/easydilemma/images/question.png' %}" id="logo" alt="Question mark"></a> -->
+                <!-- If you use the above logo insteas of the one with the text then you have to comment out the logo id in main.css  -->
+                <!--<a href="index.html" class="navbar-brand text-uppercase font-weight-bold"><span>Difficilis</span></a> -->
+                <!-- https://logohub.io/# -->
+              </div>
+              
+            <button type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"  class="navbar-toggler navbar-toggler-right">
+                <i class="fa fa-bars"></i>
+              </button>
+    
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <!--Left side of NavBar-->
+            <ul class="navbar-nav">
+              <li class="nav-item" ><a  href="{% url 'easydilemma:index' %}" class="nav-link font-weight-bold">Home</a></li>
+              <li class="nav-item "><a  href="{% url 'easydilemma:all_dilemmas' %}" class="nav-link font-weight-bold">Popular</a></li>
+              <li class="nav-item"><a  href="{% url 'easydilemma:all_dilemmas' %}" class="nav-link font-weight-bold">Newest</a></li>
+              <li class="nav-item"><a  href="{% url 'easydilemma:all_dilemmas' %}" class="nav-link font-weight-bold">All Dilemmas</a></li>
+    
+            </ul>
+            <!--Right side of NavBar-->
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                  <li class="nav-item ml-lg-3 "><button class="btn btn-outline-primary navbar_btn" id="login-overlay-button" data-toggle="modal" data-target="#login-modal"><strong>LOG OUT</strong></button></li>
+                {% else %}
+                  <li class="nav-item ml-lg-3 "><button class="btn btn-outline-primary navbar_btn" id="login-overlay-button" data-toggle="modal" data-target="#login-modal"><strong>LOG IN</strong></button></li>
+                  <li class="nav-item ml-lg-3 "><button class="btn btn-primary navbar_btn" data-toggle="modal" data-target="#signup-modal"><strong>SIGN UP</strong></button></li>
+                {% endif %}
+            </ul>
+    
+          </div>
+        </nav>
+        <!-- /Navbar -->
+      </header>
+        {% load crispy_forms_tags %}
+
+
+  <!-- Modal for LOGIN and SIGNUP -->
+  <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="login-modal-title">Login</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        
+             <!-- form card login -->
+            <form class="form needs-validation" role="form" autocomplete="off" id="login-form" method="" novalidate>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="login_username">Username</label>
+                        <input type="text" class="form-control form-control-lg" name="login_username" id="login_username" required>
+                        <div class="invalid-feedback">Please enter your username.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="login_password">Password</label>
+                        <input type="password" class="form-control form-control-lg" id="login_password" name="login_password" required>
+                        <div class="invalid-feedback">Please enter your password too!</div>
+                    </div>
+                    <div>
+                        <span class="custom-control-description small text-dark">Don't have an account? <a href="{% url 'users:register' %}">Sign Up</a></span>
+                    </div>
+                            
+                    </div>                    
+                    <a class="btn btn-secondary" href="{% url 'easydilemma:index' %}">Cancel</a>
+                    <a class="btn btn-success" href="{% url 'easydilemma:index' %}">Sign Up</a>
+                </div>
+            </form>
+      </div>
+    </div>
+  </div>
+  <!--/end LOGIN modal-->
+
+    <!-- FOOTER -->
+    <hr>
+    <footer class="container pt-5">
+
+        <div class="float-right"><a href="#" id="back-to-top"></a></div>
+
+        <!-- <p class="float-right"><a href="#"></a></p> -->
+        <p>&copy; 2019 Aaron Farntrog</p>
+    </footer>
+    
+  <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ToDo App</title>
+    {% load static %}
+    {% load crispy_forms_tags %}
+
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--My css sheet-->
+    <link rel="stylesheet" href="../../static/easydilemma/css/main.css">
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!--jQuery CDN-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
+    </script>
+
+    <!--jQuery UI local link-->
+    <script src="../../jquery-ui-1.12.1/jquery-ui.min.js"></script>
+    <!--Loading overlay Libary-->
+    <!-- <script src="./jquery-loading-overlay-2.1.6/src/loadingoverlay.js"></script> -->
+    <!-- <script src="../../static/easydilemma/js/main2.js" ></script> -->
+
+    
+    <style>
+         .asteriskField {
+      display: none;            
+        }
+
+        /* This will make sure that crsipy form will not display those annoying tips */
+        #hint_id_username, #hint_id_password1, #hint_id_password2 {
+            display: none;
+
+        }
+    </style> 
+    
+    <!-- <style>
+            body {
+                background-image: url(../../static/images/q_mark.png)
+            }
+        </style> -->
+
+</head>
+
+<body>
+    <header class="header">
+        <!-- Navbar-->
+        <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
+            <div class="d-flex">
+                <a class="navbar-brand grow" href="{% url 'easydilemma:index' %}" id="logo"><img src="{% static '../static/easydilemma/images/question.png' %}" id="logo" alt="Question mark"></a>
+                <!--<a href="index.html" class="navbar-brand text-uppercase font-weight-bold"><span>Difficilis</span></a>-->
+            </div>
+            
+            <button type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"  class="navbar-toggler navbar-toggler-right">
+                <i class="fa fa-bars"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <!--Left side of NavBar-->
+                <ul class="navbar-nav">
+                <li class="nav-item" ><a  href="{% url 'easydilemma:index' %}" class="nav-link font-weight-bold">Home</a></li>
+                <li class="nav-item "><a  href="{% url 'easydilemma:all_dilemmas' %}" class="nav-link font-weight-bold">Popular</a></li>
+                <li class="nav-item"><a  href="{% url 'easydilemma:all_dilemmas' %}" class="nav-link font-weight-bold">Newest</a></li>
+                <li class="nav-item"><a  href="{% url 'easydilemma:all_dilemmas' %}" class="nav-link font-weight-bold">All Dilemmas</a></li>
+
+                </ul>
+                <!--Right side of NavBar-->
+                <ul class="navbar-nav ml-auto">
+                <li class="nav-item ml-lg-3 "><button class="btn btn-outline-primary navbar_btn" id="login-overlay-button" data-toggle="modal" data-target="#login-modal"><strong>LOG IN</strong></button></li>
+                </ul>
+
+            </div>
+        </nav>
+    <!-- /Navbar -->
+    </header>
+            
+
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-center text-black mb-4">A place to make better informed decisions</h2>
+                <div class="row">
+                    <div class="col-md-6 mx-auto">
+
+                        <!-- form card login -->
+                        <div class="card rounded-1">
+                            <div class="card-header">
+                                <h3 class="mb-0 text-center">Sign Up</h3>
+                            </div>
+
+                            <div class="card-body">
+                                <!--[https://getbootstrap.com/docs/4.0/components/forms/]-->
+                                <form  autocomplete="off" method="POST" action="{% url 'users:register' %}" > {% csrf_token %}
+                                    
+                                    
+                                    <div class="form-group">                            
+                                        {{ form|crispy }}
+                                    </div>
+                 
+                               
+                                    <!--Write js code that gets data from the url.-->
+                                    <button type="submit" class="btn btn-success btn-lg float-right">Sign Up</button>                            
+                                
+                                </form>
+
+                            </div>
+                            <!--/card-block-->
+                        </div>
+                        <!-- /form card login -->
+
+                    </div>
+
+                </div>
+                <!--/row-->
+
+            </div>
+            <!--/col-->
+        </div>
+        <!--/row-->
+    </div>
+    <!--/container-->
+
+    <!-- FOOTER -->
+    <hr>
+    <footer class="container pt-5">
+
+        <div class="float-right"><a href="#" id="back-to-top"></a></div>
+
+        <!-- <p class="float-right"><a href="#"></a></p> -->
+        <p>&copy; 2019 Aaron Farntrog</p>
+    </footer>
+
+
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>    
+</body>
+
+</html>
