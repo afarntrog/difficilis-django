@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {% load static %}
+  <!--Bootstrap and main.css-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <!--Font Awesome-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="../static/easydilemma/js/main2.js" ></script>
+
+  <!--My css-->
+  <link rel="stylesheet" href="../../static/easydilemma/css/main.css">
+
+
+  <title>Difficilis</title>
+  <link rel="shortcut icon" type="image/png" href="{% static '../../../../static/easydilemma/images/favicon-16x16.png' %}"/> <!-- https://logohub.io/# -->
+  <style>
+        li {
+            list-style-type: none;
+        }
+    </style>
+
+</head>
+
+<body>
+
+  <!--Alert Django messages {https://docs.djangoproject.com/en/dev/ref/contrib/messages/}-->
+  {% if messages %}
+  {% for message in messages %}
+  <div class="container">
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show text-center">
+        <button type="button" data-dismiss="alert" class="close">&times;</button>
+        <strong> {{ message }}</strong>
+      </div>
+    </div>
+    <!--/Alert-->
+    {% endfor %}
+    {% endif %}
+
+  <header class="header">
+    <!-- Navbar-->
+    <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
+        <div class="d-flex">
+            <a class="navbar-brand grow" href="{% url 'easydilemma:index' %}"><img src="{% static '../static/easydilemma/images/Logo.png' %}" id="logo" style="max-height: 30px; max-width: 150px;;"  alt="Difficilis"></a>
+            <!-- <a class="navbar-brand grow" href="{% url 'easydilemma:index' %}" ><img src="{% static '../static/easydilemma/images/question.png' %}" id="logo" alt="Question mark"></a> -->
+            <!-- If you use the above logo insteas of the one with the text then you have to comment out the logo id in main.css  -->
+            <!--<a href="index.html" class="navbar-brand text-uppercase font-weight-bold"><span>Difficilis</span></a> -->
+            <!-- https://logohub.io/# -->
+          </div>
+          
+        <button type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"  class="navbar-toggler navbar-toggler-right">
+            <i class="fa fa-bars"></i>
+          </button>
+
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <!--Left side of NavBar-->
+        <ul class="navbar-nav">
+          <li class="nav-item" ><a  href="{% url 'easydilemma:index' %}" class="nav-link font-weight-bold">Home</a></li>
+          <li class="nav-item "><a  href="{% url 'easydilemma:all_dilemmas' %}" class="nav-link font-weight-bold">Popular</a></li>
+          <li class="nav-item"><a  href="{% url 'easydilemma:all_dilemmas' %}" class="nav-link font-weight-bold">Newest</a></li>
+          <li class="nav-item"><a  href="{% url 'easydilemma:all_dilemmas' %}" class="nav-link font-weight-bold">All Dilemmas</a></li>
+          <li><a href="{% url 'easydilemma:all_dilemmas' %}" class="badge badge-pill badge-primary">Hire me</a></li>
+
+        </ul>
+        <!--Right side of NavBar-->
+         <ul class="navbar-nav ml-auto">
+            <a href="{% static '../static/easydilemma/images/Logo.png' %}" class="btn btn-primary btn-info" download><strong>Resume</strong> <span class="fa fa-download"></span></a>
+            <!-- {% if user.is_authenticated %}
+            <li class="nav-item ml-lg-3 "><a  href="{% url 'users:logout' %}" class="btn btn-primary navbar_btn"><strong>Log Out</strong></a></li>
+            {% else %}
+            <li class="nav-item ml-lg-3 "><a  href="{% url 'users:login' %}" class="btn btn-outline-primary navbar_btn" ><strong>LOG IN</strong></a></li>
+            <li class="nav-item ml-lg-3 "><a  href="{% url 'users:register' %}" class="btn btn-primary navbar_btn"><strong>SIGN UP</strong></a></li>
+            {% endif %} -->
+        </ul> 
+
+      </div>
+    </nav>
+    <!-- /Navbar -->
+  </header>
+
+<!--[https://www.codeply.com/go/GVrdaKLyTC/bootstrap-4-card-examples]-->
+
+<div class="container">
+        <div class="page-header text-center mb-5 mt-5">
+            <h1>Technologies I used to build this platform.</h1>
+            <h5><small class="text-muted">(Please see <a href="#" >LinkedIn</a> for a full list of technologies I am familiar with)</small></h5>
+        </div>
+    <div class="row">
+
+        <div class="col-sm-4 py-2">
+            <div class="card bg-light mb-3" style="max-width: 18rem;">
+                <div class="card-header text-center"><strong>Languages - Frontend</strong></div>
+                <div class="card-body">
+                    <ul>
+                        <li class="h5"><span class="badge badge-pill badge-primary">HTML</span></li>
+                        <li class="h5"><span class="badge badge-pill badge-primary">CSS</span></li>
+                        <li class="h5"><span class="badge badge-pill badge-primary">Javascript</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 py-2">
+            <div class="card bg-light mb-3" style="max-width: 18rem;">
+                <div class="card-header text-center"><strong>Languages - Backend</strong></div>
+                <div class="card-body">
+                    <ul>
+                        <li class="h5"><span class="badge badge-pill badge-primary">Python</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 py-2">
+            <div class="card bg-light mb-3" style="max-width: 18rem;">
+                <div class="card-header text-center"><strong>Databases</strong></div>
+                <div class="card-body">
+                    <ul>
+                        <li class="h5"><span class="badge badge-pill badge-primary">SQLite</span></li>
+                        <li class="h5"><span class="badge badge-pill badge-primary">PostgreSQL</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 py-2">
+            <div class="card bg-light mb-3" style="max-width: 18rem;">
+                <div class="card-header text-center"><strong>Libraries</strong></div>
+                <div class="card-body">
+                    <ul>
+                        <li class="h5"><span class="badge badge-pill badge-primary">jQuery</span></li>
+                        <li class="h5"><span class="badge badge-pill badge-primary">Bootstrap</span></li>
+                        <li class="h5"><span class="badge badge-pill badge-primary">FontAwesome</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 py-2">
+            <div class="card bg-light mb-3" style="max-width: 18rem;">
+                <div class="card-header text-center"><strong>Framework</strong></div>
+                <div class="card-body">
+                    <ul>
+                        <li class="h5"><span class="badge badge-pill badge-primary">Django</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 py-2">
+            <div class="card bg-light mb-3" style="max-width: 18rem;">
+                <div class="card-header text-center"><strong>Version Control</strong></div>
+                <div class="card-body">
+                    <ul>
+                        <li class="h5"><span class="badge badge-pill badge-primary">Git</span></li>
+                        <li class="h5"><span class="badge badge-pill badge-primary">Github</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 py-2">
+            <div class="card bg-light mb-3" style="max-width: 18rem;">
+                <div class="card-header text-center"><strong>System</strong></div>
+                <div class="card-body">
+                    <ul>
+                        <li class="h5"><span class="badge badge-pill badge-primary">Linux</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+<br><br>
+</body>
+</html>

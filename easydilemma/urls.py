@@ -5,6 +5,7 @@ from . import views
 app_name = 'easydilemma'
 urlpatterns = [
     path('', views.index, name="index"),
+    path('aboutme', views.about_me, name="about_me"),
     path('dilemma', views.dilemma, name="dilemma"),
     path('dilemma/<int:dilemma_id>/', views.edit_dilemma, name="edit_dilemma"),
     path('all_dilemmas', views.all_dilemmas, name="all_dilemmas"),

@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "/home/aaron/.local/share/virtualenvs/simple-blimple-GgCo1TW4/bin/python"
+    "python.pythonPath": "/home/aaron/.local/share/virtualenvs/simple-blimple-GgCo1TW4/bin/python",
+    "liveServer.settings.port": 5501
 }

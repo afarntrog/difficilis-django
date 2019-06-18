@@ -42,6 +42,9 @@ def edit_dilemma(request, dilemma_id):
 def reasons(request):
     return render(request, 'easydilemma/reasons.html', context=None)
 
+def about_me(request):
+    return render(request, 'easydilemma/aboutme.html', context=None)
+
 # If the user clicks don't post in the dilemma_result page then it'll change the boolean field in model
 def do_not_post(request, dilemma_id):
     my_dilemma = Dilemma.objects.get(id=dilemma_id)
