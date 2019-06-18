@@ -35,6 +35,16 @@
       display: none;            
         }
     </style>
+    <script>
+        // This will stop the user from clicking the submit buttom many times. Therby ppreventing user from creating multiple instances of same model[https://stackoverflow.com/a/13843710]
+        $(document).ready( function() {
+            $('#dilemma-form').one('submit', function() {
+                $(this).find('input[type="submit"]').attr('disabled','disabled');
+            });
+
+        })
+
+    </script>
 
 <!-- THIS IS A NICE FORM BACKDROP -->
   <!-- <style>
