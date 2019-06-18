@@ -8,7 +8,8 @@ from .forms import UserRegisterForm
 from django.contrib.auth.signals import user_logged_out
 from django.dispatch import receiver
 from django.contrib import messages
-
+# This will log the user in automatically after signup!
+from django.contrib.auth import authenticate, login
 
 def register(request):
     if request.method == 'POST':
@@ -18,6 +19,13 @@ def register(request):
             username = form.cleaned_data.get('username')
             messages.success(request, f'Welcome {username}! You have successfully created an account👏')
 
+            # This will log the user in automatically after signup!
+            new_user = authenticate(
+                username=form.cleaned_data['username'],
+                password=form.cleaned_data['password1'],
+            )
+            login(request, new_user)
+            
             # Redirect user to different page, use url name
             return redirect('easydilemma:index')
     else:
