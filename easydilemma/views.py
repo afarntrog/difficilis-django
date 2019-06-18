@@ -75,6 +75,12 @@ def handle_dilemma(request):
             dilemma = Dilemma()
             dilemma.dilemma_part_one = dilemma_1
             dilemma.dilemma_part_two = dilemma_2
+
+            # If user is logged in then save it to dilemma model
+            if request.user.is_authenticated:
+                dilemma.user = request.user
+            else:
+                dilemma.user = None
             dilemma.save()
 
             context = {

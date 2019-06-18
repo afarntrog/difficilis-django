@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 
 # class DilemmaModel(models.Model):
@@ -47,6 +47,7 @@ class Dilemma(models.Model):
     dilemma_part_one = models.ForeignKey(DilemmaPartOne, on_delete=models.CASCADE)
     dilemma_part_two = models.ForeignKey(DilemmaPartTwo, on_delete=models.CASCADE)
     result = models.TextField()
+    user = models.ForeignKey(User, null=True, blank=True, default = None, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.dilemma_part_two}... Or {self.dilemma_part_two}..."

@@ -16,7 +16,7 @@ def register(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            messages.success(request, f'Welcome👏 Account created for {username}!')
+            messages.success(request, f'Welcome {username}! You have successfully created an account👏')
 
             # Redirect user to different page, use url name
             return redirect('easydilemma:index')
