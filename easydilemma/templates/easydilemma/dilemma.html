@@ -85,14 +85,15 @@
                 </ul>
                 <!--Right side of NavBar-->
                 <ul class="navbar-nav ml-auto">
-                        {% if user.is_authenticated %}
-                        <li class="nav-item ml-lg-3 "><a  href="{% url 'users:logout' %}" class="btn btn-primary navbar_btn"><strong>LOG OUT</strong></a></li>
-                        {% else %}
+                    {% if user.is_authenticated %}
+                        <li class="nav-item ml-lg-3 "><a  href="{% url 'easydilemma:dilemma' %}" class="btn btn-primary "><strong>New Dilemma</strong></a></li>
+                        <li class="nav-item ml-lg-3 "><a  href="{% url 'users:logout' %}" class="btn btn-outline-primary navbar_btn"><strong>Log Out</strong></a></li>
+                    {% else %}
+                        <li class="nav-item ml-lg-3 "><a  href="{% url 'easydilemma:dilemma' %}" class="btn btn-primary navbar_btn"><strong>New Dilemma</strong></a></li>
                         <li class="nav-item ml-lg-3 "><a  href="{% url 'users:login' %}" class="btn btn-outline-primary navbar_btn" ><strong>LOG IN</strong></a></li>
                         <li class="nav-item ml-lg-3 "><a  href="{% url 'users:register' %}" class="btn btn-primary navbar_btn"><strong>SIGN UP</strong></a></li>
-                        {% endif %}
-                    </ul>
-
+                    {% endif %}
+                </ul>
             </div>
         </nav>
     <!-- /Navbar -->
