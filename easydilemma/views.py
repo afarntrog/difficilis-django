@@ -5,14 +5,8 @@ from .models import *
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
-
-# from django.contrib import messages
-# from django.contrib.auth.decorators import login_required
-# from django.core.urlresolvers import reverse
-# from django.db import IntegrityError, transaction
-# from django.forms.formsets import formset_factory
 from django.shortcuts import redirect, render
-
+from django.core.paginator import Paginator # This if for pagination
 
 
 
@@ -58,7 +52,12 @@ def do_not_post(request, dilemma_id):
 
 def all_dilemmas(request):
     # Get this main dilemma pk
-    all_dilemmas = Dilemma.objects.all()        
+    get_all_dilemmas = Dilemma.objects.all()        
+
+    # [https://simpleisbetterthancomplex.com/tutorial/2016/08/03/how-to-paginate-with-django.html]
+    paginator = Paginator(get_all_dilemmas, 5)
+    page = request.GET.get('page', 1)
+    all_dilemmas = paginator.page(page)
 
     # Use the pks for each dilemma to get the current dilemma object to assccoiate with the reason
     context = {
