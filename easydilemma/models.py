@@ -48,6 +48,7 @@ class Dilemma(models.Model):
     dilemma_part_two = models.ForeignKey(DilemmaPartTwo, on_delete=models.CASCADE)
     result = models.TextField()
     user = models.ForeignKey(User, null=True, blank=True, default = None, on_delete=models.CASCADE)
+    should_post = models.BooleanField(default=True)
 
     def __str__(self):
         return f"{self.dilemma_part_two}... Or {self.dilemma_part_two}..."

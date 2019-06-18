@@ -48,6 +48,13 @@ def edit_dilemma(request, dilemma_id):
 def reasons(request):
     return render(request, 'easydilemma/reasons.html', context=None)
 
+# If the user clicks don't post in the dilemma_result page then it'll change the boolean field in model
+def do_not_post(request, dilemma_id):
+    my_dilemma = Dilemma.objects.get(id=dilemma_id)
+    my_dilemma.should_post = False
+    my_dilemma.save()
+    return redirect('easydilemma:all_dilemmas')#all_dilemmas(request)#render(request, 'easydilemma/all_dilemmas.html', context=None)
+
 
 def all_dilemmas(request):
     # Get this main dilemma pk
@@ -145,6 +152,7 @@ def store_and_calc_reasons(request, dilemma_id):
 
     # Store model data for use in the template
     context = {
+        'dilemma': my_dilemma,
         'full_dilemma': f"Should I {my_dilemma.dilemma_part_one} Or should I {my_dilemma.dilemma_part_two}",
         'dilemma_part_one': my_dilemma.dilemma_part_one,
         'dilemma_part_two': my_dilemma.dilemma_part_two,

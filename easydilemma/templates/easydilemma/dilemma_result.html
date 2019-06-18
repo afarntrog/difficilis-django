@@ -153,7 +153,7 @@
             <h5 class="text-large text-center font-weight-bold">Result: {{ result }} </span> </h5>
             <div class="float-right col-sm-12  pt-3 border-top">
                 <a  href="{% url 'easydilemma:all_dilemmas' %}" class="btn float-right btn-outline-success ml-4 ">Post as anonymous</a>
-                <a  href="{% url 'easydilemma:all_dilemmas' %}" class="btn float-right btn-outline-danger ">Don't Post</a>
+                <a  href="{% url 'easydilemma:do_not_post' dilemma.id %}" class="btn float-right btn-outline-danger ">Don't Post</a>
              </div>
             
         </div>
