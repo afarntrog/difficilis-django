@@ -56,6 +56,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
+SECURE_SSL_REDIRECT = True
 
 ROOT_URLCONF = 'difficilis.urls'
 
