@@ -69,7 +69,7 @@
                 <!--Right side of NavBar-->
                 <ul class="navbar-nav ml-auto">
                     {% if user.is_authenticated %}
-                        <li class="nav-item ml-lg-3 "><a  href="{% url 'easydilemma:dilemma' %}" class="btn btn-primary"><strong>New Dilemmadsxfsdfdsfs</strong></a></li>
+                        <li class="nav-item ml-lg-3 "><a  href="{% url 'easydilemma:dilemma' %}" class="btn btn-primary"><strong>New Dilemma</strong></a></li>
                         <li class="nav-item ml-lg-3 "><a  href="{% url 'users:logout' %}" class="btn btn-outline-primary navbar_btn"><strong>Log Out</strong></a></li>
                     {% else %}
                         <li class="nav-item ml-lg-3 "><a  href="{% url 'easydilemma:dilemma' %}" class="btn btn-primary"><strong>New Dilemma</strong></a></li>
@@ -153,7 +153,11 @@
         <div class="card-footer">
             <h5 class="text-large text-center font-weight-bold">Result: {{ result }} </span> </h5>
             <div class="float-right col-sm-12  pt-3 border-top">
-                <a  href="{% url 'easydilemma:all_dilemmas' %}" class="btn float-right btn-outline-success ml-4 ">Post as anonymous</a>
+                {% if user.is_authenticated %}
+                    <a  href="{% url 'easydilemma:all_dilemmas' %}" class="btn float-right btn-outline-success ml-4 ">Post as {{ user.username }}</a>
+                {% else %}
+                    <a  href="{% url 'easydilemma:all_dilemmas' %}" class="btn float-right btn-outline-success ml-4 ">Post as anonymous_45{{ dilemma.id }}</a>
+                {% endif %}
                 <a  href="{% url 'easydilemma:do_not_post' dilemma.id %}" class="btn float-right btn-outline-danger ">Don't Post</a>
              </div>
             

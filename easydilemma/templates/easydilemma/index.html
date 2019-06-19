@@ -81,6 +81,7 @@
         <ul class="navbar-nav ml-auto">
             {% if user.is_authenticated %}
             <li class="nav-item ml-lg-3 "><a  href="{% url 'users:logout' %}" class="btn btn-primary navbar_btn"><strong>LOG OUT</strong></a></li>
+            <li class="nav-item ml-lg-3 "><a  href="{% url 'easydilemma:all_user_dilemmas' %}" class="btn btn-outline-success"><strong>My Dilemmas</strong></a></li>
             {% else %}
             <li class="nav-item ml-lg-3 "><a  href="{% url 'users:login' %}" class="btn btn-outline-primary navbar_btn" ><strong>LOG IN</strong></a></li>
             <li class="nav-item ml-lg-3 "><a  href="{% url 'users:register' %}" class="btn btn-primary navbar_btn"><strong>SIGN UP</strong></a></li>
@@ -183,7 +184,7 @@
           <div class="col-lg-6 order-lg-1">
             <div class="p-5 mr-3">
               <h2>See the result!</h2>
-              <p>Our algorithms will take into considertaion all the reasons and corresponding weights. We will then use our propiartary AI to calucate and return to you bes result for your dilemma.</p>
+              <p>Our algorithms will take into considertaion all the reasons and corresponding weights. We will then use our proprietary AI to calculate and return to you the best result for your dilemma.</p>
             </div>
           </div>
         </div>

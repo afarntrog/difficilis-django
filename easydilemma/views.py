@@ -7,7 +7,7 @@ from django.urls import reverse
 
 from django.shortcuts import redirect, render
 from django.core.paginator import Paginator # This if for pagination
-
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -68,6 +68,21 @@ def all_dilemmas(request):
     }
     return render(request, 'easydilemma/all_dilemmas.html', context)
 
+@login_required
+def all_user_dilemmas(request):
+    # Get this main dilemma pk
+    get_all_dilemmas = Dilemma.objects.filter(user=request.user)       
+
+    # [https://simpleisbetterthancomplex.com/tutorial/2016/08/03/how-to-paginate-with-django.html]
+    paginator = Paginator(get_all_dilemmas, 5)
+    page = request.GET.get('page', 1)
+    all_dilemmas = paginator.page(page)
+
+    # Use the pks for each dilemma to get the current dilemma object to assccoiate with the reason
+    context = {
+        'all_dilemmas': all_dilemmas,
+    }
+    return render(request, 'easydilemma/all_user_dilemmas.html', context)
 
 def handle_dilemma(request):
     if request.method =='POST':

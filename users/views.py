@@ -11,6 +11,10 @@ from django.contrib import messages
 # This will log the user in automatically after signup!
 from django.contrib.auth import authenticate, login
 
+# For delete view
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -40,3 +44,19 @@ def register(request):
 @receiver(user_logged_out)
 def on_user_logged_out(sender, request, **kwargs):
     messages.add_message(request, messages.INFO, 'You have successfully logged out.')
+
+
+
+# Delete user account
+@login_required
+def del_user(request):    
+    try:
+        u = User.objects.get(username = request.user)
+        u.delete()
+        messages.success(request, "You successfully deleted your account.")            
+
+    except User.DoesNotExist:
+        messages.error(request, "User doesnot exist")    
+        return redirect('easydilemma:index') 
+
+    return redirect('easydilemma:index') 
