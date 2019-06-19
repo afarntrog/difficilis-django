@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False# (os.environ.get('DEBUG_VALUE') == 'True')
+DEBUG = False # (os.environ.get('DEBUG_VALUE') == 'True')
 
 ALLOWED_HOSTS = ['*']#['difficilis.herokuapp.com','.difficilis.com']
 
@@ -56,7 +56,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
-SECURE_SSL_REDIRECT = True
+# This forces all domains to go to ssl
+# On local dev Chrome will remember so run in incognito
+SECURE_SSL_REDIRECT = False #True # True for Heroku
 
 ROOT_URLCONF = 'difficilis.urls'
 

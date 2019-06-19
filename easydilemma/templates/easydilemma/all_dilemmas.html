@@ -108,6 +108,12 @@
 <div class="container mb-5">
         <div class="card w-75 mx-auto">
             <div class="card-header">
+                {% if dilemma.user is None %}
+                    <span class="small badge badge-pill badge-primary font-weight-normal float-right mt-2 align-middle">anonymous_45{{ dilemma.id }}</span>
+                {% else %}
+                    <span class="small badge badge-pill badge-primary font-weight-normal float-right mt-2 align-middle">{{ dilemma.user }}</span>
+                {% endif %}
+                    
                 <h5>{{ dilemma.dilemma_part_one.dilemma_part_one }} or {{ dilemma.dilemma_part_two.dilemma_part_two }}</h5>
             </div> 
             <div class="card-body">
