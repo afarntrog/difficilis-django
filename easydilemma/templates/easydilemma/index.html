@@ -24,7 +24,7 @@
 
 
   <title>Difficilis</title>
-  <link rel="shortcut icon" type="image/png" href="{% static '../../../../static/easydilemma/images/favicon-16x16.png' %}"/> <!-- https://logohub.io/# -->
+  <link rel="shortcut icon" type="image/png" href="{% static 'easydilemma/images/favicon-16x16.png' %}"/> <!--https://logohub.io/#-->
 
 
 </head>
@@ -56,8 +56,8 @@
     <!-- Navbar-->
     <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
         <div class="d-flex">
-            <a class="navbar-brand grow" href="{% url 'easydilemma:index' %}"><img src="{% static '../static/easydilemma/images/Logo.png' %}" id="logo" style="max-height: 30px; max-width: 150px;;"  alt="Difficilis"></a>
-            <!-- <a class="navbar-brand grow" href="{% url 'easydilemma:index' %}" ><img src="{% static '../static/easydilemma/images/question.png' %}" id="logo" alt="Question mark"></a> -->
+            <a class="navbar-brand grow" href="{% url 'easydilemma:index' %}"><img src="{% static 'easydilemma/images/Logo.png' %}" id="logo" style="max-height: 30px; max-width: 150px;;"  alt="Difficilis"></a>
+            
             <!-- If you use the above logo insteas of the one with the text then you have to comment out the logo id in main.css  -->
             <!--<a href="index.html" class="navbar-brand text-uppercase font-weight-bold"><span>Difficilis</span></a> -->
             <!-- https://logohub.io/# -->
@@ -74,7 +74,7 @@
           <li class="nav-item "><a  href="{% url 'easydilemma:all_dilemmas' %}" class="nav-link font-weight-bold">Popular</a></li>
           <li class="nav-item"><a  href="{% url 'easydilemma:all_dilemmas' %}" class="nav-link font-weight-bold">Newest</a></li>
           <li class="nav-item"><a  href="{% url 'easydilemma:all_dilemmas' %}" class="nav-link font-weight-bold">All Dilemmas</a></li>
-          <li><a href="{% url 'easydilemma:about_me' %}" class="badge badge-pill badge-primary">Hire me</a></li>
+          <li><a href="{% url 'easydilemma:about_me' %}" class="badge badge-pill badge-primary">About me</a></li>
 
         </ul>
         <!--Right side of NavBar-->
@@ -140,7 +140,7 @@
         <div class="row align-items-center">
           <div class="col-lg-6 order-lg-2">
             <div class="p-5 ml-5">
-              <img class="img-fluid grow" src="{% static '../static/easydilemma/images/undraw_questions_75e0.svg' %}"alt=""  style="width:70%;">
+              <img class="img-fluid grow" src="{% static 'easydilemma/images/undraw_questions_75e0.svg' %}"alt=""  style="width:70%;">
             </div>
           </div>
           <div class="col-lg-6 order-lg-1">
@@ -158,7 +158,7 @@
         <div class="row align-items-center">
           <div class="col-lg-6">
             <div class="p-5">
-              <img class="img-fluid grow" src="../static/easydilemma/images/undraw_choose_80qg.svg" alt="" style="width:50%; height:50%">
+              <img class="img-fluid grow" src="{% static 'easydilemma/images/undraw_choose_80qg.svg' %}" alt="" style="width:50%; height:50%">
             </div>
           </div>
           <div class="col-lg-6">
@@ -177,7 +177,7 @@
         <div class="row align-items-center">
           <div class="col-lg-6 order-lg-2">
             <div class="p-5 ml-5">
-              <img class="img-fluid grow" src="../static/easydilemma/images/undraw_completed_ngx6.svg" alt="" style="width:60%;">
+              <img class="img-fluid grow" src="{% static 'easydilemma/images/undraw_completed_ngx6.svg' %}" alt="" style="width:60%;">
             </div>
           </div>
           <div class="col-lg-6 order-lg-1">

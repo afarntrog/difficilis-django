@@ -1,0 +1,15 @@
+[
+    {
+    "dilemma": "Should I learn JavaScript or PHP",
+    "reasons": ["learn java1", "learn java2"],
+    "importance": ["Very Important", "Not Important"],
+    "result": "PHP Yeah!"
+    },
+
+    {
+    "dilemma": "Should I learn JavaScript or PHP",
+    "reasons": ["learn java1", "learn java2"],
+    "importance": ["Very Important", "Not Important"],
+    "result": "PHP Yeah!"
+    }
+]
