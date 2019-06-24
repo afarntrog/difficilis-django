@@ -117,6 +117,9 @@
                 <h5>{{ dilemma.dilemma_part_one.dilemma_part_one }} or {{ dilemma.dilemma_part_two.dilemma_part_two }}</h5>
             </div> 
             <div class="card-body">
+                    <div class="row mb-3 ml-2">
+                        <span class="badge badge-pill badge-secondary">Reasons for: {{ dilemma.dilemma_part_one.dilemma_part_one }}</span>
+                    </div>
                 {% for reason in dilemma.dilemma_part_one.reason_part_one.all %}
                 <div class="row mb-3">
                     <div class="col-md-8">
@@ -139,6 +142,10 @@
                 </div>
                 {% endfor %}
 
+                <hr>
+                <div class="row mb-3 ml-2">
+                    <span class="badge badge-pill badge-secondary">Reasons for: {{ dilemma.dilemma_part_two.dilemma_part_two }}</span>
+                </div>
                 {% for reason in dilemma.dilemma_part_two.reason_part_two.all %}
                 <div class="row mb-3">
                     <div class="col-md-8">
@@ -163,7 +170,7 @@
             </div>
        
         <div class="card-footer">
-            <h5>Result: {{ dilemma.result }} </span> </h5>
+            <h5><strong>Result: {{ dilemma.result }}</strong></h5>
         </div>
     </div>
 </div>
