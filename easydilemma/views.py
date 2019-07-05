@@ -26,6 +26,7 @@ def dilemma(request):
 def edit_dilemma(request, dilemma_id):
     print(dilemma_id)
     dilemma =  get_object_or_404(Dilemma, pk=dilemma_id)
+    print(dilemma.dilemma_part_one.id)
     print('dilemma')
     dilemma_part_1 = get_object_or_404(DilemmaPartOne, pk=dilemma_id)
     print('dilemma part one')
