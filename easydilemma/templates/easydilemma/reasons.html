@@ -59,14 +59,6 @@
 
     </script>
     <script src="../../static/easydilemma/js/main2.js" ></script>
-    <!-- <script>
-        // Store good and bad numbers in this global list.
-        var good_numbers = [];
-        var ignore_numbers = [];
-        var good_numbers_string = '';
-        var ignore_numbers_string = '';
-        var SEP = "-"; // This will be the string that seperates the values.
-    </script> -->
 
 </head>
 
@@ -103,8 +95,8 @@
                         <li class="nav-item ml-lg-3 "><a  href="{% url 'users:logout' %}" class="btn btn-outline-primary navbar_btn"><strong>Log Out</strong></a></li>
                     {% else %}
                         <li class="nav-item ml-lg-3 "><a  href="{% url 'easydilemma:dilemma' %}" class="btn btn-primary"><strong>New Dilemma</strong></a></li>
-                        <li class="nav-item ml-lg-3 "><a  href="{% url 'users:login' %}" class="btn btn-outline-primary navbar_btn" ><strong>LOG IN</strong></a></li>
-                        <li class="nav-item ml-lg-3 "><a  href="{% url 'users:register' %}" class="btn btn-primary navbar_btn"><strong>SIGN UP</strong></a></li>
+                        <!-- <li class="nav-item ml-lg-3 "><a  href="{% url 'users:login' %}" class="btn btn-outline-primary navbar_btn" ><strong>LOG IN</strong></a></li> -->
+                        <li class="nav-item ml-lg-3 "><a  href="{% url 'users:register' %}" class="btn btn-outline-primary navbar_btn"><strong>SIGN UP</strong></a></li>
                     {% endif %}
                 </ul>
             </div>
