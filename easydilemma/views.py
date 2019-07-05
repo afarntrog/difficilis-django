@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
 from django.shortcuts import redirect, render
-from django.core.paginator import Paginator # This if for pagination
+from django.core.paginator import Paginator # This is for pagination
 from django.contrib.auth.decorators import login_required
 
 
@@ -24,14 +24,9 @@ def dilemma(request):
 # https://stackoverflow.com/a/936622 
 # Problem this is making a new dilemma each time. So you must make a new html template that does not create a new dilemma rather it just edits the field.
 def edit_dilemma(request, dilemma_id):
-    print(dilemma_id)
     dilemma =  get_object_or_404(Dilemma, pk=dilemma_id)
-    print(dilemma.dilemma_part_one.id)
-    print('dilemma')
-    dilemma_part_1 = get_object_or_404(DilemmaPartOne, pk=dilemma_id)
-    print('dilemma part one')
-    dilemma_part_2 = get_object_or_404(DilemmaPartTwo, pk=dilemma_id)
-    print('dilemma part 2')
+    # dilemma_part_1 = get_object_or_404(DilemmaPartOne, pk=dilemma_id)
+    # dilemma_part_2 = get_object_or_404(DilemmaPartTwo, pk=dilemma_id)
     form = DilemmaForm(initial={'dilemma_part_one' : dilemma.dilemma_part_one, 'dilemma_part_two' : dilemma.dilemma_part_two})
     
     context = {
@@ -60,9 +55,7 @@ def do_not_post(request, dilemma_id):
 
 def all_dilemmas(request):
     # Get this main dilemma pk
-    get_all_dilemmas = Dilemma.objects.all()  
-    for this_dilemma in get_all_dilemmas:
-        print(this_dilemma.id)      
+    get_all_dilemmas = Dilemma.objects.all()     
 
     # [https://simpleisbetterthancomplex.com/tutorial/2016/08/03/how-to-paginate-with-django.html]
     paginator = Paginator(get_all_dilemmas, 5)
