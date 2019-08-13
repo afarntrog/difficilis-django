@@ -19,4 +19,6 @@ urlpatterns = [
     path('reasons', views.reasons, name="reasons"),
     path('result/<int:dilemma_id>/', views.store_and_calc_reasons, name="store_and_calc_reasons"),
     path('do_not_post/<int:dilemma_id>/', views.do_not_post, name="do_not_post"),
+
+    path('disclaimer', views.disclaimer, name="disclaimer"),
 ]

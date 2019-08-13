@@ -13,6 +13,8 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     return render(request, 'easydilemma/index.html', context=None)
 
+def disclaimer(request):
+    return render(request, 'easydilemma/disclaimer.html', context=None)
 
 def dilemma(request):
     form = DilemmaForm()

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143158805-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-143158805-1');
+  </script>
+    <title>Difficilis</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'easydilemma/images/favicon-16x16.png' %}"/>
+
+ 
+
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--My css sheet-->
+    <link rel="stylesheet" href="../../static/easydilemma/css/main.css">
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!--jQuery CDN-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
+    </script>
+
+    <!--jQuery UI local link-->
+    <script src="../../jquery-ui-1.12.1/jquery-ui.min.js"></script>   
+
+</head>
+
+<body>
+    <header class="header">
+        <!-- Navbar-->
+        <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
+                <div class="d-flex">
+                    <a class="navbar-brand grow" href="{% url 'easydilemma:index' %}"><img src="{% static 'easydilemma/images/Logo.png' %}" id="logo" style="max-height: 30px; max-width: 150px;;"  alt="Difficilis"></a>
+                </div>
+            
+            <button type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"  class="navbar-toggler navbar-toggler-right">
+                <i class="fa fa-bars"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <!--Left side of NavBar-->
+                <ul class="navbar-nav">
+                <li class="nav-item" ><a  href="{% url 'easydilemma:index' %}" class="nav-link font-weight-bold">Home</a></li>
+                <li class="nav-item "><a  href="{% url 'easydilemma:all_dilemmas' %}" class="nav-link font-weight-bold">Popular</a></li>
+                <li class="nav-item"><a  href="{% url 'easydilemma:all_dilemmas' %}" class="nav-link font-weight-bold">Newest</a></li>
+                <li class="nav-item"><a  href="{% url 'easydilemma:all_dilemmas' %}" class="nav-link font-weight-bold">All Dilemmas</a></li>
+
+                </ul>
+                <!--Right side of NavBar-->
+                <ul class="navbar-nav ml-auto">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item ml-lg-3 "><a  href="{% url 'easydilemma:dilemma' %}" class="btn btn-primary "><strong>New Dilemma</strong></a></li>
+                        <li class="nav-item ml-lg-3 "><a  href="{% url 'users:logout' %}" class="btn btn-outline-primary navbar_btn"><strong>Log Out</strong></a></li>
+                    {% else %}
+                        <li class="nav-item ml-lg-3 "><a  href="{% url 'easydilemma:dilemma' %}" class="btn btn-primary"><strong>New Dilemma</strong></a></li>
+                        <!-- <li class="nav-item ml-lg-3 "><a  href="{% url 'users:login' %}" class="btn btn-outline-primary navbar_btn" ><strong>LOG IN</strong></a></li> -->
+                        <li class="nav-item ml-lg-3 "><a  href="{% url 'users:register' %}" class="btn btn-outline-primary navbar_btn"><strong>SIGN UP</strong></a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    <!-- /Navbar -->
+    </header>
+
+    <div class="container" >
+        <div class="card" >
+            <p>Difficilis.com is for entertainment purposes only! 
+                Do <strong>not</strong> make any decisions based on information displayed on 
+                this site or information this site may display to you personally. 
+                Difficilis.com never actually makes a decision. 
+                Difficilis.com merely reorders your input to show you the winning result 
+                based on the data you enter. You are making the decision. 
+                Difficilis.com just displays your decision to you. Difficilis.com and the owners of 
+                difficilis.com take no responsibility for any outcomes that 
+                comes about through your decision making. 
+                AGAIN. DO NOT MAKE ANY DECISION FROM DIFFICILIS.COM 
+                THIS WEBSITE IS FOR ENTERTAINMENT PURPOSES ONLY!!!
+            </p>
+        </div>
+    </div>
+    
+</body>
+</html>
