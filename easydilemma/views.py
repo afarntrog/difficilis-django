@@ -57,8 +57,10 @@ def do_not_post(request, dilemma_id):
 
 def all_dilemmas(request):
     # Get this main dilemma pk
-    get_all_dilemmas = Dilemma.objects.all()     
+    # get_all_dilemmas = Dilemma.objects.all()
+    get_all_dilemmas = Dilemma.objects.filter(should_post=True)     
 
+    # Only get all dilemmas that the boolea ield is set to true
     # [https://simpleisbetterthancomplex.com/tutorial/2016/08/03/how-to-paginate-with-django.html]
     paginator = Paginator(get_all_dilemmas, 5)
     page = request.GET.get('page', 1)
