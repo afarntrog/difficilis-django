@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
       
     {% load static %}
+
+
         <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143158805-1"></script>
   <script>
@@ -16,6 +18,8 @@
 
     gtag('config', 'UA-143158805-1');
   </script>
+
+
     <title>Difficilis</title>
     <link rel="shortcut icon" type="image/png" href="{% static 'easydilemma/images/favicon-16x16.png' %}"/>
 
@@ -74,7 +78,7 @@
                 <!--Left side of NavBar-->
                 <ul class="navbar-nav">
                 <li class="nav-item" ><a  href="{% url 'easydilemma:index' %}" class="nav-link font-weight-bold">Home</a></li>
-                <li class="nav-item "><a  href="{% url 'easydilemma:all_dilemmas' %}" class="nav-link font-weight-bold">Popular</a></li>
+                <li class="nav-item "><a  href="{% url 'easydilemma:popular_dilemmas' %}" class="nav-link font-weight-bold">Popular</a></li>
                 <li class="nav-item"><a  href="{% url 'easydilemma:all_dilemmas' %}" class="nav-link font-weight-bold">Newest</a></li>
                 <li class="nav-item"><a  href="{% url 'easydilemma:all_dilemmas' %}" class="nav-link font-weight-bold">All Dilemmas</a></li>
 
@@ -184,11 +188,11 @@
                 <div class="col-md-10 align-self-center"><h5><strong>Result: {{ dilemma.result }}</strong></h5></div>
 
                 {% if user.is_authenticated %}
-                    <div class="col-md-1 text-right btn"><i id="vote_up"  data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-up text-primary"></i></div>
-                    <div class="col-md-1 text-right btn"><i id="vote_down" data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-down text-danger"></i></div>
+                    <div class="col-md-1 text-right btn grow"><i id="vote_up"  data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-up text-primary"></i></div>
+                    <div class="col-md-1 text-right btn grow"><i id="vote_down" data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-down text-danger"></i></div>
                 {% else %}
-                    <div class="col-md-1 text-right btn" data-toggle="tooltip" data-placement="auto" title="Login to vote"><i id="vote_up"    data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-up text-primary"></i></div>
-                    <div class="col-md-1 text-right btn" data-toggle="tooltip" data-placement="auto" title="Login to vote"><i id="vote_down" data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-down text-danger"></i></div>
+                    <div class="col-md-1 text-right btn grow" data-toggle="tooltip" data-placement="auto" title="Login to vote"><i id="vote_up"    data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-up text-primary"></i></div>
+                    <div class="col-md-1 text-right btn grow" data-toggle="tooltip" data-placement="auto" title="Login to vote"><i id="vote_down" data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-down text-danger"></i></div>
                 {% endif %}
 
             </div>
@@ -201,6 +205,7 @@
 {% endif %}
 {% endfor %}
 <br> <br>
+
 
 <!--This will make an ajax request to the vote view-->
 
