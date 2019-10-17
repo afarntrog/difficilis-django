@@ -184,15 +184,29 @@
             </div>
        
         <div class="card-footer voting ">
-            <div class="row" > <!--Maybe try to list both buttons in  a list strcture-->
+            <div class="row"> <!--Maybe try to list both buttons in  a list strcture-->
                 <div class="col-md-10 align-self-center"><h5><strong>Result: {{ dilemma.result }}</strong></h5></div>
 
                 {% if user.is_authenticated %}
-                    <div class="col-md-1 text-right btn grow"><i id="vote_up"  data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-up text-primary"></i></div>
-                    <div class="col-md-1 text-right btn grow"><i id="vote_down" data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-down text-danger"></i></div>
+                    <div class="col-md-2">
+                        <div class="row">
+                            <div class="col-md-4 text-right btn grow" ><i id="vote_up"    data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-up text-primary"></i></div>
+                            <div class="col-md-4 text-center btn" id="vote_count"><strong>{{ dilemma.votes.count }}</strong> </div>
+                            <div class="col-md-4 text-right btn grow"><i id="vote_down" data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-down text-danger"></i></div>           
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-1 text-right btn grow"><i id="vote_up"  data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-up text-primary"></i></div>
+                    <div class="col-md-1 text-right btn grow"><i id="vote_down" data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-down text-danger"></i></div> -->
                 {% else %}
-                    <div class="col-md-1 text-right btn grow" data-toggle="tooltip" data-placement="auto" title="Login to vote"><i id="vote_up"    data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-up text-primary"></i></div>
-                    <div class="col-md-1 text-right btn grow" data-toggle="tooltip" data-placement="auto" title="Login to vote"><i id="vote_down" data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-down text-danger"></i></div>
+                    <div class="col-md-2">
+                        <div class="row hi">
+                            <div class="col-md-4 text-right btn grow" data-toggle="tooltip" data-placement="auto" title="Login to vote"><i id="vote_up"    data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-up text-primary"></i></div>
+                            <div class="col-md-4 text-center btn"><strong id="vote_count" >{{ dilemma.votes.count }}</strong></div>
+                            <div class="col-md-4 text-right btn grow" data-toggle="tooltip" data-placement="auto" title="Login to vote"><i id="vote_down" data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-down text-danger"></i></div>           
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-1 text-right btn grow" data-toggle="tooltip" data-placement="auto" title="Login to vote"><i id="vote_up"    data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-up text-primary"></i></div>
+                    <div class="col-md-1 text-right btn grow" data-toggle="tooltip" data-placement="auto" title="Login to vote"><i id="vote_down" data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-down text-danger"></i></div> -->
                 {% endif %}
 
             </div>
@@ -216,8 +230,8 @@
                 url: $(this).attr("data-href"), // change it to be a link and this shold be in the link or form,
                 data: {'status': 'vote_up'},
                 success: function (data) {
-                    // $('#vote_score').html(data.score);
-                    // alert(data.score);
+                    location.reload();
+
                 }
             })
         });
@@ -228,7 +242,7 @@
                 url: $(this).attr("data-href"), // change it to be a link and this shold be in the link or form,
                 data: {'status': 'vote_down'},
                 success: function (data) {
-                    // $('#vote_score').html(data.score);
+                    location.reload();
                     // alert(data.score);
                 }
             })
