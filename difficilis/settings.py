@@ -59,7 +59,7 @@ MIDDLEWARE = [
 # This forces all domains to go to ssl
 # On local dev Chrome will remember so run in incognito
 # Make this an enviro variable
-# SECURE_SSL_REDIRECT = True # True for Heroku
+SECURE_SSL_REDIRECT = True # True for Heroku
 
 ROOT_URLCONF = 'difficilis.urls'
 
