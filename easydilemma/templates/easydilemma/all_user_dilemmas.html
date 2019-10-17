@@ -195,7 +195,7 @@
 
             <div class="card-footer">
                         
-                <h5 class="text-large font-weight-bold">Result: {{ result }} </span> </h5>
+                <h5 class="text-large font-weight-bold">Result: {{ dilemma.result }} </span> </h5>
                 <div class="float-right col-sm-12  pt-3 border-top">
                     {% if not dilemma.should_post %}
                         <a  href="{% url 'users:make_public' dilemma.id %}" class="btn float-right btn-outline-success ml-4 ">Make Public</a>
