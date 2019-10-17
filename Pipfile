@@ -10,6 +10,7 @@ django = "*"
 django-crispy-forms = "*"
 gunicorn = "*"
 django-heroku = "*"
+django-vote = "*"
 
 [requires]
 python_version = "3.6"

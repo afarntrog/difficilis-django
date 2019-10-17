@@ -9,6 +9,8 @@ from django.shortcuts import redirect, render
 from django.core.paginator import Paginator # This is for pagination
 from django.contrib.auth.decorators import login_required
 
+from django.http import JsonResponse
+
 
 def index(request):
     return render(request, 'easydilemma/index.html', context=None)
@@ -90,6 +92,32 @@ def username_public_dilemmas(request, username):
         'all_dilemmas': all_dilemmas,
     }
     return render(request, 'easydilemma/all_dilemmas.html', context)
+
+
+
+
+@login_required
+def handle_vote(request, dilemma_id):
+    current_dilemma = Dilemma.objects.get(pk=dilemma_id)
+    user = request.user # get the user who voted
+
+    if request.is_ajax():
+        status = request.GET.get('status')
+
+        if status == 'vote_up':
+            current_dilemma.votes.up(user.id)
+        else:
+            current_dilemma.votes.down(user.id)
+        
+        return JsonResponse(data={'score': current_dilemma.vote_score})
+
+    
+    # Not at all a json request
+    return all_dilemmas(request)
+
+    
+
+
 
 
 

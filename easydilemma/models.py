@@ -1,5 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
+
+# Vote model
+from vote.models import VoteModel
+
 # Create your models here.
 
 # class DilemmaModel(models.Model):
@@ -43,7 +47,7 @@ class ReasonPartTwo(models.Model):
 
 
 
-class Dilemma(models.Model):
+class Dilemma(VoteModel, models.Model):
     dilemma_part_one = models.ForeignKey(DilemmaPartOne, on_delete=models.CASCADE)
     dilemma_part_two = models.ForeignKey(DilemmaPartTwo, on_delete=models.CASCADE)
     result = models.TextField()

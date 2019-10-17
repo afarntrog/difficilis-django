@@ -113,9 +113,10 @@
         
 {% for dilemma in all_dilemmas %}
 {% if dilemma.should_post %} <!--Only display dilemmas that the field is should_post=True-->
-<!--TOGGLE CLASS-->
+<!--TOGGLE CLASS-->                  
 <div class="container mb-5">
-        <div class="card w-75 mx-auto">
+
+        <div class="card w-75 mx-auto">                
             <div class="card-header">
                 {% if dilemma.user is None %}
                     <span class="small badge badge-pill badge-primary font-weight-normal float-right mt-2 align-middle">anonymous_45{{ dilemma.id }}</span>
@@ -178,14 +179,68 @@
                 {% endfor %}
             </div>
        
-        <div class="card-footer">
-            <h5><strong>Result: {{ dilemma.result }}</strong></h5>
+        <div class="card-footer voting ">
+            <div class="row" > <!--Maybe try to list both buttons in  a list strcture-->
+                <div class="col-md-10 align-self-center"><h5><strong>Result: {{ dilemma.result }}</strong></h5></div>
+
+                {% if user.is_authenticated %}
+                    <div class="col-md-1 text-right"><i id="vote_up"  data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-up text-primary"></i></div>
+                    <div class="col-md-1 text-right"><i id="vote_down" data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-down text-danger"></i></div>
+                {% else %}
+                    <div class="col-md-1 text-right btn" data-toggle="tooltip" data-placement="auto" title="Login to vote"><i id="vote_up"    data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-up text-primary"></i></div>
+                    <div class="col-md-1 text-right btn" data-toggle="tooltip" data-placement="auto" title="Login to vote"><i id="vote_down" data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-down text-danger"></i></div>
+                {% endif %}
+
+            </div>
+        </div>
+
         </div>
     </div>
 </div>
+
 {% endif %}
 {% endfor %}
 <br> <br>
+
+<!-- 1.attach on.click() to exisiting class
+    2. -->
+
+<script rel="script" type="text/javascript">
+    $(document).ready(function () {
+        $('.voting').on('click', '#vote_up', function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: $(this).attr("data-href"), // change it to be a link and this shold be in the link or form,
+                data: {'status': 'vote_up'},
+                success: function (data) {
+                    // $('#vote_score').html(data.score);
+                    alert(data.score);
+                }
+            })
+        });
+
+        $('.voting').on('click', '#vote_down', function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: $(this).attr("data-href"), // change it to be a link and this shold be in the link or form,
+                data: {'status': 'vote_down'},
+                success: function (data) {
+                    // $('#vote_score').html(data.score);
+                    alert(data.score);
+                }
+            })
+        });
+    })
+</script>
+
+
+
+
+
+
+
+
+
 
 
 {% if all_dilemmas.has_other_pages %}

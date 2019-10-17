@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "085f3cbac0fda88a5b59d60436eebe1e21e9550bfe760ba21770808a3159fadc"
+            "sha256": "9ff67915ee6c7a2bf6751c7ff70255a0aff0a1e54e8fadc93462c9ddb7f9bf83"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -25,11 +25,11 @@
         },
         "django": {
             "hashes": [
-                "sha256:753d30d3eb078064d2ddadfea65083c9848074a7f93d7b4dc7fa6b1380d278f5",
-                "sha256:7cb67e8b934fab23b6daed7144da52e8a25a47eba7f360ca43d2b448506b01ad"
+                "sha256:4025317ca01f75fc79250ff7262a06d8ba97cd4f82e93394b2a0a6a4a925caeb",
+                "sha256:a8ca1033acac9f33995eb2209a6bf18a4681c3e5269a878e9a7e0b7384ed1ca3"
             ],
             "index": "pypi",
-            "version": "==2.2.2"
+            "version": "==2.2.6"
         },
         "django-crispy-forms": {
             "hashes": [
@@ -46,6 +46,13 @@
             ],
             "index": "pypi",
             "version": "==0.3.1"
+        },
+        "django-vote": {
+            "hashes": [
+                "sha256:44cee16a9a55da1a57524cad18f95f0b58317c6c7d9eb2676f56d47384d809a2"
+            ],
+            "index": "pypi",
+            "version": "==2.1.7"
         },
         "gunicorn": {
             "hashes": [
@@ -73,10 +80,10 @@
         },
         "pytz": {
             "hashes": [
-                "sha256:303879e36b721603cc54604edcac9d20401bdbe31e1e4fdee5b9f98d5d31dfda",
-                "sha256:d747dd3d23d77ef44c6a3526e274af6efeb0a6f1afd5a69ba4d5be4098c8e141"
+                "sha256:1c557d7d0e871de1f5ccd5833f60fb2550652da6be2693c1e02300743d21500d",
+                "sha256:b02c06db6cf09c12dd25137e563b31700d3b80fcc4ad23abb7a315f2789819be"
             ],
-            "version": "==2019.1"
+            "version": "==2019.3"
         },
         "sqlparse": {
             "hashes": [
@@ -87,10 +94,10 @@
         },
         "whitenoise": {
             "hashes": [
-                "sha256:118ab3e5f815d380171b100b05b76de2a07612f422368a201a9ffdeefb2251c1",
-                "sha256:42133ddd5229eeb6a0c9899496bdbe56c292394bf8666da77deeb27454c0456a"
+                "sha256:22f79cf8f1f509639330f93886acaece8ec5ac5e9600c3b981d33c34e8a42dfd",
+                "sha256:6dfea214b7c12efd689007abf9afa87a426586e9dbc051873ad2c8e535e2a1ac"
             ],
-            "version": "==4.1.2"
+            "version": "==4.1.4"
         }
     },
     "develop": {}
