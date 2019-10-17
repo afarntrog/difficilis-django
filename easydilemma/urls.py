@@ -14,6 +14,7 @@ urlpatterns = [
 
     # Displaying dilemmas
     path('all_dilemmas', views.all_dilemmas, name="all_dilemmas"),
+    path('popular', views.popular_dilemmas, name="popular_dilemmas"),
     path('all_dilemmas/<slug:username>/', views.username_public_dilemmas, name="username_public_dilemmas"),
     path('all_user_dilemmas', views.all_user_dilemmas, name="all_user_dilemmas"),
 

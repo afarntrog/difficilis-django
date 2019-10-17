@@ -59,8 +59,23 @@ def do_not_post(request, dilemma_id):
 
 def all_dilemmas(request):
     # Get this main dilemma pk
-    # get_all_dilemmas = Dilemma.objects.all()
-    get_all_dilemmas = Dilemma.objects.filter(should_post=True)     
+    get_all_dilemmas = Dilemma.objects.filter(should_post=True)
+
+    # Only get all dilemmas that the boolea ield is set to true
+    # [https://simpleisbetterthancomplex.com/tutorial/2016/08/03/how-to-paginate-with-django.html]
+    paginator = Paginator(get_all_dilemmas, 5)
+    page = request.GET.get('page', 1)
+    all_dilemmas = paginator.page(page)
+
+    # Use the pks for each dilemma to get the current dilemma object to assccoiate with the reason
+    context = {
+        'all_dilemmas': all_dilemmas,
+    }
+    return render(request, 'easydilemma/all_dilemmas.html', context)
+
+
+def popular_dilemmas(request):
+    get_all_dilemmas = Dilemma.objects.filter(should_post=True).order_by('-votes')  
 
     # Only get all dilemmas that the boolea ield is set to true
     # [https://simpleisbetterthancomplex.com/tutorial/2016/08/03/how-to-paginate-with-django.html]
@@ -96,6 +111,8 @@ def username_public_dilemmas(request, username):
 
 
 
+
+# Process the ajax like or dislike vote button.
 @login_required
 def handle_vote(request, dilemma_id):
     current_dilemma = Dilemma.objects.get(pk=dilemma_id)
@@ -121,36 +138,7 @@ def handle_vote(request, dilemma_id):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Return a user all of their dilemmas. Must be logged in.
 @login_required
 def all_user_dilemmas(request):
     # Get this main dilemma pk
@@ -166,6 +154,9 @@ def all_user_dilemmas(request):
         'all_dilemmas': all_dilemmas,
     }
     return render(request, 'easydilemma/all_user_dilemmas.html', context)
+
+
+
 
 def handle_dilemma(request):
     if request.method =='POST':
