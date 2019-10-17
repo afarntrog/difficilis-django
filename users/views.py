@@ -15,6 +15,11 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
+# For delete specific dilemma
+from easydilemma.models import Dilemma
+from django.core.exceptions import ObjectDoesNotExist
+
+
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -60,3 +65,51 @@ def del_user(request):
         return redirect('easydilemma:index') 
 
     return redirect('easydilemma:index') 
+
+
+
+# Delete user account
+@login_required
+def del_dilemma(request, dilemma_id):    
+    try:
+        Dilemma.objects.filter(id=dilemma_id).delete()
+        messages.success(request, "Dilemma successfully deleted.")            
+
+    except dilemma_id.DoesNotExist:
+        messages.error(request, "Dilemma does not exist")    
+        return redirect('easydilemma:all_user_dilemmas') 
+
+    return redirect('easydilemma:all_user_dilemmas') 
+
+
+
+# Delete user account
+@login_required
+def make_public(request, dilemma_id):    
+    try:
+        dilemma = Dilemma.objects.get(id=dilemma_id)
+        dilemma.should_post = True
+        dilemma.save()
+        messages.success(request, "Dilemma successfully posted.")            
+
+    except ObjectDoesNotExist:
+        messages.error(request, "Dilemma does not exist")    
+        return redirect('easydilemma:all_user_dilemmas')
+
+    return redirect('easydilemma:all_user_dilemmas') 
+
+
+# Delete user account
+@login_required
+def make_private(request, dilemma_id):    
+    try:
+        dilemma = Dilemma.objects.get(id=dilemma_id)
+        dilemma.should_post = False
+        dilemma.save()
+        messages.success(request, "Dilemma is now private.")            
+
+    except ObjectDoesNotExist:
+        messages.error(request, "Dilemma does not exist")    
+        return redirect('easydilemma:all_user_dilemmas')
+
+    return redirect('easydilemma:all_user_dilemmas') 
