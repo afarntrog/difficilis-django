@@ -202,8 +202,7 @@
 {% endfor %}
 <br> <br>
 
-<!-- 1.attach on.click() to exisiting class
-    2. -->
+<!--This will make an ajax request to the vote view-->
 
 <script rel="script" type="text/javascript">
     $(document).ready(function () {
@@ -214,7 +213,7 @@
                 data: {'status': 'vote_up'},
                 success: function (data) {
                     // $('#vote_score').html(data.score);
-                    alert(data.score);
+                    // alert(data.score);
                 }
             })
         });
@@ -226,7 +225,7 @@
                 data: {'status': 'vote_down'},
                 success: function (data) {
                     // $('#vote_score').html(data.score);
-                    alert(data.score);
+                    // alert(data.score);
                 }
             })
         });
