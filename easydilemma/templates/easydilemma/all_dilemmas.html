@@ -184,8 +184,8 @@
                 <div class="col-md-10 align-self-center"><h5><strong>Result: {{ dilemma.result }}</strong></h5></div>
 
                 {% if user.is_authenticated %}
-                    <div class="col-md-1 text-right"><i id="vote_up"  data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-up text-primary"></i></div>
-                    <div class="col-md-1 text-right"><i id="vote_down" data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-down text-danger"></i></div>
+                    <div class="col-md-1 text-right btn"><i id="vote_up"  data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-up text-primary"></i></div>
+                    <div class="col-md-1 text-right btn"><i id="vote_down" data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-down text-danger"></i></div>
                 {% else %}
                     <div class="col-md-1 text-right btn" data-toggle="tooltip" data-placement="auto" title="Login to vote"><i id="vote_up"    data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-up text-primary"></i></div>
                     <div class="col-md-1 text-right btn" data-toggle="tooltip" data-placement="auto" title="Login to vote"><i id="vote_down" data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-down text-danger"></i></div>
