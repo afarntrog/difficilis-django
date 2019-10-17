@@ -72,6 +72,57 @@ def all_dilemmas(request):
     }
     return render(request, 'easydilemma/all_dilemmas.html', context)
 
+
+
+# When a user clicks on another users name on a dilemma they can view all of the selected users
+#   public dilemmas.
+def username_public_dilemmas(request, username):
+    # get_all_dilemmas that are for this user *and* `should_post=True`
+    # `user__username` is the correct syntax when passing a primitive to the Django built in user model.
+    get_all_dilemmas = Dilemma.objects.filter(user__username=username).filter(should_post=True)
+
+    paginator = Paginator(get_all_dilemmas, 5)
+    page = request.GET.get('page', 1)
+    all_dilemmas = paginator.page(page)
+
+    # Use the pks for each dilemma to get the current dilemma object to assccoiate with the reason
+    context = {
+        'all_dilemmas': all_dilemmas,
+    }
+    return render(request, 'easydilemma/all_dilemmas.html', context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @login_required
 def all_user_dilemmas(request):
     # Get this main dilemma pk

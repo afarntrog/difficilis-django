@@ -103,13 +103,13 @@
 
 
     <!-- <script>
-            $(document).ready(function() {
-                $(".expand-reason").on("click", function() {
-                    $(this).next().toggle();
-                });
-        
+        $(document).ready(function() {
+            $(".expand-reason").on("click", function() {
+                $(this).next().toggle();
             });
-        </script> -->
+    
+        });
+    </script> -->
         
 {% for dilemma in all_dilemmas %}
 {% if dilemma.should_post %} <!--Only display dilemmas that the field is should_post=True-->
@@ -120,7 +120,7 @@
                 {% if dilemma.user is None %}
                     <span class="small badge badge-pill badge-primary font-weight-normal float-right mt-2 align-middle">anonymous_45{{ dilemma.id }}</span>
                 {% else %}
-                    <span class="small badge badge-pill badge-primary font-weight-normal float-right mt-2 align-middle">{{ dilemma.user }}</span>
+                    <a href="{% url 'easydilemma:username_public_dilemmas' dilemma.user %}"> <span class="small badge badge-pill badge-primary font-weight-normal float-right mt-2 align-middle">{{ dilemma.user }}</span> </a>
                 {% endif %}
                     
                 <h5>{{ dilemma.dilemma_part_one.dilemma_part_one }} or {{ dilemma.dilemma_part_two.dilemma_part_two }}</h5>
