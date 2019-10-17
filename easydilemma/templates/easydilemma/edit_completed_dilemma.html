@@ -1,0 +1,50 @@
+
+<!-- DILEMMA FORM-->
+<div class="container py-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-center text-black mb-4">Enter dilemma below.</h2>
+                <div class="row">
+                    <div class="col-md-6 mx-auto">
+
+                        <!-- form card login -->
+                        <div class="card rounded-1">
+                            <div class="card-header">
+                                <h3 class="mb-0 text-center">Dilemma</h3>
+                            </div>
+
+                            <div class="card-body">
+                                <!--[https://getbootstrap.com/docs/4.0/components/forms/]-->
+                                <form  role="form" name="dilemma-form" id="dilemma-form" autocomplete="off" method="POST" action="{% url 'easydilemma:handle_dilemma' %}" nonvalidate> {% csrf_token %}
+                                    
+                                    
+                                    <div class="form-group">
+                                        <!-- <label for="dilemma-part-1"><strong>Should I:</strong></label> -->
+                                        {{ form|crispy }}
+                                        <!-- <input id="dilemma-part-1" name="dilemma-part-1" class="form-control form-control-lg" type="text" placeholder="Vote democrat..." required> -->
+                                        <!-- <div class="valid-feedback">Good!</div> 
+                                       <div class="invalid-feedback">Please fill out this half of the dilemma.</div>  -->
+                                    </div>
+                 
+                               
+                                    <!--Write js code that gets data from the url.-->
+                                    <button type="submit" class="btn btn-success btn-lg float-right" id="dilemma_form_submit">Next</button>                            
+                                
+                                </form>
+
+                            </div>
+                            <!--/card-block-->
+                        </div>
+                        <!-- /form card login -->
+
+                    </div>
+
+                </div>
+                <!--/row-->
+
+            </div>
+            <!--/col-->
+        </div>
+        <!--/row-->
+    </div>
+    <!--/container-->
