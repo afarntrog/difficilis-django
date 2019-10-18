@@ -18,6 +18,11 @@ urlpatterns = [
     path('all_dilemmas/<slug:username>/', views.username_public_dilemmas, name="username_public_dilemmas"),
     path('all_user_dilemmas', views.all_user_dilemmas, name="all_user_dilemmas"),
 
+
+    # Searching dilemmas
+    path('search', views.search_results, name="search"),
+
+
     # Voting
     path('handle_vote/<int:dilemma_id>/', views.handle_vote, name="handle_vote"),
 

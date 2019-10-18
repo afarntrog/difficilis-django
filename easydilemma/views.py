@@ -307,3 +307,32 @@ def handle_revised_dilemma(request, dilemma_id):
     form = DilemmaForm(initial={'dilemma_part_one' : dilemma.dilemma_part_one, 'dilemma_part_two' : dilemma.dilemma_part_two})
     
     return render(request, 'easydilemma/dilemma.html', {"form_1": form})
+
+
+
+
+
+
+
+
+# Search dilemmas
+# Search results for job posts
+def search_results(request):
+    query = request.GET.get('q')
+
+    if query:
+        all_dilemmas = Dilemma.objects.filter(dilemma_part_one__dilemma_part_one__icontains=query, dilemma_part_two__dilemma_part_two__icontains=query)
+    try:
+        # Pagination
+        paginator = Paginator(all_dilemmas, 5)
+        page = request.GET.get('page', 1)
+        all_dilemmas = paginator.page(page)
+    except:
+            pass
+            
+    context = {
+        'all_dilemmas': all_dilemmas,
+        'query': query, # Needed for pagiantion, avoid 'local variable 'all_dilemmas' referenced before assignment'
+    }
+
+    return render(request, 'easydilemma/all_dilemmas.html', context)

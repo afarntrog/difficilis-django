@@ -112,9 +112,25 @@
                 $(this).next().toggle();
             });
     
-        });
+        });mx-auto mr-sm-2
     </script> -->
-        
+
+    <!-- Form to search other dilemmas -->
+    <form action="{% url 'easydilemma:search' %}" method="GET">{% csrf_token %}
+        <div class="container mb-4">
+            <div class="card w-75 mx-auto"> 
+                <div class="input-group">
+                    <!-- <form action="#" method="GET">{% csrf_token %} -->
+                        <input class="form-control " name="q" value="{{ request.GET.q }}" type="search" placeholder="Search dilemmas" required>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+                        </div>
+                    <!-- </form> -->
+                </div>
+            </div>
+        </div>
+    </form>
+
 {% for dilemma in all_dilemmas %}
 {% if dilemma.should_post %} <!--Only display dilemmas that the field is should_post=True-->
 <!--TOGGLE CLASS-->                  
@@ -266,7 +282,7 @@
 <nav aria-label="Page navigation example">
         <ul class="pagination">
             {% if all_dilemmas.has_previous %}
-                <li class="page-item"><a class="page-link" href="?page={{ all_dilemmas.previous_page_number }}">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ all_dilemmas.previous_page_number }}{% if query %}&q={{ query }}{% endif %}">Previous</a></li>
             {% else %}
                 <li class="page-item disabled"><a class="page-link" >Previous</a></li>
             {% endif %}
@@ -275,12 +291,12 @@
                 {% if all_dilemmas.number == i %}
                     <li class="active page-item"><a class="page-link" href="?page={{ i }}">{{ i }}<span class="sr-only">(current)</span></a></li>
                 {% else %}
-                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ i }}{% if query %}&q={{ query }}{% endif %}">{{ i }}</a></li>
                 {% endif %}
                     
             {% endfor %}
             {% if all_dilemmas.has_next %}
-                <li class="page-item"><a class="page-link" href="?page={{ all_dilemmas.next_page_number }}">Next</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ all_dilemmas.next_page_number }}{% if query %}&q={{ query }}{% endif %}">Next</a></li>
             {% else %}
             <li class="page-item disabled"><a class="page-link" >Next</a></li>
             {% endif %}
