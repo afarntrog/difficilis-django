@@ -85,7 +85,7 @@
                             <a class="dropdown-item text-muted" href="{% url 'easydilemma:dilemma' %}">New dilemma</a>
                             <a class="dropdown-item text-muted" href="{% url 'users:profile_update' %}">Change username</a>
                             <a class="dropdown-item text-muted" href="{% url 'users:logout' %}">Logout</a>
-                            <a class="dropdown-item text-muted" href="#">Delete account</a>
+                            <a class="dropdown-item text-muted" href="{% url 'users:del_user' %}" onclick="return confirm('Are you sure you want to delete your account? This action is permanent.')">Delete account</a>
                             <div class="dropdown-divider"></div>
                             <a  href="{% url 'easydilemma:all_user_dilemmas' %}" class="dropdown-item text-success"><strong>My Dilemmas</strong></a>
                             </div>
