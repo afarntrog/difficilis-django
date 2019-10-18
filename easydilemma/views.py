@@ -75,7 +75,7 @@ def all_dilemmas(request):
 
 
 def popular_dilemmas(request):
-    get_all_dilemmas = Dilemma.objects.filter(should_post=True).order_by('-votes')  
+    get_all_dilemmas = Dilemma.objects.filter(should_post=True).order_by('-vote_score')  
 
     # Only get all dilemmas that the boolea ield is set to true
     # [https://simpleisbetterthancomplex.com/tutorial/2016/08/03/how-to-paginate-with-django.html]
