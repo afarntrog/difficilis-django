@@ -111,10 +111,10 @@ window.cookieconsent.initialise({
             {% if user.is_authenticated %}
             <!-- <li class="nav-item ml-lg-3 "><a  href="{% url 'easydilemma:all_user_dilemmas' %}" class="btn btn-outline-success"><strong>My Dilemmas</strong></a></li> -->
             <li class="nav-item ml-lg-3 dropdown ">
-              <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">kvothe</a>
+              <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.username }}</a>
               <!-- <a  href="{% url 'users:logout' %}" class="btn btn-outline-secondary navbar_btn"><strong>Logout</strong></a> -->
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item text-muted" href="#">Change username</a>
+                  <a class="dropdown-item text-muted" href="{% url 'users:profile_update' %}">Change username</a>
                   <a class="dropdown-item text-muted" href="{% url 'users:logout' %}">Logout</a>
                   <a class="dropdown-item text-muted" href="#">Delete account</a>
                   <div class="dropdown-divider"></div>

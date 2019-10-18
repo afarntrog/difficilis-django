@@ -18,4 +18,6 @@ urlpatterns = [
     # Make private dilemma public
     path('make_private/<int:dilemma_id>/', views.make_private, name="make_private"),
 
+    path('profile_update/', views.profile_update, name='profile_update'),
+
 ]

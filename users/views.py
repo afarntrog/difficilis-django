@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from .forms import UserRegisterForm
+from .forms import UserRegisterForm, UserUpdateForm
 # Create your views here.
 
 # Imported for letting user know he logged out.
@@ -113,3 +113,24 @@ def make_private(request, dilemma_id):
         return redirect('easydilemma:all_user_dilemmas')
 
     return redirect('easydilemma:all_user_dilemmas') 
+
+
+
+
+@login_required
+def profile_update(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        
+        if u_form.is_valid():
+            u_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('easydilemma:index')
+
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+    context = {
+        'u_form': u_form
+        }
+
+    return render(request, 'users/profile_update.html', context)

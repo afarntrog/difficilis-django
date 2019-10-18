@@ -10,3 +10,10 @@ class UserRegisterForm(UserCreationForm):
     class Meta:
         model = User # When ever this form validates then it'll create a new user
         fields = ['username', 'password1'] # Add 'password2' for validation and then add 'email' if you want a email    
+
+
+class UserUpdateForm(forms.ModelForm):
+    
+    class Meta:
+        model = User
+        fields = ['username']
