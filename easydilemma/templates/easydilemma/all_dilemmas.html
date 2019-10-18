@@ -132,7 +132,7 @@
             </div> 
             <div class="card-body">
                     <div class="row mb-3 ml-2">
-                        <span class="badge badge-pill badge-secondary">Reasons for: {{ dilemma.dilemma_part_one.dilemma_part_one }}</span>
+                        <span class="badge badge-pill badge-secondary text-truncate">Reasons for: {{ dilemma.dilemma_part_one.dilemma_part_one }}</span>
                     </div>
                 {% for reason in dilemma.dilemma_part_one.reason_part_one.all %}
                 <div class="row mb-3">
@@ -158,7 +158,7 @@
 
                 <hr>
                 <div class="row mb-3 ml-2">
-                    <span class="badge badge-pill badge-secondary">Reasons for: {{ dilemma.dilemma_part_two.dilemma_part_two }}</span>
+                    <span class="badge badge-pill badge-secondary text-truncate">Reasons for: {{ dilemma.dilemma_part_two.dilemma_part_two }}</span>
                 </div>
                 {% for reason in dilemma.dilemma_part_two.reason_part_two.all %}
                 <div class="row mb-3">
