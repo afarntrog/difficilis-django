@@ -321,7 +321,7 @@ def search_results(request):
     query = request.GET.get('q')
 
     if query:
-        all_dilemmas = Dilemma.objects.filter(dilemma_part_one__dilemma_part_one__icontains=query, dilemma_part_two__dilemma_part_two__icontains=query)
+        all_dilemmas = Dilemma.objects.filter(dilemma_part_one__dilemma_part_one__icontains=query, should_post=True) | Dilemma.objects.filter(dilemma_part_two__dilemma_part_two__icontains=query, should_post=True)
     try:
         # Pagination
         paginator = Paginator(all_dilemmas, 5)
