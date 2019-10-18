@@ -103,7 +103,9 @@ window.cookieconsent.initialise({
           <li class="nav-item "><a  href="{% url 'easydilemma:popular_dilemmas' %}" class="nav-link font-weight-bold">Popular</a></li>
           <li class="nav-item"><a  href="{% url 'easydilemma:all_dilemmas' %}" class="nav-link font-weight-bold">Newest</a></li>
           <li class="nav-item"><a  href="{% url 'easydilemma:all_dilemmas' %}" class="nav-link font-weight-bold">All Dilemmas</a></li>
+          {% if not user.is_authenticated %}
           <li><a href="{% url 'easydilemma:about_me' %}" class="badge badge-pill badge-primary">About me</a></li>
+          {% endif %}
 
         </ul>
         <!--Right side of NavBar-->
@@ -114,6 +116,7 @@ window.cookieconsent.initialise({
               <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.username }}</a>
               <!-- <a  href="{% url 'users:logout' %}" class="btn btn-outline-secondary navbar_btn"><strong>Logout</strong></a> -->
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item text-muted" href="{% url 'easydilemma:dilemma' %}">New dilemma</a>
                   <a class="dropdown-item text-muted" href="{% url 'users:profile_update' %}">Change username</a>
                   <a class="dropdown-item text-muted" href="{% url 'users:logout' %}">Logout</a>
                   <a class="dropdown-item text-muted" href="#">Delete account</a>
