@@ -55,7 +55,7 @@ class Dilemma(VoteModel, models.Model):
     should_post = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"{self.dilemma_part_two}... Or {self.dilemma_part_two}..."
+        return f"{self.dilemma_part_one}... Or {self.dilemma_part_two}..."
     
     # def get_part_one(self):
     #     return dilemma_part_one.dilemma_part_one
