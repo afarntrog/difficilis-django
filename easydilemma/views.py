@@ -91,6 +91,25 @@ def popular_dilemmas(request):
 
 
 
+# This is for the newest dilemmas page
+def newest_dilemmas(request):
+    get_all_dilemmas = Dilemma.objects.filter(should_post=True).order_by('-created_date') # minus sign reverses the order.
+
+    # Only get all dilemmas that the boolea ield is set to true
+    # [https://simpleisbetterthancomplex.com/tutorial/2016/08/03/how-to-paginate-with-django.html]
+    paginator = Paginator(get_all_dilemmas, 5)
+    page = request.GET.get('page', 1)
+    all_dilemmas = paginator.page(page)
+
+    # Use the pks for each dilemma to get the current dilemma object to assccoiate with the reason
+    context = {
+        'all_dilemmas': all_dilemmas,
+    }
+    return render(request, 'easydilemma/all_dilemmas.html', context)
+
+
+
+
 # When a user clicks on another users name on a dilemma they can view all of the selected users
 #   public dilemmas.
 def username_public_dilemmas(request, username):
