@@ -131,107 +131,106 @@
     </form>
 
 {% for dilemma in all_dilemmas %}
-{% if dilemma.should_post %} <!--Only display dilemmas that the field is should_post=True-->
-<!--TOGGLE CLASS-->                  
-<div class="container mb-5">
+    {% if dilemma.should_post and dilemma.dilemma_part_one.reason_part_one.count > 0 %} <!--Only display dilemmas that the field is should_post=True AND only display dilemmas that have reasons-->
+    <!--TOGGLE CLASS-->                  
+    <div class="container mb-5">
+            <div class="card w-75 mx-auto">                
+                <div class="card-header">
+                    {% if dilemma.user is None %}
+                        <span class="small badge badge-pill badge-primary font-weight-normal float-right mt-2 align-middle">anonymous_45{{ dilemma.id }}</span>
+                    {% else %}
+                        <a href="{% url 'easydilemma:username_public_dilemmas' dilemma.user %}"> <span class="small badge badge-pill badge-primary font-weight-normal float-right mt-2 align-middle">{{ dilemma.user }}</span> </a>
+                    {% endif %}
+                        
+                    <h5>{{ dilemma.dilemma_part_one.dilemma_part_one }} or {{ dilemma.dilemma_part_two.dilemma_part_two }}</h5>
+                </div> 
+                <div class="card-body">
+                        <div class="row mb-3 ml-2">
+                            <span class="badge badge-pill badge-secondary text-truncate">Reasons for: {{ dilemma.dilemma_part_one.dilemma_part_one }}</span>
+                        </div>
+                    {% for reason in dilemma.dilemma_part_one.reason_part_one.all %}
+                    <div class="row mb-3">
+                        <div class="col-md-8">
+                            <input type="text" class="form-control font-weight-bold expand-reason text-truncate" value="{{ reason.reason }}" readonly>
+                            <div class="p-2 mb-3 rounded text-dark font-weight-bold border text-center bg-light" style="display: none" id="full-reason-div">{{ reason.reason }}</div>
+                        </div>
+                        <div class="col-md-4">
+                                {% if reason.selected_option == "1" %}
+                                    <input type="text" class="form-control text-center font-weight-bold" value="Not Really Important" readonly>
+                                {% elif reason.selected_option == "2" %}
+                                    <input type="text" class="form-control text-center font-weight-bold" value="Somewhat Important" readonly>
+                                {% elif reason.selected_option == "3" %}
+                                    <input type="text" class="form-control text-center font-weight-bold" value="Important" readonly>
+                                {% elif reason.selected_option == "4" %}
+                                    <input type="text" class="form-control text-center font-weight-bold" value="Very Important" readonly>
+                                {% elif reason.selected_option == "5" %}
+                                    <input type="text" class="form-control text-center font-weight-bold" value="Extremely Important" readonly>
+                                {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
 
-        <div class="card w-75 mx-auto">                
-            <div class="card-header">
-                {% if dilemma.user is None %}
-                    <span class="small badge badge-pill badge-primary font-weight-normal float-right mt-2 align-middle">anonymous_45{{ dilemma.id }}</span>
-                {% else %}
-                    <a href="{% url 'easydilemma:username_public_dilemmas' dilemma.user %}"> <span class="small badge badge-pill badge-primary font-weight-normal float-right mt-2 align-middle">{{ dilemma.user }}</span> </a>
-                {% endif %}
-                    
-                <h5>{{ dilemma.dilemma_part_one.dilemma_part_one }} or {{ dilemma.dilemma_part_two.dilemma_part_two }}</h5>
-            </div> 
-            <div class="card-body">
+                    <hr>
                     <div class="row mb-3 ml-2">
-                        <span class="badge badge-pill badge-secondary text-truncate">Reasons for: {{ dilemma.dilemma_part_one.dilemma_part_one }}</span>
+                        <span class="badge badge-pill badge-secondary text-truncate">Reasons for: {{ dilemma.dilemma_part_two.dilemma_part_two }}</span>
                     </div>
-                {% for reason in dilemma.dilemma_part_one.reason_part_one.all %}
-                <div class="row mb-3">
-                    <div class="col-md-8">
-                        <input type="text" class="form-control font-weight-bold expand-reason text-truncate" value="{{ reason.reason }}" readonly>
-                        <div class="p-2 mb-3 rounded text-dark font-weight-bold border text-center bg-light" style="display: none" id="full-reason-div">{{ reason.reason }}</div>
-                    </div>
-                    <div class="col-md-4">
-                            {% if reason.selected_option == "1" %}
-                                <input type="text" class="form-control text-center font-weight-bold" value="Not Really Important" readonly>
-                            {% elif reason.selected_option == "2" %}
-                                <input type="text" class="form-control text-center font-weight-bold" value="Somewhat Important" readonly>
-                            {% elif reason.selected_option == "3" %}
-                                <input type="text" class="form-control text-center font-weight-bold" value="Important" readonly>
-                            {% elif reason.selected_option == "4" %}
-                                <input type="text" class="form-control text-center font-weight-bold" value="Very Important" readonly>
-                            {% elif reason.selected_option == "5" %}
-                                <input type="text" class="form-control text-center font-weight-bold" value="Extremely Important" readonly>
-                            {% endif %}
-                    </div>
-                </div>
-                {% endfor %}
-
-                <hr>
-                <div class="row mb-3 ml-2">
-                    <span class="badge badge-pill badge-secondary text-truncate">Reasons for: {{ dilemma.dilemma_part_two.dilemma_part_two }}</span>
-                </div>
-                {% for reason in dilemma.dilemma_part_two.reason_part_two.all %}
-                <div class="row mb-3">
-                    <div class="col-md-8">
-                        <input type="text" class="form-control font-weight-bold expand-reason text-truncate" value="{{ reason.reason }}" readonly>
-                        <div class="p-2 mb-3 rounded text-dark font-weight-bold border text-center bg-light" style="display: none" id="full-reason-div">{{ reason.reason }}</div>
-                    </div>
-                    <div class="col-md-4">
-                            {% if reason.selected_option == "1" %}
-                                <input type="text" class="form-control text-center font-weight-bold" value="Not Really Important" readonly>
-                            {% elif reason.selected_option == "2" %}
-                                <input type="text" class="form-control text-center font-weight-bold" value="Somewhat Important" readonly>
-                            {% elif reason.selected_option == "3" %}
-                                <input type="text" class="form-control text-center font-weight-bold" value="Important" readonly>
-                            {% elif reason.selected_option == "4" %}
-                                <input type="text" class="form-control text-center font-weight-bold" value="Very Important" readonly>
-                            {% elif reason.selected_option == "5" %}
-                                <input type="text" class="form-control text-center font-weight-bold" value="Extremely Important" readonly>
-                            {% endif %}                        
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-       
-        <div class="card-footer voting ">
-            <div class="row"> <!--Maybe try to list both buttons in  a list strcture-->
-                <div class="col-10 align-self-center"><h5><strong>Result: {{ dilemma.result }}</strong></h5></div>
-
-                {% if user.is_authenticated %}
-                    <div class="col-2">
-                        <div class="row">
-                            <div class="col-4 text-right btn grow" ><i id="vote_up"    data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-up text-primary"></i></div>
-                            <div class="col-4 text-center btn" id="vote_count"><strong>{{ dilemma.vote_score }}</strong> </div>
-                            <div class="col-4 text-right btn grow"><i id="vote_down" data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-down text-danger"></i></div>           
+                    {% for reason in dilemma.dilemma_part_two.reason_part_two.all %}
+                    <div class="row mb-3">
+                        <div class="col-md-8">
+                            <input type="text" class="form-control font-weight-bold expand-reason text-truncate" value="{{ reason.reason }}" readonly>
+                            <div class="p-2 mb-3 rounded text-dark font-weight-bold border text-center bg-light" style="display: none" id="full-reason-div">{{ reason.reason }}</div>
+                        </div>
+                        <div class="col-md-4">
+                                {% if reason.selected_option == "1" %}
+                                    <input type="text" class="form-control text-center font-weight-bold" value="Not Really Important" readonly>
+                                {% elif reason.selected_option == "2" %}
+                                    <input type="text" class="form-control text-center font-weight-bold" value="Somewhat Important" readonly>
+                                {% elif reason.selected_option == "3" %}
+                                    <input type="text" class="form-control text-center font-weight-bold" value="Important" readonly>
+                                {% elif reason.selected_option == "4" %}
+                                    <input type="text" class="form-control text-center font-weight-bold" value="Very Important" readonly>
+                                {% elif reason.selected_option == "5" %}
+                                    <input type="text" class="form-control text-center font-weight-bold" value="Extremely Important" readonly>
+                                {% endif %}                        
                         </div>
                     </div>
-                    <!-- <div class="col-md-1 text-right btn grow"><i id="vote_up"  data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-up text-primary"></i></div>
-                    <div class="col-md-1 text-right btn grow"><i id="vote_down" data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-down text-danger"></i></div> -->
-                {% else %}
-                    <div class="col-2">
-                        <div class="row hi">
-                            <div class="col-4 text-right btn grow" data-toggle="tooltip" data-placement="auto" title="Login to vote"><i id="vote_up"    data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-up text-primary"></i></div>
-                            <div class="col-4 text-center btn"><strong id="vote_count" >{{ dilemma.vote_score }}</strong></div>
-                            <div class="col-4 text-right btn grow" data-toggle="tooltip" data-placement="auto" title="Login to vote"><i id="vote_down" data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-down text-danger"></i></div>           
+                    {% endfor %}
+                </div>
+        
+            <div class="card-footer voting ">
+                <div class="row"> <!--Maybe try to list both buttons in  a list strcture-->
+                    <div class="col-10 align-self-center"><h5><strong>Result: {{ dilemma.result }}</strong></h5></div>
+
+                    {% if user.is_authenticated %}
+                        <div class="col-2">
+                            <div class="row">
+                                <div class="col-4 text-right btn grow" ><i id="vote_up"    data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-up text-primary"></i></div>
+                                <div class="col-4 text-center btn" id="vote_count"><strong>{{ dilemma.vote_score }}</strong> </div>
+                                <div class="col-4 text-right btn grow"><i id="vote_down" data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-down text-danger"></i></div>           
+                            </div>
                         </div>
-                    </div>
-                    <!-- <div class="col-md-1 text-right btn grow" data-toggle="tooltip" data-placement="auto" title="Login to vote"><i id="vote_up"    data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-up text-primary"></i></div>
-                    <div class="col-md-1 text-right btn grow" data-toggle="tooltip" data-placement="auto" title="Login to vote"><i id="vote_down" data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-down text-danger"></i></div> -->
-                {% endif %}
+                        <!-- <div class="col-md-1 text-right btn grow"><i id="vote_up"  data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-up text-primary"></i></div>
+                        <div class="col-md-1 text-right btn grow"><i id="vote_down" data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-down text-danger"></i></div> -->
+                    {% else %}
+                        <div class="col-2">
+                            <div class="row hi">
+                                <div class="col-4 text-right btn grow" data-toggle="tooltip" data-placement="auto" title="Login to vote"><i id="vote_up"    data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-up text-primary"></i></div>
+                                <div class="col-4 text-center btn"><strong id="vote_count" >{{ dilemma.vote_score }}</strong></div>
+                                <div class="col-4 text-right btn grow" data-toggle="tooltip" data-placement="auto" title="Login to vote"><i id="vote_down" data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-down text-danger"></i></div>           
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-1 text-right btn grow" data-toggle="tooltip" data-placement="auto" title="Login to vote"><i id="vote_up"    data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-up text-primary"></i></div>
+                        <div class="col-md-1 text-right btn grow" data-toggle="tooltip" data-placement="auto" title="Login to vote"><i id="vote_down" data-href="{% url 'easydilemma:handle_vote' dilemma.id %}" class="fas fa-thumbs-down text-danger"></i></div> -->
+                    {% endif %}
+
+                </div>
+            </div>
 
             </div>
-        </div>
-
         </div>
     </div>
-</div>
 
-{% endif %}
+    {% endif %}
 {% endfor %}
 <br> <br>
 
