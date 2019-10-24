@@ -131,7 +131,7 @@
     </form>
 
 {% for dilemma in all_dilemmas %}
-    {% if dilemma.should_post and dilemma.dilemma_part_one.reason_part_one.count > 0 %} <!--Only display dilemmas that the field is should_post=True AND only display dilemmas that have reasons-->
+    {% if dilemma.should_post and dilemma.dilemma_part_one.reason_part_one.count > 0 %} {% comment %}Only display dilemmas that the field is should_post=True AND only display dilemmas that have reasons{% endcomment %}
     <!--TOGGLE CLASS-->                  
     <div class="container mb-5">
             <div class="card w-75 mx-auto">                
