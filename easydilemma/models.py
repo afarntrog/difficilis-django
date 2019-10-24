@@ -53,7 +53,7 @@ class Dilemma(VoteModel, models.Model):
     result = models.TextField()
     user = models.ForeignKey(User, null=True, blank=True, default = None, on_delete=models.CASCADE)
     should_post = models.BooleanField(default=True)
-    created_date = models.DateTimeField(auto_now_add=True)
+    created_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"{self.dilemma_part_one}... Or {self.dilemma_part_two}..."
