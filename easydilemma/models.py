@@ -46,6 +46,7 @@ class ReasonPartTwo(models.Model):
         return self.reason[:50]
 
 
+from django.utils import timezone
 
 class Dilemma(VoteModel, models.Model):
     dilemma_part_one = models.ForeignKey(DilemmaPartOne, on_delete=models.CASCADE)
@@ -53,7 +54,7 @@ class Dilemma(VoteModel, models.Model):
     result = models.TextField()
     user = models.ForeignKey(User, null=True, blank=True, default = None, on_delete=models.CASCADE)
     should_post = models.BooleanField(default=True)
-    created_date = models.DateTimeField(auto_now=True)
+    created_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return f"{self.dilemma_part_one}... Or {self.dilemma_part_two}..."
@@ -62,6 +63,8 @@ class Dilemma(VoteModel, models.Model):
     #     return dilemma_part_one.dilemma_part_one
 
 # class Reason(models.Model):
+#    created_date = models.DateTimeField(auto_now=True)default=timezone.now
+
 #     dilemma = models.ForeignKey(Dilemma, default=None, on_delete=models.CASCADE)
 #     reason = models.TextField()
 
