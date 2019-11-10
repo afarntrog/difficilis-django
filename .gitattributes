@@ -1,4 +1,4 @@
 *.html linguist-vendored
 *.css linguist-vendored
-/staticfiles export-ignore
-/easydilemma/static export-ignore
+staticfiles/* linguist-vendored
+easydilemma/static/* linguist-vendored
