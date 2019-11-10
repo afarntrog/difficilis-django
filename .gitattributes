@@ -1,2 +1,4 @@
+*.html linguist-vendored
+*.css linguist-vendored
 staticfiles/* linguist-vendored
 easydilemma/static/* linguist-vendored
