@@ -1,140 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  {% load static %}
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143158805-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'UA-143158805-1');
-  </script>
-
-  <!--Bootstrap and main.css-->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-  <!--Font Awesome-->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-  
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-  <script src="../static/easydilemma/js/main2.js" ></script>
-
-<!--Include links for client logo CAROUSEL-->
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-<link rel="stylesheet" href="../static/easydilemma/css/carousel-slider.css">
-<script src="../static/easydilemma/js/carousel.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-  <!--My css-->
-  <link rel="stylesheet" href="../../static/easydilemma/css/main.css">
+{% extends "./base.html" %}
+{% load static %}
 
 
-  <title>Difficilis</title>
-  <link rel="shortcut icon" type="image/png" href="{% static 'easydilemma/images/favicon-16x16.png' %}"/> <!--https://logohub.io/#-->
-
-  <!--OSANO COOKIE-->
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
-<script>
-window.addEventListener("load", function(){
-window.cookieconsent.initialise({
-  "palette": {
-    "popup": {
-      "background": "#edeff5",
-      "text": "#838391"
-    },
-    "button": {
-      "background": "#4b81e8"
-    }
-  },
-  "theme": "classic",
-  "position": "bottom-right"
-})});
-</script>
-
-</head>
-
-<body>
-  <!--Alert when you open the site-->
-  <!-- <div class="container">
-    <div class="alert alert-info alert-dismissible fade show text-center">
-      <button type="button" data-dismiss="alert" class="close">&times;</button>
-      <strong>Welcome!</strong> This site is in Beta
-    </div>
-  </div> -->
-  <!--/Alert-->
-
-  <!--Alert Django messages {https://docs.djangoproject.com/en/dev/ref/contrib/messages/}-->
-  {% if messages %}
-  {% for message in messages %}
-  <div class="container">
-      <div class="alert alert-{{ message.tags }} alert-dismissible fade show text-center">
-        <button type="button" data-dismiss="alert" class="close">&times;</button>
-        <strong> {{ message }}</strong>
-      </div>
-    </div>
-    <!--/Alert-->
-    {% endfor %}
-    {% endif %}
-
-  <header class="header">
-    <!-- Navbar-->
-    <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
-        <div class="d-flex">
-            <a class="navbar-brand grow" href="{% url 'easydilemma:index' %}"><img src="{% static 'easydilemma/images/Logo.png' %}" id="logo" style="max-height: 30px; max-width: 150px;;"  alt="Difficilis"></a>
-            
-            <!-- If you use the above logo insteas of the one with the text then you have to comment out the logo id in main.css  -->
-            <!--<a href="index.html" class="navbar-brand text-uppercase font-weight-bold"><span>Difficilis</span></a> -->
-            <!-- https://logohub.io/# -->
-          </div>
-          
-        <button type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"  class="navbar-toggler navbar-toggler-right">
-            <i class="fa fa-bars"></i>
-          </button>
-
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <!--Left side of NavBar-->
-        <ul class="navbar-nav">
-          <li class="nav-item" ><a  href="{% url 'easydilemma:index' %}" class="nav-link font-weight-bold">Home</a></li>
-          <li class="nav-item "><a  href="{% url 'easydilemma:popular_dilemmas' %}" class="nav-link font-weight-bold">Popular</a></li>
-          <li class="nav-item"><a  href="{% url 'easydilemma:newest_dilemmas' %}" class="nav-link font-weight-bold">Newest</a></li>
-          <li class="nav-item"><a  href="{% url 'easydilemma:all_dilemmas' %}" class="nav-link font-weight-bold">All Dilemmas</a></li>
-          {% if not user.is_authenticated %}
-          <li><a href="{% url 'easydilemma:about_me' %}" class="badge badge-pill badge-primary">About me</a></li>
-          {% endif %}
-
-        </ul>
-        <!--Right side of NavBar-->
-        <ul class="navbar-nav ml-auto">
-            {% if user.is_authenticated %}
-            <li class="nav-item ml-lg-3 dropdown ">
-              <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.username }}</a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item text-muted" href="{% url 'easydilemma:dilemma' %}">New dilemma</a>
-                  <a class="dropdown-item text-muted" href="{% url 'users:profile_update' %}">Change username</a>
-                  <a class="dropdown-item text-muted" href="{% url 'users:logout' %}">Logout</a>
-                  <a class="dropdown-item text-muted" href="{% url 'users:del_user' %}" onclick="return confirm('Are you sure you want to delete your account? This action is permanent.')">Delete account</a>
-                  <div class="dropdown-divider"></div>
-                  <a  href="{% url 'easydilemma:all_user_dilemmas' %}" class="dropdown-item text-success"><strong>My Dilemmas</strong></a>
-                </div>
-            </li>
-            
-            
-            
-            {% else %}
-            <li class="nav-item ml-lg-3 "><a  href="{% url 'users:login' %}" class="btn btn-outline-primary navbar_btn" ><strong>LOG IN</strong></a></li>
-            <li class="nav-item ml-lg-3 "><a  href="{% url 'users:register' %}" class="btn btn-primary navbar_btn"><strong>SIGN UP</strong></a></li>
-            {% endif %}
-        </ul>
-
-      </div>
-    </nav>
-    <!-- /Navbar -->
-  </header>
+{% block body %}
 
   <main>
     <div class="container-fluid text-center" id="tag-line">
@@ -145,8 +13,8 @@ window.cookieconsent.initialise({
    <!--Instruction Cards-->
     <div class="container-fluid">
     <div class="row card-deck">
-      <div class="col-sm-4">
-        <div class="card w3-hover-shadow">
+      <div class="col-sm-4 ">
+        <div class="card h-100 w3-hover-shadow ">
           <div class="card-body">
             <h5 class="card-title text-center">Enter your dilemma</h5>
             <p class="card-text">Easily enter in you dilemma. We will layout it out neatly so you can decide with a clear head.</p>
@@ -154,7 +22,7 @@ window.cookieconsent.initialise({
         </div>
       </div>
       <div class="col-sm-4">
-        <div class="card w3-hover-shadow">
+        <div class="card h-100 w3-hover-shadow">
           <div class="card-body">
             <h5 class="card-title text-center">Write out the pros for each side</h5>
             <p class="card-text">You can then assign a weight for each reason. When you are done, our AI 😉 will show you the winning decision.</p>
@@ -162,7 +30,7 @@ window.cookieconsent.initialise({
         </div>
       </div>
       <div class="col-sm-4">
-          <div class="card w3-hover-shadow">
+          <div class="card h-100 w3-hover-shadow">
             <div class="card-body">
               <h5 class="card-title text-center">Find out the right decision!</h5>
               <p class="card-text">We will show you the winning decision so you can move on to do the great things you are meant to be doing.</p>
@@ -240,52 +108,6 @@ window.cookieconsent.initialise({
     <!--NEW: mt-2 allows a top margin!!-->
     <div class="mt-5 text-center pb-5 pt-5 bg-light" >
       <a class="btn btn-primary btn-lg" role="button" href="{% url 'easydilemma:dilemma' %}">Enter Dilemma</a>
-    </div>    
-    
-  </main>
-
-
-  <!--Client Who Use us Carousel-->
-  <!-- <section>
-    <div class="container mt-5 mb-5">
-      <div class="container mb-5">
-        <h2 class="text-center">Companies that love us</h2>
-        <p class=" text-center text-muted">Get Difficilis for business</p>
-      </div>
-      <div class="customer-logos slider"> -->
-        <!--<a href="https://icons8.com/icon/38607/hp">All icons by Icons8</a>-->
-          <!-- <div class="slide"><img src="https://img.icons8.com/color/100/000000/google-logo.png"></div>
-          <div class="slide"><img src="https://img.icons8.com/color/100/000000/office-365.png"></div>
-          <div class="slide"><img src="https://img.icons8.com/color/100/000000/google-firebase-console.png"></div>
-          <div class="slide"><img src="https://img.icons8.com/color/100/000000/hp.png"></div>
-          <div class="slide"><img src="https://img.icons8.com/color/100/000000/facebook-circled.png"></div>
-          <div class="slide"><img src="https://img.icons8.com/color/100/000000/snapchat-circled-logo.png"></div>
-          <div class="slide"><img src="https://img.icons8.com/color/100/000000/class.png"></div>
-          <div class="slide"><img src="https://img.icons8.com/color/100/000000/twitter.png"></div>
-        </div>
     </div>
-  </section> -->
-  <!--/End Carousel-->
 
-    <!-- FOOTER -->
-    <hr>
-    <footer class="container pt-5">
-
-        <div class="float-right"><a href="#" id="back-to-top"></a></div>
-
-        <p class="float-right mr-3"> <a href="{% url 'easydilemma:disclaimer' %}" target="_blank" class="text-secondary" >Disclaimer</a>        </p>
-        <p>&copy; 2019 Aaron Farntrog</p>
-    </footer>
-
-
-  <!--Bootstrap fa-plus-circle-->
-  <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-
-
-</body>
-</html>
-
-<!--Tag line: Make better decisions/Decisions made easy-->
+{% endblock  %}
