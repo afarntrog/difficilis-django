@@ -1,59 +1,23 @@
 {% extends "easydilemma/base.html" %}
 
 
-<!DOCTYPE html>
-<html lang="en">
+{% load static %}
+{% load crispy_forms_tags %}
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% load static %}
-    {% load crispy_forms_tags %}
-    <title>Difficilis</title>
-    <link rel="shortcut icon" type="image/png" href="{% static 'easydilemma/images/favicon-16x16.png' %}"/> <!-- https://logohub.io/# -->
+<style>
+        .asteriskField {
+    display: none;            
+    }
+    /* This will make sure that crsipy form will not display those annoying tips */
+    #hint_id_username, #hint_id_password1, #hint_id_password2 {
+        display: none;
+    }
+    /* Hide django bullet point in error */
+    ul {
+        list-style:none;
+    }
+</style> 
 
-  
-
-    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <!--My css sheet-->
-    <link rel="stylesheet" href="../../static/easydilemma/css/main.css">
-    <!--Font Awesome-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <!--jQuery CDN-->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
-    </script>
-
-    <!--jQuery UI local link-->
-    <script src="../../jquery-ui-1.12.1/jquery-ui.min.js"></script>
-    <!--Loading overlay Libary-->
-    <!-- <script src="./jquery-loading-overlay-2.1.6/src/loadingoverlay.js"></script> -->
-    <!-- <script src="../../static/easydilemma/js/main2.js" ></script> -->
-
-    
-    <style>
-         .asteriskField {
-      display: none;            
-        }
-
-        /* This will make sure that crsipy form will not display those annoying tips */
-        #hint_id_username, #hint_id_password1, #hint_id_password2 {
-            display: none;
-
-        }
-        /* Hide django bullet point in error */
-        ul {
-          list-style:none;
-        }
-    </style> 
-    
-    <!-- <style>
-            body {
-                background-image: url(../../static/images/q_mark.png)
-            }
-        </style> -->
 
 </head>
 

@@ -45,7 +45,7 @@
     });
   </script>
   <!-- END OSANO COOKIE-->
-
+  {% block extra_css %}{% endblock %}
   {% block extra_js %}{% endblock %}
 
 </head>
@@ -165,6 +165,8 @@
   {% endblock %}
 
   {% include "./snippets/footer_links.html" %}
+  {% block extra_bottom_js %}
+  {% endblock %}
 
   <!-- https://stackoverflow.com/questions/1724466/can-we-append-to-a-block-rather-than-overwrite -->
 
