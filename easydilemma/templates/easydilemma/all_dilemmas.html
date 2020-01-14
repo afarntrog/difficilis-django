@@ -3,7 +3,6 @@
 
 
 {% block body %}
-
     <!--The finnished dilemma card will go here. This is used in JS/Ajax to dynamically add content-->
     <div id="add-content">                   
     </div>
@@ -23,12 +22,12 @@
     </form>
 
 {% for dilemma in all_dilemmas %}
-    {% if dilemma.should_post and dilemma.dilemma_part_one.reason_part_one.count > 0 %} {% comment %}Only display dilemmas that the field is should_post=True AND only display dilemmas that have reasons{% endcomment %}
+  {#  {% if dilemma.should_post and dilemma.dilemma_part_one.reason_part_one.count > 0 %} {% comment %}Only display dilemmas that the field is should_post=True AND only display dilemmas that have reasons{% endcomment %} #}
         
         {# This will include the Card template and specify which card footer to use. #}
         {% include "./snippets/display_dilemmas_snippet.html" with footer_to_include="snippets/card_vote_footer" %}
 
-    {% endif %}
+   {# {% endif %} #}
 {% endfor %}
 <br> <br>
 
