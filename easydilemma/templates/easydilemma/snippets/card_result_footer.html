@@ -1,0 +1,20 @@
+<style>
+    .text-large {
+        font-size: 150%;
+        }
+</style>
+
+<div class="card-footer">
+
+<h5 class="text-large text-center font-weight-bold">Result: {{ result }} </span> </h5>
+<div class="float-right col-sm-12  pt-3 border-top">
+    {% if user.is_authenticated %}
+        <a  href="{% url 'easydilemma:all_dilemmas' %}" class="btn float-right btn-outline-success ml-4 ">Post as {{ user.username }}</a>
+    {% else %}
+        <a  href="{% url 'easydilemma:all_dilemmas' %}" class="btn float-right btn-outline-success ml-4 ">Post as anonymous_45{{ dilemma.id }}</a>
+    {% endif %}
+    <a  href="{% url 'easydilemma:do_not_post' dilemma.id %}" class="btn float-right btn-outline-danger ">Don't Post</a>
+    <a href="{% url 'easydilemma:disclaimer' %}" target="_blank"><small class="text-muted">Disclaimer</small></a>
+ </div>
+
+</div>

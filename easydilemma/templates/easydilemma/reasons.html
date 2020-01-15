@@ -3,11 +3,9 @@
 
 {% block extra_js %}
     <!--Loading overlay Libary-->
-    <script
-  src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
-  integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
-  crossorigin="anonymous"></script>
-    <script>
+    <script  src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"  integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="  crossorigin="anonymous"></script>
+   
+   <script>
         // This will make sure the form will not load if the user did not select an item from the dropdown
         $(document).ready( function() {
             $('#reason_form').submit(function (e) {
@@ -16,9 +14,7 @@
             }
             });
         });
-    </script>
 
-    <script>
         $(function() {
             $(".sortable").sortable({
                 handle: '.handle',

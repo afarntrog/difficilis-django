@@ -33,18 +33,10 @@
 
 
 
-
-
-
-
-
-
-
-
 {% if all_dilemmas.has_other_pages %}
 <div class="container d-flex justify-content-center">
         <!-- <div class="card w-75 mx-auto"> -->
-<nav aria-label="Page navigation example">
+    <nav aria-label="Page navigation example">
         <ul class="pagination">
             {% if all_dilemmas.has_previous %}
                 <li class="page-item"><a class="page-link" href="?page={{ all_dilemmas.previous_page_number }}{% if query %}&q={{ query }}{% endif %}">Previous</a></li>
@@ -68,8 +60,7 @@
             
         </ul>
       </nav>
-        </div>
-<!-- </div> -->
+</div>
 
       {% endif %}
 {% endblock %}

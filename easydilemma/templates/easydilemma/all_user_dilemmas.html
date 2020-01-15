@@ -5,12 +5,9 @@
 
 {% block body  %}
 
-    {% comment %}
     <!--The finnished dilemma card will go here-->
-    <div id="add-content">                   
-        {% include "./display_users_dilemmas.html" %}
+    <div id="add-content">
     </div>
-    {% endcomment %}
 
     {% if all_dilemmas|length > 0 %} <!--Make sure that there are some dilemmas for this user if not display message below-->
         {% for dilemma in all_dilemmas %}

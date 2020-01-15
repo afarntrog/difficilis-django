@@ -98,7 +98,7 @@
           <li class="nav-item "><a href="{% url 'easydilemma:popular_dilemmas' %}" class="nav-link font-weight-bold {% if request.path == '/popular' %} active {% endif %}">Popular</a></li>
           <li class="nav-item"><a href="{% url 'easydilemma:newest_dilemmas' %}" class="nav-link font-weight-bold {% if request.path == '/newest' %} active {% endif %}">Newest</a></li>
           <li class="nav-item"><a href="{% url 'easydilemma:all_dilemmas' %}" class="nav-link font-weight-bold {% if request.path == '/all_dilemmas' %} active {% endif %}">All Dilemmas</a></li>
-          {% if not user.is_authenticated %}
+          {% if not user.is_authenticated and request.path == '/' %}
             <li><a href="{% url 'easydilemma:about_me' %}" class="badge badge-pill badge-primary {% if request.path == '/about_me' %} active {% endif %}">About me</a></li>
           {% endif %}
 
@@ -127,15 +127,19 @@
             <li class="nav-item ml-lg-3 "><a  href="{% url 'easydilemma:dilemma' %}" class="btn btn-primary "><strong>New Dilemma</strong></a></li>
           </ul>
 
+          {% elif request.path == '/aboutme' %}
+            <a href="https://www.linkedin.com/in/aaronfarntrog/" class="btn btn-primary btn-outline-primary"><strong>LinkedIn</strong> <span class="fab fa-linkedin-in"></span></a>
+
           {% elif request.path != '/' %}
               <!--Right side of NavBar-->
               <li class="nav-item ml-lg-3 "><a  href="{% url 'easydilemma:dilemma' %}" class="btn btn-primary"><strong>New Dilemma</strong></a></li>
               <li class="nav-item ml-lg-3 "><a  href="{% url 'users:login' %}" class="btn btn-outline-primary navbar_btn" ><strong>LOG IN</strong></a></li>
+         
           {% else %}
-          <li class="nav-item ml-lg-3 "><a href="{% url 'users:login' %}"
-              class="btn btn-outline-primary navbar_btn"><strong>LOG IN</strong></a></li>
-          <li class="nav-item ml-lg-3 "><a href="{% url 'users:register' %}"
-              class="btn btn-primary navbar_btn"><strong>SIGN UP</strong></a></li>
+            <li class="nav-item ml-lg-3 "><a href="{% url 'users:login' %}"
+                class="btn btn-outline-primary navbar_btn"><strong>LOG IN</strong></a></li>
+            <li class="nav-item ml-lg-3 "><a href="{% url 'users:register' %}"
+                class="btn btn-primary navbar_btn"><strong>SIGN UP</strong></a></li>
           {% endif %}
         </ul>
 
