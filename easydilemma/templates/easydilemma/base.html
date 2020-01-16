@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
   {% load static %}
+  {% load i18n %}
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143158805-1"></script>
@@ -164,9 +165,13 @@
 
     <p class="float-right mr-3"> <a href="{% url 'easydilemma:disclaimer' %}" target="_blank"
         class="text-secondary">Disclaimer</a> </p>
-    <p>&copy; 2019 Aaron Farntrog</p>
+ 
+        {# Must load --> {% load i18n %} for the trans blocks to work #}
+      {% now "Y" as current_year %}
+    <p>&copy; {% blocktrans %} {{ current_year }} {% endblocktrans %} Aaron Farntrog</p>
   </footer>
   {% endblock %}
+
 
   {% include "./snippets/footer_links.html" %}
   {% block extra_bottom_js %}
