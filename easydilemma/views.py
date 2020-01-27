@@ -212,9 +212,10 @@ def handle_dilemma(request):
 
 
 def store_and_calc_reasons(request, dilemma_id):
-
     # Get this main dilemma pk
     my_dilemma = Dilemma.objects.get(id=dilemma_id)
+
+    # data = request.POST.copy() When I have time i'll change this view to use this.
 
     # Get the pk for each dilemma side
     dilemma_1_id = my_dilemma.dilemma_part_one.id

@@ -54,7 +54,6 @@
 //     all_form_rows = $("#" + this_form_id).find(".form-row");
 //     // var hello = $(this).parent().parent().parent().parent().next();//.parent().parent().parent().parent().parent().parent().html();//.parent().parent().parent().prev().prev().prev('input').attr("id");
 //     // $(hello).find("div").html();
-//     // alert(hello);
 //     // Do not allow user to delete the last reason. There must be at least *1* reason!
 //     if (all_form_rows.length != 1)
 //         $(this).parent().parent().parent().parent().remove();

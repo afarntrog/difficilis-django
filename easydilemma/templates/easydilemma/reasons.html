@@ -6,13 +6,18 @@
     <script  src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"  integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="  crossorigin="anonymous"></script>
    
    <script>
-        // This will make sure the form will not load if the user did not select an item from the dropdown
+        // This will make sure the form will not be submitted if the dilemma is the same
         $(document).ready( function() {
             $('#reason_form').submit(function (e) {
-                if ($('#form_1').val() == '') {
-                e.preventDefault(); //stop form submission
-            }
+
+                if (!form_checker()) {
+                    // Display an error message to user with an alert. Append dismissable error alert to page. I have to append it because whenever user dismisses it then it is removed from the dom sp since we want the error message to come everytime i had to append it to the body each time.
+                    var html_alert =  '<div class="alert alert-warning alert-dismissible fade container show" role="alert" id="buttonAlert"><strong>Hmmmm 🤔</strong> Your dilemma is too close to call<strong>!</strong> Try adding/deleting or editing your reasons.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+                    $("#msgs").append(html_alert);   
+                    e.preventDefault();                
+                }
             });
+
         });
 
         $(function() {
@@ -24,10 +29,10 @@
         });
 
     </script>
-    <script src="../../static/easydilemma/js/main2.js" ></script>
 {% endblock %}
 
 {% block body %}
+<div id="msgs" ></div>
     <!--TODO Make this input stick on scroll instead of the navbar-->
     <!--This is the top non-editable form that displays the users dilemma-->
     <div class="container">
@@ -47,7 +52,7 @@
 
 
 
-<form id="reason_form" action="{% url 'easydilemma:store_and_calc_reasons' dilemma.id %}" method="POST" role="form" >{% csrf_token %}
+<form id="reason_form"  action="{% url 'easydilemma:store_and_calc_reasons' dilemma.id %}" method="POST" role="form" >{% csrf_token %}
 <div class="container">
     <div class="card">
         <div class="card-header">
@@ -64,7 +69,7 @@
                             <div class="input-group-prepend">
                                 <button class="btn btn-outline-secondary" type="button"><span class="handle">=</span></button>
                             </div>
-                            <input type="text" id="reason1" name="reason1" class="form-control" placeholder="Reason..." required>
+                            <input type="text" id="reason1" name="reason1"  class="form-control" placeholder="Reason..." required>
                         </div>
                     </div><!--END/col-md-8 -->
     
@@ -193,6 +198,11 @@
         // Get number of reasons so that we can use in for loop. Reasons and importance are the SAME length.
         var total_amnt_of_reasons = all_reason_elements.length;
 
+        var total_importance_1 = 0;
+
+        for (var i = 0; i < all_importance_elemnets.length; i++)
+            total_importance_1 += parseInt(all_importance_elemnets[i].value);
+
         // Loop through and get the values for each reason and it's corresponding importance. Then store it in a string
         // Then store in string seperated only by a ~ between each one and a a | between group
         for (var index = 0; index < total_amnt_of_reasons; index++) {
@@ -210,33 +220,21 @@
         var all_importance_elemnets = [];
         all_importance_elemnets = $("#form-second-half").find("select");
 
+        var total_importance_2 = 0;
+
+        for (var i = 0; i < all_importance_elemnets.length; i++)
+        total_importance_2 += parseInt(all_importance_elemnets[i].value);
+
+        if (total_importance_1 == total_importance_2) {
+            return false;
+        }
+
         for (var index = 0; index < total_amnt_of_reasons; index++) {
             if ( (all_reason_elements[index].value == "") || (all_importance_elemnets[index].value == "") ) {
                 return false
             }
         }
         return true;
-    }
-
-    /**
-     * This will call the checker function and then modify the data-toggle attribute.
-     */
-    var validate_reasons = function( event ) {
-        event.preventDefault();
-        // Call function that checks all the fields. And then store boolean result.
-        var is_valid = form_checker();
-        if ( is_valid ) {
-            // Process form and allow modal to open and display results
-            // $("#decide-button").attr("data-toggle","modal");
-            $("#decide-button").submit();
-        }
-        else {
-            // Prevent modal from opening. This will also prevent the form from being processed.
-            $("#decide-button").attr("data-toggle","#");
-            // Display an error message to user with an alert. Append dismissable error alert to page. I have to append it because whenever user dismisses it then it is removed from the dom sp since we want the error message to come everytime i had to append it to the body each time.
-            var html_alert =  '<div class="alert alert-danger alert-dismissible fade container show" role="alert" id="buttonAlert"><strong>Not Valid</strong> Please fill out all the reasons and select an importance level.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
-            $("#mr-alert").append(html_alert);
-        }
     }
 </script>    
 {% endblock %}
